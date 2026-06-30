@@ -1586,6 +1586,43 @@
       font-weight: 700;
       word-break: keep-all;
     }
+    .ai-tuned .ref-sub,
+    .ai-tuned li,
+    .ai-tuned .cell,
+    .ai-tuned .pipeline-copy p,
+    .ai-tuned .pipeline-step p,
+    .ai-tuned .stage-card span,
+    .ai-tuned .simple-step span {
+      font-weight: 600;
+    }
+    .ai-tuned .caption,
+    .ai-tuned .asset-caption {
+      font-size: 18px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+    .ai-tuned .pipeline-copy p {
+      font-size: 29px;
+      line-height: 1.45;
+    }
+    .ai-tuned .pipeline-step p {
+      font-size: 18px;
+      line-height: 1.46;
+      min-height: 66px;
+    }
+    .ai-tuned .stage-card {
+      min-height: 180px;
+      padding: 24px;
+    }
+    .ai-tuned .stage-card span,
+    .ai-tuned .simple-step span {
+      font-size: 20px;
+      line-height: 1.46;
+    }
+    .ai-tuned .row.four .cell {
+      padding: 18px 22px;
+      line-height: 1.38;
+    }
     .status-chip {
       display: inline-block;
       min-width: 86px;
@@ -2119,11 +2156,11 @@
         <p class="caption reveal" style="margin-top:32px">YOLO는 후보 영역을 찾고, OpenCV는 막힘 비율을 수치화하며, XGBoost는 이미지·센서 feature를 결합해 상태를 분류합니다.</p>
       </section>
 
-      <section class="slide" data-page="13 / 34">
+      <section class="slide ai-tuned" data-page="13 / 34">
         <div class="topline"><div><div class="kicker">08 AI 한계</div><h2>YOLO 단독 분석 한계</h2></div><div class="section-label">후처리 필요</div></div>
         <div class="hero-split">
           <div class="hero-copy reveal">
-            <p class="ref-claim">객체 탐지만으로는 배수 상태를 안정적으로 판단하기 어렵습니다.</p>
+            <p class="ref-claim">객체 탐지만으로는 배수 위험도를 안정적으로 판단하기 어렵습니다.</p>
             <p class="ref-sub">탐지 결과를 그대로 위험도로 쓰지 않고, OpenCV 후처리와 센서 feature를 결합해 상태 분류로 연결합니다.</p>
             <ul>
               <li>YOLO는 보이는 객체와 후보 영역 탐지에 강점이 있습니다.</li>
@@ -2134,94 +2171,94 @@
           <div class="hero-visual reveal">
             <div class="asset-frame hero">
               <img src="assets/yolo-opencv-error-graph.png" alt="YOLO 단독 해석 한계와 후처리 필요성 예시">
-              <div class="asset-caption">과정 예시: 원본 이미지 → 탐지/전처리 → mask/dark area → obstruction_ratio feature</div>
+              <div class="asset-caption">개념 예시: 객체 탐지만으로 상태 분류가 흔들릴 수 있어 OpenCV·센서 feature를 함께 사용합니다.</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide" data-page="14 / 34">
+      <section class="slide ai-tuned" data-page="14 / 34">
         <div class="topline"><div><div class="kicker">09 OpenCV</div><h2>OpenCV 결합 이유</h2></div><div class="section-label">이미지 분석 결과를 위험도 판단으로 연결합니다</div></div>
         <div class="pipeline-layout">
           <div class="pipeline-copy reveal">
             <div class="eyebrow">AI Pipeline</div>
-            <h3>OpenCV는 탐지 결과를 실제 feature로 바꾸는 중간 단계입니다.</h3>
-            <p>분석 영역, 어두운 영역, 차폐 비율을 정리해 XGBoost 입력으로 연결합니다.</p>
+            <h3>OpenCV는 탐지 결과를 분류에 사용할 feature로 정리하는 중간 단계입니다.</h3>
+            <p>분석 영역과 차폐 비율을 정리해 XGBoost 입력으로 연결합니다.</p>
           </div>
           <div class="pipeline-steps reveal">
             <div class="pipeline-step">
               <h4>원본 이미지</h4>
-              <p>현장 사진을 기준으로 빗물받이 상태를 확인합니다.</p>
+              <p>sample image를 분석 입력으로 사용합니다.</p>
               <div class="pipeline-shot raw"><img src="assets/pipeline-drain-raw.jpg" alt="원본 이미지"></div>
             </div>
             <div class="pipeline-step">
               <h4>OpenCV 전처리</h4>
-              <p>대비와 경계를 보정해 분석 가능한 입력으로 정리합니다.</p>
+              <p>대비와 경계를 보정합니다.</p>
               <div class="pipeline-shot prep"><img src="assets/pipeline-drain-prep.jpg" alt="OpenCV 전처리"></div>
             </div>
             <div class="pipeline-step">
               <h4>mask / dark area</h4>
-              <p>분석 영역과 어두운 영역을 분리해 막힘 계산 기준으로 사용합니다.</p>
+              <p>어두운 영역과 mask를 분리합니다.</p>
               <div class="pipeline-shot yolo"><img src="assets/pipeline-drain-yolo.jpg" alt="mask와 dark area"></div>
             </div>
             <div class="pipeline-step">
               <h4>ratio</h4>
-              <p>차폐 영역을 obstruction_ratio feature로 정리합니다.</p>
+              <p>차폐 영역을 obstruction_ratio로 정리합니다.</p>
               <div class="pipeline-shot ratio"><img src="assets/pipeline-drain-ratio.jpg" alt="obstruction ratio"></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="slide" data-page="15 / 34">
+      <section class="slide ai-tuned" data-page="15 / 34">
         <div class="topline"><div><div class="kicker">AI 설계</div><h2>XGBoost 입력 feature</h2></div><div class="section-label">feature 결합</div></div>
-        <p class="lead compact reveal">XGBoost에는 이미지 feature와 mock sensor data feature가 함께 들어가며, 근거가 부족하거나 품질이 낮으면 판단불가 또는 보수적 분류 후보가 됩니다.</p>
+        <p class="lead compact reveal">XGBoost에는 이미지 feature와 센서 feature가 함께 들어가며, 근거가 부족하면 판단불가 또는 보수적 분류 후보가 됩니다.</p>
         <div class="table reveal" style="margin-top:24px">
           <div class="row four head"><div class="cell">feature</div><div class="cell">출처</div><div class="cell">의미</div><div class="cell">결측 처리 기준</div></div>
-          <div class="row four"><div class="cell">obstruction_ratio</div><div class="cell">OpenCV 후처리</div><div class="cell">이미지 기반 막힘 정도</div><div class="cell">낮은 품질이면 판단불가 후보</div></div>
-          <div class="row four"><div class="cell">confidence_score</div><div class="cell">YOLO 결과</div><div class="cell">탐지 신뢰도</div><div class="cell">낮으면 이미지 근거 가중 제한</div></div>
-          <div class="row four"><div class="cell">water_level</div><div class="cell">mock sensor data</div><div class="cell">수위 상승 여부</div><div class="cell">없으면 센서 근거 부족으로 표시</div></div>
-          <div class="row four"><div class="cell">flow_velocity</div><div class="cell">mock sensor data</div><div class="cell">유속 저하 여부</div><div class="cell">없으면 이미지 근거 중심으로 제한</div></div>
+          <div class="row four"><div class="cell">obstruction_ratio</div><div class="cell">OpenCV 후처리</div><div class="cell">이미지 기반 막힘 정도</div><div class="cell">품질 낮으면 판단불가 후보</div></div>
+          <div class="row four"><div class="cell">confidence_score</div><div class="cell">YOLO 결과</div><div class="cell">탐지 신뢰도</div><div class="cell">낮으면 이미지 근거 제한</div></div>
+          <div class="row four"><div class="cell">water_level</div><div class="cell">mock sensor data</div><div class="cell">수위 변화</div><div class="cell">없으면 센서 근거 부족</div></div>
+          <div class="row four"><div class="cell">flow_velocity</div><div class="cell">mock sensor data</div><div class="cell">유속 변화</div><div class="cell">없으면 이미지 근거 중심</div></div>
         </div>
         <p class="trigger-note reveal" style="margin-top:22px">핵심은 이미지 근거와 센서 근거를 분리해 저장하고, 최종 분류에서는 함께 조합한다는 점입니다.</p>
-        <p class="caption reveal" style="margin-top:12px">sensor_data 원본 단위는 water_level_cm, flow_velocity_mps이며, AI service 내부에서 0~1 범위로 정규화해 사용합니다.</p>
+        <p class="caption reveal" style="margin-top:16px">sensor_data 원본 단위는 water_level_cm, flow_velocity_mps이며, AI service 내부에서 정규화해 사용합니다.</p>
       </section>
 
-      <section class="slide" data-page="16 / 34">
+      <section class="slide ai-tuned" data-page="16 / 34">
         <div class="topline"><div><div class="kicker">AI 결과</div><h2>위험도 분류 로직</h2></div><div class="section-label">내부 점수</div></div>
-        <p class="lead compact reveal">상태 분류는 점검 우선순위를 설명하기 위한 내부 계산 결과이며, 실제 물리적 침수 확률로 말하지 않습니다.</p>
+        <p class="lead compact reveal">상태 분류는 점검 우선순위를 설명하기 위한 내부 계산 결과이며, 실제 침수 확률을 직접 의미하지 않습니다.</p>
         <p class="caption reveal" style="margin-top:14px">아래 조건은 발표 설명용 대표 예시이며, 실제 결과는 이미지 feature와 센서 feature를 함께 반영한 최종 분류 결과입니다.</p>
         <div class="table reveal" style="margin-top:24px">
           <div class="row four head"><div class="cell">상태</div><div class="cell">판단 조건 예시</div><div class="cell">화면 처리</div><div class="cell">발표 표현</div></div>
-          <div class="row four"><div class="cell"><span class="status-chip good">양호</span></div><div class="cell">차폐율과 센서 정체 징후가 낮음</div><div class="cell">일반 상태로 표시</div><div class="cell">우선 확인 낮음</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip good">양호</span></div><div class="cell">차폐율과 센서 정체 징후가 낮음</div><div class="cell">일반 상태로 표시</div><div class="cell">우선 점검 필요 낮음</div></div>
           <div class="row four"><div class="cell"><span class="status-chip warn">주의</span></div><div class="cell">막힘 또는 수위·유속 변화 징후가 있음</div><div class="cell">목록에서 점검 후보 표시</div><div class="cell">관찰 필요</div></div>
-          <div class="row four"><div class="cell"><span class="status-chip danger">위험</span></div><div class="cell">이미지와 센서 근거가 함께 강함</div><div class="cell">대시보드 우선 확인 대상으로 표시</div><div class="cell">우선 확인</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip danger">위험</span></div><div class="cell">이미지와 센서 근거가 함께 강함</div><div class="cell">대시보드 우선 확인 대상으로 표시</div><div class="cell">우선 확인 필요</div></div>
           <div class="row four"><div class="cell"><span class="status-chip unknown">판단불가</span></div><div class="cell">이미지 품질 낮음, feature 결측, 분석 실패</div><div class="cell">재분석 또는 현장 확인 상태로 표시</div><div class="cell">재확인 필요</div></div>
         </div>
-        <p class="caption reveal" style="margin-top:18px">`risk_score`는 우수주의보 내부 분류용 계산 점수이며 실제 현장 검증 기반 침수 예측값이 아닙니다.</p>
+        <p class="caption reveal" style="margin-top:22px">`risk_score`는 우수주의보 내부 분류용 계산 점수이며 실제 현장 검증 기반 침수 예측값이 아닙니다.</p>
       </section>
 
-      <section class="slide" data-page="17 / 34">
+      <section class="slide ai-tuned" data-page="17 / 34">
         <div class="topline"><div><div class="kicker">AI 결과</div><h2>MVP 검증 범위</h2></div><div class="section-label">sample / mock</div></div>
-        <p class="message-line reveal">검증은 sample image와 mock sensor data 기반으로 입력, 중간 feature, 최종 분류가 연결되는지 확인하는 범위입니다.</p>
+        <p class="message-line reveal">검증 범위는 sample image와 mock sensor data를 입력으로 받아, 중간 feature와 최종 분류가 연결되는지 확인하는 수준입니다.</p>
         <div class="layout split-40 after-lead">
           <div class="asset-frame cover reveal">
             <img src="assets/drain-good.png" alt="양호 sample image">
             <div class="asset-caption">sample image: 상태 예시와 이미지 feature 설명에 사용하는 리소스</div>
           </div>
           <div class="stage-flow reveal" style="grid-template-columns: repeat(3, 1fr); margin-top:0">
-            <div class="stage-card"><b>01</b><strong>입력</strong><span>sample image와 mock sensor data를 하나의 분석 요청에 묶습니다.</span></div>
-            <div class="stage-card"><b>02</b><strong>중간 feature</strong><span>obstruction_ratio, confidence_score, water_level, flow_velocity를 확인합니다.</span></div>
-            <div class="stage-card"><b>03</b><strong>최종 분류</strong><span>risk_level과 risk_score를 저장 가능한 결과로 만듭니다.</span></div>
+            <div class="stage-card"><b>01</b><strong>입력</strong><span>sample image와 mock sensor data를 하나의 요청으로 묶어 분석을 시작합니다.</span></div>
+            <div class="stage-card"><b>02</b><strong>중간 feature</strong><span>obstruction_ratio, confidence_score, water_level, flow_velocity가 생성되는지 확인합니다.</span></div>
+            <div class="stage-card"><b>03</b><strong>최종 분류</strong><span>risk_level과 risk_score가 저장 가능한 결과로 남는지 확인합니다.</span></div>
           </div>
         </div>
-        <p class="caption reveal" style="margin-top:18px">한계: 실제 현장 검증 완료나 실제 침수 예측 성능을 주장하지 않습니다.</p>
+        <p class="caption reveal" style="margin-top:24px">한계: 실제 현장 검증 완료나 실제 침수 예측 성능을 주장하지 않습니다.</p>
       </section>
 
-      <section class="slide" data-page="18 / 34">
-        <div class="topline"><div><div class="kicker">서비스 구축</div><h2>서비스 구축 개요</h2></div><div class="section-label">AI 결과 활용</div></div>
-        <p class="ref-claim wide reveal">AI 분석 결과는 관리자 화면에서 시설 상태를 확인하고 점검 우선순위를 판단하는 흐름으로 연결됩니다.</p>
-        <div class="simple-steps reveal" style="grid-template-columns: repeat(4, 1fr)">
+      <section class="slide ai-tuned" data-page="18 / 34">
+        <div class="topline"><div><div class="kicker">서비스 구축</div><h2>AI 결과 활용 흐름</h2></div><div class="section-label">상태 반영</div></div>
+        <p class="ref-claim wide reveal" style="font-size:56px;line-height:1.08;max-width:1120px;margin:58px auto 0;text-align:center">AI 분석 결과는 관리자 화면에서 시설 상태와 점검 우선순위를 확인하는 흐름으로 연결됩니다.</p>
+        <div class="simple-steps reveal" style="grid-template-columns: repeat(4, 1fr); margin-top:30px">
           <div class="simple-step"><b>01</b><strong>대상 확인</strong><span>관리자가 대시보드에서 시설 목록과 상태를 확인합니다.</span></div>
           <div class="simple-step"><b>02</b><strong>분석 요청</strong><span>sample image와 mock sensor data를 분석 작업으로 묶습니다.</span></div>
           <div class="simple-step"><b>03</b><strong>결과 저장</strong><span>callback으로 받은 상태 분류 결과를 DB에 저장합니다.</span></div>
