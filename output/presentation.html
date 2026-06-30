@@ -2068,7 +2068,9 @@
         this.setupButtons();
         this.setupTouchNav();
         this.setupWheelNav();
-        this.showSlide(0);
+        this.setupHashNav();
+        const initialSlide = this.getSlideIndexFromHash();
+        this.showSlide(initialSlide ?? 0, { updateHash: !window.location.hash });
       }
       setupStageScale() {
         const scale = () => {
@@ -2110,13 +2112,38 @@
           e.deltaY > 0 ? this.next() : this.prev();
         }, { passive: true });
       }
-      showSlide(index) {
+      setupHashNav() {
+        window.addEventListener('hashchange', () => {
+          const index = this.getSlideIndexFromHash();
+          if (index !== null && index !== this.currentSlide) {
+            this.showSlide(index, { updateHash: false });
+          }
+        });
+      }
+      getSlideIndexFromHash() {
+        const rawHash = window.location.hash.replace(/^#/, '').trim();
+        if (!rawHash) return null;
+        const match = rawHash.match(/^(?:slide[-_])?(\d+)$/i);
+        if (!match) return null;
+        const page = Number.parseInt(match[1], 10);
+        if (!Number.isFinite(page)) return null;
+        return Math.max(0, Math.min(page - 1, this.slides.length - 1));
+      }
+      updateHash() {
+        const nextHash = `#${this.currentSlide + 1}`;
+        if (window.location.hash !== nextHash) {
+          window.history.replaceState(null, '', nextHash);
+        }
+      }
+      showSlide(index, options = {}) {
+        const { updateHash = true } = options;
         this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
         this.slides.forEach((slide, i) => {
           slide.classList.toggle('active', i === this.currentSlide);
           slide.classList.toggle('visible', i === this.currentSlide);
         });
         this.counter.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+        if (updateHash) this.updateHash();
       }
       next() { this.showSlide(this.currentSlide + 1); }
       prev() { this.showSlide(this.currentSlide - 1); }
