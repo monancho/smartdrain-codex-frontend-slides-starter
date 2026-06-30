@@ -439,14 +439,7 @@
       overflow-wrap: anywhere;
     }
     .step:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: 6px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      font: 900 21px/1 var(--mono);
-      color: var(--red);
+      display: none;
     }
     .stage-flow {
       display: grid;
@@ -464,14 +457,7 @@
       position: relative;
     }
     .stage-card:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      font: 900 30px/1 var(--mono);
-      color: var(--red);
-      z-index: 2;
+      display: none;
     }
     .stage-card b {
       display: inline-grid;
@@ -671,15 +657,7 @@
       height: 565px;
     }
     .sequence-board.swimlane .sequence-step:not(:last-child)::after {
-      content: "→";
-      display: block;
-      position: absolute;
-      right: -16px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 3;
-      font: 900 24px/1 var(--mono);
-      color: var(--red);
+      display: none;
     }
     .sequence-step {
       border: 1px solid var(--line);
@@ -1137,12 +1115,7 @@
       position: relative;
     }
     .simple-step:not(:last-child)::after {
-      content: "→";
-      position: absolute;
-      right: -14px;
-      top: 28px;
-      color: var(--orange);
-      font: 900 22px/1 var(--mono);
+      display: none;
     }
     .simple-step b {
       font: 900 16px/1 var(--mono);
@@ -1501,7 +1474,7 @@
           <div class="hero-visual reveal">
             <div class="asset-frame hero">
             <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
-              <div class="asset-caption">브라우저 → Nginx → Backend/AI/PostgreSQL 연결 구조</div>
+              <div class="asset-caption">브라우저, Nginx, Backend/AI/PostgreSQL 연결 구조</div>
             </div>
           </div>
         </div>
@@ -1665,7 +1638,7 @@
           <div class="hero-visual reveal">
             <div class="asset-frame hero zoom">
               <img src="assets/yolo-opencv-process.jpg" alt="YOLO와 OpenCV 처리 과정">
-              <div class="asset-caption">원본 → 보정/전처리 → mask/검출 → obstruction ratio로 이어지는 이미지 처리 과정</div>
+              <div class="asset-caption">원본, 보정/전처리, mask/검출, obstruction ratio로 이어지는 이미지 처리 과정</div>
             </div>
           </div>
           <div class="hero-copy reveal">
