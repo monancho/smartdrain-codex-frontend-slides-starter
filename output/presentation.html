@@ -564,8 +564,10 @@
       overflow: hidden;
     }
     .evidence-crop img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       display: block;
     }
@@ -584,6 +586,23 @@
       height: 100%;
       object-fit: contain;
       display: block;
+    }
+    .erd-overview {
+      grid-template-columns: .58fr 1.42fr;
+      gap: 36px;
+    }
+    .erd-overview .hero-visual {
+      height: 600px;
+    }
+    .erd-overview .erd-resource-frame {
+      padding: 6px;
+      background-image: url("assets/erd-final.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+    .erd-overview .erd-resource-frame img {
+      display: none;
     }
     .erd-resource-wide {
       height: 770px;
@@ -611,6 +630,44 @@
     .erd-copy .line-module span {
       font-size: 18px;
       line-height: 1.38;
+    }
+    .sequence-overview {
+      grid-template-columns: .54fr 1.46fr;
+      gap: 32px;
+    }
+    .sequence-overview .hero-visual {
+      height: 720px;
+    }
+    .sequence-copy .ref-claim {
+      font-size: 44px;
+      line-height: 1.12;
+    }
+    .sequence-copy .line-module {
+      padding-top: 18px;
+    }
+    .sequence-copy .line-module strong {
+      font-size: 25px;
+    }
+    .sequence-copy .line-module span {
+      font-size: 17px;
+      line-height: 1.38;
+    }
+    .sequence-resource-frame {
+      height: 100%;
+      background: #fff;
+      background-image: url("assets/sequence-analysis-websocket-full.png");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border: 1px solid rgba(18,28,43,.16);
+      box-shadow: var(--shadow);
+      padding: 10px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .sequence-resource-frame img {
+      display: none;
     }
     .goal-card {
       min-height: 0;
@@ -2156,7 +2213,7 @@
 
       <section class="slide" data-page="21 / 34">
         <div class="topline"><div><div class="kicker">15 Data model</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
-        <div class="hero-split">
+        <div class="hero-split erd-overview">
           <div class="hero-copy erd-copy reveal">
             <p class="ref-claim">센서·이미지·위험도를 같은 시설 기준으로 묶습니다.</p>
             <div class="line-modules" style="margin-top:34px">
@@ -2191,20 +2248,20 @@
       </section>
 
       <section class="slide" data-page="23 / 34">
-        <div class="topline"><div><div class="kicker">Backend</div><h2>비동기 분석 요청</h2></div><div class="section-label">AnalysisJob</div></div>
-        <p class="lead compact reveal">분석 요청은 화면 응답과 분리하고, AnalysisJob 상태로 어디까지 처리됐는지 추적합니다.</p>
-        <div class="layout two after-lead">
-          <div class="diagram reveal">
-            <div class="flow"><div class="step">scheduler</div><div class="step">AnalysisJob 생성</div><div class="step">Backend 요청</div><div class="step">AI request</div></div>
-            <div class="flow" style="margin-top:28px"><div class="step">pending</div><div class="step">processing</div><div class="step">done</div><div class="step">failed</div></div>
+        <div class="topline"><div><div class="kicker">Backend / AI / Frontend</div><h2>분석 요청과 화면 갱신 흐름</h2></div><div class="section-label">overview</div></div>
+        <div class="hero-split sequence-overview">
+          <div class="hero-copy sequence-copy reveal">
+            <p class="ref-claim">분석 요청은 Backend에서 시작되고, 결과는 callback과 WebSocket event를 거쳐 화면에 반영됩니다.</p>
+            <div class="line-modules" style="margin-top:34px">
+              <div class="line-module"><strong>분석 작업 생성</strong><span>Scheduler 또는 운영 트리거가 AnalysisJob을 만들고 AI server에 요청합니다.</span></div>
+              <div class="line-module"><strong>callback 저장</strong><span>AI server 결과는 Backend callback을 통해 PostgreSQL에 저장됩니다.</span></div>
+              <div class="line-module"><strong>화면 갱신</strong><span>WebSocket event는 갱신 알림이고, Frontend가 최신 데이터를 다시 조회합니다.</span></div>
+            </div>
           </div>
-          <div class="panel reveal">
-            <h3>요청 설계 포인트</h3>
-            <ul>
-              <li>scheduler 또는 운영 트리거가 분석 작업을 만듭니다.</li>
-              <li>Backend는 request_id와 작업 상태를 기준으로 AI server에 요청합니다.</li>
-              <li>분석 실패는 화면 오류가 아니라 job 상태와 로그로 추적합니다.</li>
-            </ul>
+          <div class="hero-visual reveal">
+            <div class="sequence-resource-frame">
+              <img src="assets/sequence-analysis-websocket-full.png" alt="분석 요청, AI callback, DB 저장, WebSocket 화면 갱신 전체 sequence">
+            </div>
           </div>
         </div>
       </section>
@@ -2269,21 +2326,9 @@
             <div class="arch-legend"><span class="legend-chip">현재 구현 구조</span><span class="legend-chip future">향후 확장 범위</span></div>
           </div>
           <div class="hero-visual reveal">
-            <div class="diagram-map">
-              <div class="map-line" style="left:170px; top:150px; width:180px"></div>
-              <div class="map-line" style="left:390px; top:150px; width:180px"></div>
-              <div class="map-line" style="left:610px; top:150px; width:180px"></div>
-              <div class="map-line" style="left:705px; top:250px; width:140px; transform:rotate(90deg)"></div>
-              <div class="map-line" style="left:705px; top:255px; width:160px; transform:rotate(125deg)"></div>
-              <div class="map-line dotted" style="left:765px; top:420px; width:150px"></div>
-              <div class="map-node" style="left:35px; top:95px"><strong>Browser</strong><span>대시보드와 상세 화면 진입점</span></div>
-              <div class="map-node" style="left:255px; top:95px"><strong>Nginx</strong><span>Frontend, API, WebSocket routing</span></div>
-              <div class="map-node" style="left:475px; top:95px"><strong>Frontend</strong><span>event 수신과 UI 갱신</span></div>
-              <div class="map-node" style="left:695px; top:95px"><strong>Backend</strong><span>AnalysisJob, callback 저장</span></div>
-              <div class="map-node" style="left:560px; top:365px"><strong>PostgreSQL</strong><span>sensor_data, jobs, results 저장</span></div>
-              <div class="map-node" style="left:820px; top:285px"><strong>AI server</strong><span>YOLO, OpenCV, XGBoost 분석</span></div>
-              <div class="map-node" style="left:255px; top:365px"><strong>Docker / Jenkins</strong><span>build/deploy 흐름 구성</span></div>
-              <div class="map-node future" style="left:820px; top:445px"><strong>RTSP / MQTT / Alert</strong><span>향후 확장 범위</span></div>
+            <div class="asset-frame hero">
+              <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
+              <div class="asset-caption">브라우저, Nginx, Backend/AI/PostgreSQL 연결 구조</div>
             </div>
           </div>
         </div>
