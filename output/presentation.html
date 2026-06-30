@@ -1210,6 +1210,30 @@
       gap: 42px;
       align-items: end;
     }
+    .cover-hero {
+      height: 820px;
+      grid-template-columns: .76fr 1.24fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .cover-hero .hero-copy {
+      align-content: center;
+    }
+    .cover-hero .hero-visual.tall {
+      height: 690px;
+    }
+    .cover-hero .asset-frame {
+      grid-template-rows: 1fr;
+    }
+    .cover-keywords {
+      margin-top: 34px;
+      gap: 24px;
+    }
+    .cover-keywords .keyword {
+      border-top: 0;
+      padding-top: 0;
+      min-height: auto;
+    }
     .title-slide h1.title-name {
       font-size: 146px;
       line-height: .98;
@@ -1401,13 +1425,13 @@
     <main class="deck-stage" id="deckStage">
 
       <section class="slide title-slide active" data-page="01 / 36">
-        <div class="hero-split">
+        <div class="hero-split cover-hero">
           <div class="hero-copy">
             <div class="title-mark reveal">이미지·센서 기반 빗물받이 위험도 모니터링</div>
             <h1 class="reveal title-name">우수주의보</h1>
             <p class="ref-sub reveal">이미지·센서 기반 빗물받이 상태 판단 및 관리자 화면 반영 시스템</p>
             <div class="ref-accent reveal"></div>
-            <div class="keyword-strip reveal">
+            <div class="keyword-strip cover-keywords reveal">
               <div class="keyword"><strong>실시간</strong><span>지도 기반 상태 확인</span></div>
               <div class="keyword"><strong>AI 판단</strong><span>막힘·수위·유속 통합</span></div>
               <div class="keyword"><strong>우선순위</strong><span>위험 시설 선별</span></div>
@@ -1416,7 +1440,6 @@
           <div class="hero-visual tall reveal">
             <div class="asset-frame hero">
               <img src="assets/dashboard-main.png" alt="관리자 대시보드 화면">
-              <div class="asset-caption">관리자 대시보드: 위험 지도, 시설 목록, 상세 정보가 한 화면에 배치된 구조</div>
             </div>
           </div>
         </div>
