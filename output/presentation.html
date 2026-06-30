@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>우수주의보 발표자료</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Noto+Sans+KR:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    /* === THEME === */
+    :root {
+      --stage-bg: #111827;
+      --slide-bg: #f7f8f3;
+      --ink: #111820;
+      --muted: #657181;
+      --line: #1b2531;
+      --paper: #f7f8f3;
+      --panel: #ffffff;
+      --panel-soft: #eef2ed;
+      --teal: #117d7c;
+      --orange: #d97706;
+      --red: #c63d3d;
+      --blue: #315f9f;
+      --unknown: #858b96;
+      --mono: "IBM Plex Mono", monospace;
+      --display: "Archivo", "Noto Sans KR", sans-serif;
+      --body: "Noto Sans KR", sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+
+    /* 1. Lock the browser viewport */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 2. Full-window deck viewport */
+    .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    /* 3. Fixed 16:9 design canvas.
+       JavaScript sets transform: translate(...) scale(...). */
+    .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: var(--slide-bg, #fff);
+    }
+
+    /* 4. Slides stack inside the fixed stage.
+       Content must be laid out at 1920×1080, not reflowed per device. */
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+    }
+
+    /* 5. Keep media inside authored slide bounds */
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* 6. Presentation chrome stays outside the slide design system */
+    .deck-controls {
+        position: fixed;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    /* 7. Print one fixed-size slide per page */
+    @media print {
+        html,
+        body {
+            width: 1920px;
+            height: auto;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-viewport {
+            position: static;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-stage {
+            position: static;
+            width: auto;
+            height: auto;
+            transform: none !important;
+            background: none;
+        }
+
+        .slide {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            width: 1920px;
+            height: 1080px;
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .slide:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        .deck-controls {
+            display: none !important;
+        }
+    }
+
+    /* 8. Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.2s !important;
+        }
+    }
+
+    /* === BASE LAYOUT === */
+    * { box-sizing: border-box; }
+    body { font-family: var(--body); color: var(--ink); }
+    .slide {
+      padding: 72px 84px;
+      background:
+        linear-gradient(90deg, rgba(17, 24, 39, .055) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(17, 24, 39, .035) 1px, transparent 1px),
+        var(--paper);
+      background-size: 80px 80px;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      left: 84px;
+      right: 84px;
+      top: 54px;
+      height: 8px;
+      background: linear-gradient(90deg, var(--ink), var(--teal) 40%, var(--orange) 68%, var(--red));
+    }
+    .slide::after {
+      content: attr(data-page);
+      position: absolute;
+      right: 84px;
+      bottom: 48px;
+      font: 700 18px/1 var(--mono);
+      color: var(--muted);
+      letter-spacing: .08em;
+    }
+    .kicker {
+      font: 800 17px/1 var(--mono);
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 20px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-family: var(--display);
+      font-size: 116px;
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    h2 {
+      font-family: var(--display);
+      font-size: 60px;
+      line-height: 1.05;
+      letter-spacing: 0;
+      margin-bottom: 26px;
+    }
+    h3 {
+      font-size: 27px;
+      line-height: 1.25;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+    p, li {
+      font-size: 25px;
+      line-height: 1.48;
+      font-weight: 500;
+      word-break: keep-all;
+    }
+    ul { margin: 0; padding-left: 30px; }
+    li { margin: 9px 0; }
+    .layout {
+      position: relative;
+      z-index: 1;
+      height: 760px;
+      display: grid;
+      gap: 28px;
+    }
+    .two { grid-template-columns: 1.02fr .98fr; }
+    .three { grid-template-columns: repeat(3, 1fr); }
+    .layout > .flow {
+      align-self: start;
+      min-height: 220px;
+    }
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 30px;
+      margin-bottom: 28px;
+    }
+    .section-label {
+      font: 800 18px/1 var(--mono);
+      color: var(--muted);
+      letter-spacing: .08em;
+      border: 2px solid var(--line);
+      padding: 11px 14px;
+      background: rgba(255,255,255,.68);
+    }
+    .lead {
+      font-size: 33px;
+      line-height: 1.38;
+      font-weight: 800;
+      max-width: 1140px;
+      word-break: keep-all;
+    }
+    .caption {
+      font: 700 18px/1.45 var(--mono);
+      color: var(--muted);
+      margin-top: 16px;
+    }
+    .panel, .metric, .placeholder, .table, .flow, .diagram {
+      background: rgba(255,255,255,.88);
+      border: 2px solid var(--line);
+      box-shadow: 10px 10px 0 rgba(17,24,39,.12);
+    }
+    .panel {
+      padding: 28px;
+    }
+    .panel.soft {
+      background: var(--panel-soft);
+    }
+    .placeholder {
+      height: 100%;
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: var(--muted);
+      font-weight: 900;
+      font-size: 27px;
+      text-align: center;
+      background:
+        repeating-linear-gradient(-45deg, rgba(17,24,39,.045), rgba(17,24,39,.045) 12px, transparent 12px, transparent 24px),
+        #fff;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .tag {
+      border: 2px solid var(--line);
+      padding: 9px 13px;
+      background: #fff;
+      font: 800 17px/1 var(--mono);
+    }
+    .status-good { color: var(--teal); }
+    .status-warn { color: var(--orange); }
+    .status-danger { color: var(--red); }
+    .status-unknown { color: var(--unknown); }
+
+    /* === TABLES AND GRIDS === */
+    .table { overflow: hidden; }
+    .row {
+      display: grid;
+      grid-template-columns: 260px 1fr 1fr;
+      border-bottom: 2px solid var(--line);
+    }
+    .row:last-child { border-bottom: 0; }
+    .cell {
+      padding: 18px 20px;
+      border-right: 2px solid var(--line);
+      font-size: 22px;
+      line-height: 1.38;
+      word-break: keep-all;
+    }
+    .cell:last-child { border-right: 0; }
+    .head .cell {
+      background: var(--ink);
+      color: #fff;
+      font: 800 18px/1.3 var(--mono);
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+    .feature-card {
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 24px;
+      min-height: 150px;
+    }
+    .feature-card strong {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+    .feature-card span {
+      display: block;
+      font-size: 21px;
+      line-height: 1.42;
+      color: var(--muted);
+      word-break: keep-all;
+    }
+
+    /* === DIAGRAMS === */
+    .flow {
+      padding: 24px;
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      min-height: 170px;
+    }
+    .step {
+      flex: 1;
+      min-width: 0;
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 18px 14px;
+      display: grid;
+      align-content: center;
+      text-align: center;
+      position: relative;
+      font-weight: 900;
+      font-size: 21px;
+      line-height: 1.25;
+      word-break: keep-all;
+    }
+    .step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 3;
+      font: 900 27px/1 var(--mono);
+      color: var(--red);
+    }
+    .diagram {
+      padding: 28px;
+      min-height: 300px;
+    }
+    .node-map {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .node {
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 20px;
+      min-height: 112px;
+      display: grid;
+      align-content: center;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .node small {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font: 700 15px/1.25 var(--mono);
+    }
+    .erd {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .entity {
+      border: 2px solid var(--line);
+      background: #fff;
+    }
+    .entity b {
+      display: block;
+      background: var(--ink);
+      color: #fff;
+      padding: 12px;
+      font: 800 18px/1 var(--mono);
+    }
+    .entity span {
+      display: block;
+      padding: 9px 12px;
+      border-top: 1px solid rgba(17,24,39,.2);
+      font: 700 17px/1.25 var(--mono);
+      color: var(--muted);
+    }
+    .formula {
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 24px;
+      font: 700 25px/1.5 var(--mono);
+    }
+    .formula .accent { color: var(--teal); }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 34px;
+    }
+    .timebox {
+      border: 2px solid var(--line);
+      background: #fff;
+      padding: 24px;
+      min-height: 220px;
+      position: relative;
+    }
+    .timebox::before {
+      content: attr(data-step);
+      display: inline-grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--line);
+      background: var(--teal);
+      color: #fff;
+      font: 900 18px/1 var(--mono);
+      margin-bottom: 24px;
+    }
+    .timebox h3 { font-size: 25px; }
+
+    /* === TITLE AND SPECIAL SLIDES === */
+    .title-slide {
+      padding: 78px 92px;
+      background:
+        linear-gradient(90deg, rgba(17,24,39,.08) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(17,24,39,.055) 1px, transparent 1px),
+        #f5f6ef;
+      background-size: 84px 84px;
+    }
+    .title-wrap {
+      height: 930px;
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 44px;
+      align-items: end;
+    }
+    .title-mark {
+      font: 800 24px/1 var(--mono);
+      color: var(--teal);
+      letter-spacing: .18em;
+      margin-bottom: 36px;
+    }
+    .title-slide h1 {
+      font-size: 168px;
+      margin-bottom: 32px;
+    }
+    .title-sub {
+      font-size: 42px;
+      line-height: 1.32;
+      font-weight: 900;
+      max-width: 920px;
+    }
+    .status-tower {
+      height: 790px;
+      border: 3px solid var(--line);
+      background: #fff;
+      box-shadow: 16px 16px 0 rgba(17,24,39,.16);
+      display: grid;
+      grid-template-rows: 90px 1fr;
+    }
+    .tower-head {
+      background: var(--ink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      font: 800 18px/1 var(--mono);
+    }
+    .tower-body {
+      padding: 32px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+    .gauge {
+      height: 92px;
+      border: 2px solid var(--line);
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      align-items: center;
+      padding: 0 20px;
+      background: var(--panel-soft);
+    }
+    .gauge b { font: 900 18px/1 var(--mono); }
+    .bar {
+      height: 24px;
+      border: 2px solid var(--line);
+      background: #fff;
+      position: relative;
+    }
+    .bar span {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--w);
+      background: var(--c);
+    }
+    .agenda {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 30px;
+    }
+    .agenda-item {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      border: 2px solid var(--line);
+      background: #fff;
+      min-height: 112px;
+      align-items: center;
+    }
+    .agenda-item b {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: #fff;
+      font: 900 22px/1 var(--mono);
+    }
+    .agenda-item span {
+      padding: 0 30px;
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    /* === ANIMATIONS === */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+    }
+    .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+    .slide.visible .reveal:nth-child(2) { transition-delay: .08s; }
+    .slide.visible .reveal:nth-child(3) { transition-delay: .16s; }
+    .slide.visible .reveal:nth-child(4) { transition-delay: .24s; }
+    .pulse { animation: pulseLine 2.2s var(--ease) infinite; }
+    @keyframes pulseLine {
+      0%, 100% { box-shadow: inset 0 -5px 0 rgba(17,125,124,.15); }
+      50% { box-shadow: inset 0 -5px 0 rgba(17,125,124,.45); }
+    }
+
+    /* === CONTROLS AND EDITING === */
+    .deck-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 12px;
+      background: rgba(17,24,39,.88);
+      color: #fff;
+      border-radius: 999px;
+      font: 700 13px/1 var(--mono);
+    }
+    .deck-controls button {
+      border: 0;
+      color: #fff;
+      background: rgba(255,255,255,.15);
+      width: 34px;
+      height: 28px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      z-index: 10001;
+      opacity: 0;
+      pointer-events: none;
+      border: 0;
+      background: #111827;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font: 800 13px/1 var(--mono);
+      transition: opacity .25s ease;
+    }
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    [contenteditable="true"] {
+      outline: 3px solid rgba(17,125,124,.45);
+      background: rgba(255,255,255,.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage">
+
+      <!-- === SLIDE 1: TITLE === -->
+      <section class="slide title-slide active" data-page="01 / 31">
+        <div class="title-wrap">
+          <div>
+            <div class="title-mark reveal">이미지 · 센서 · 빗물받이 모니터링</div>
+            <h1 class="reveal">우수주의보</h1>
+            <p class="title-sub reveal">이미지·센서 기반 빗물받이 위험도 모니터링 프로젝트</p>
+            <div class="tag-row reveal">
+              <span class="tag">YOLO</span><span class="tag">OpenCV</span><span class="tag">XGBoost</span><span class="tag">PostgreSQL</span><span class="tag">WebSocket</span>
+            </div>
+          </div>
+          <div class="status-tower reveal">
+            <div class="tower-head"><span>판단 기준</span><span>2026</span></div>
+            <div class="tower-body">
+              <div class="gauge"><b>막힌비율</b><div class="bar"><span style="--w: 68%; --c: var(--orange)"></span></div></div>
+              <div class="gauge"><b>수위</b><div class="bar"><span style="--w: 74%; --c: var(--red)"></span></div></div>
+              <div class="gauge"><b>유속</b><div class="bar"><span style="--w: 31%; --c: var(--blue)"></span></div></div>
+              <div class="panel soft">
+                <h3>핵심 구현 흐름</h3>
+                <p>강우 중 개별 빗물받이 상태를 이미지 분석과 센서값으로 판단하고, 결과를 DB 저장과 화면 갱신으로 연결합니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 2: ONE-LINE SUMMARY === -->
+      <section class="slide" data-page="02 / 31">
+        <div class="topline"><div><div class="kicker">인트로</div><h2>프로젝트 한 줄 요약 + 전체 흐름</h2></div><div class="section-label">구현 흐름</div></div>
+        <p class="lead reveal">이미지·센서 입력부터 scheduler, Backend, AI 서버, callback, DB 저장, WebSocket 화면 갱신까지 하나의 추적 가능한 흐름으로 연결합니다.</p>
+        <div class="flow reveal" style="margin-top:42px">
+          <div class="step">이미지·센서<br>입력</div><div class="step">스케줄러</div><div class="step">Backend</div><div class="step">AI 서버</div><div class="step">callback</div><div class="step">DB 저장</div><div class="step">WebSocket</div><div class="step">대시보드·상세<br>화면 갱신</div>
+        </div>
+        <div class="feature-grid reveal" style="margin-top:34px">
+          <div class="feature-card"><strong>입력</strong><span>sample image와 mock sensor data를 기준으로 분석 흐름을 구성합니다.</span></div>
+          <div class="feature-card"><strong>처리</strong><span>Backend는 작업을 추적하고 AI 서버 분석 결과를 callback으로 받습니다.</span></div>
+          <div class="feature-card"><strong>저장</strong><span>분석 결과와 작업 상태를 PostgreSQL에 남깁니다.</span></div>
+          <div class="feature-card"><strong>반영</strong><span>WebSocket event 이후 화면이 최신 데이터를 다시 조회합니다.</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 3: TEAM ROLES === -->
+      <section class="slide" data-page="03 / 31">
+        <div class="topline"><div><div class="kicker">인트로</div><h2>팀 구성과 역할</h2></div><div class="section-label">역할 중심</div></div>
+        <div class="feature-grid reveal">
+          <div class="feature-card"><strong>송희수</strong><span>YOLO, OpenCV 모델 튜닝, 이미지 데이터 라벨링, AI 파이프라인 설계</span></div>
+          <div class="feature-card"><strong>이명근</strong><span>Backend 서버, DB 연동, callback 저장, WebSocket 처리 구조</span></div>
+          <div class="feature-card"><strong>오택률</strong><span>Frontend 화면 구현, 인프라 구성, Jenkins CI/CD</span></div>
+          <div class="feature-card"><strong>김윤섭</strong><span>발표자료 구성, XGBoost 학습용 데이터 기준 설계, AI 서버와 Backend 서버 간 통신 구조 설계</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 4: AGENDA === -->
+      <section class="slide" data-page="04 / 31">
+        <div class="topline"><div><div class="kicker">인트로</div><h2>목차</h2></div><div class="section-label">31장 구성</div></div>
+        <div class="agenda reveal">
+          <div class="agenda-item"><b>1</b><span>개발 필요성과 기존 방식 검토</span></div>
+          <div class="agenda-item"><b>2</b><span>AI 분석 설계</span></div>
+          <div class="agenda-item"><b>3</b><span>웹 서버 및 서비스 구축</span></div>
+          <div class="agenda-item"><b>4</b><span>인프라 / 운영 설계</span></div>
+          <div class="agenda-item"><b>5</b><span>마무리</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 5: STACK AND ARCHITECTURE === -->
+      <section class="slide" data-page="05 / 31">
+        <div class="topline"><div><div class="kicker">인트로</div><h2>전체 기술 스택/구성 + 전체 아키텍처 요약</h2></div><div class="section-label">시스템</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <div class="feature-grid">
+              <div class="feature-card"><strong>Frontend</strong><span>Next.js, React, TypeScript, TanStack Query, Zustand, Kakao Maps, Recharts</span></div>
+              <div class="feature-card"><strong>Backend</strong><span>FastAPI, SQLAlchemy, Alembic, Pydantic, WebSocket</span></div>
+              <div class="feature-card"><strong>AI</strong><span>YOLO, OpenCV, XGBoost, scikit-learn</span></div>
+              <div class="feature-card"><strong>DB / Infra</strong><span>PostgreSQL, Docker, Nginx, Jenkins</span></div>
+            </div>
+          </div>
+          <div class="diagram reveal">
+            <div class="placeholder" style="height:220px">전체 시스템 아키텍처 이미지 삽입 예정</div>
+            <div class="flow" style="margin-top:24px; min-height:130px">
+              <div class="step">Frontend</div><div class="step">Backend</div><div class="step">AI 서버</div><div class="step">DB</div><div class="step">화면 갱신</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 6 === -->
+      <section class="slide" data-page="06 / 31">
+        <div class="topline"><div><div class="kicker">필요성</div><h2>도시 침수와 빗물받이</h2></div><div class="section-label">문제 정의</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <ul>
+              <li>빗물받이는 도로 위 빗물이 배수관으로 들어가는 첫 유입 지점입니다.</li>
+              <li>낙엽, 쓰레기, 토사 등으로 막히면 강우 중 배수 흐름이 제한됩니다.</li>
+              <li>개별 시설 상태를 빠르게 파악하는 흐름은 점검 우선순위 판단에 도움이 됩니다.</li>
+            </ul>
+            <div class="flow" style="margin-top:36px; min-height:145px">
+              <div class="step">도로 위<br>빗물</div><div class="step">빗물받이</div><div class="step">배수관<br>흐름</div>
+            </div>
+          </div>
+          <div class="placeholder reveal">막힌 빗물받이 사진 삽입 예정</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 7 === -->
+      <section class="slide" data-page="07 / 31">
+        <div class="topline"><div><div class="kicker">필요성</div><h2>강우 중 상태 변화</h2></div><div class="section-label">상태 변화</div></div>
+        <p class="lead reveal">강우 중에는 시설 상태가 순차 또는 동시다발적으로 변하고, 이 변화가 배수 흐름과 판단 기준에 영향을 줍니다.</p>
+        <div class="flow reveal" style="margin-top:52px">
+          <div class="step">강우</div><div class="step">이물질<br>유입</div><div class="step">막힌비율<br>증가</div><div class="step">수위<br>상승</div><div class="step">유속<br>저하</div>
+        </div>
+        <div class="feature-grid reveal" style="margin-top:42px">
+          <div class="feature-card"><strong>시간차 문제</strong><span>점검 시점과 실제 강우 중 상태가 달라질 수 있습니다.</span></div>
+          <div class="feature-card"><strong>동시다발 문제</strong><span>여러 시설이 동시에 변화하면 우선순위 판단이 필요합니다.</span></div>
+          <div class="feature-card"><strong>근거 문제</strong><span>수치와 이미지 근거를 함께 보아야 판단 흐름이 명확해집니다.</span></div>
+          <div class="feature-card"><strong>반영 문제</strong><span>분석 결과가 화면에 반영되어야 관리자가 상태를 확인할 수 있습니다.</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 8 === -->
+      <section class="slide" data-page="08 / 31">
+        <div class="topline"><div><div class="kicker">필요성</div><h2>기존 점검 방식의 한계</h2></div><div class="section-label">공백</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <h3>유지관리에는 필요</h3>
+            <p>정기 점검과 청소는 시설 유지관리의 기본 흐름입니다. 문제는 이 방식 자체가 아니라 강우 중 빠르게 바뀌는 현재 상태를 즉시 반영하기 어렵다는 점입니다.</p>
+          </div>
+          <div class="panel soft reveal">
+            <h3>현재 상태 판단에는 공백</h3>
+            <ul>
+              <li>점검 이후 상태 변화 발생 가능</li>
+              <li>신고 전까지 발견이 늦어질 수 있음</li>
+              <li>시설별 우선순위를 자동으로 정리하기 어려움</li>
+              <li>이미지 근거와 센서 근거가 분리될 수 있음</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 9 === -->
+      <section class="slide" data-page="09 / 31">
+        <div class="topline"><div><div class="kicker">사례 검토</div><h2>기존 방식/사례 검토 ① 점검·신고</h2></div><div class="section-label">점검 / 신고</div></div>
+        <div class="table reveal">
+          <div class="row head"><div class="cell">방식</div><div class="cell">강점</div><div class="cell">남는 한계</div></div>
+          <div class="row"><div class="cell">정기 점검</div><div class="cell">시설 유지관리 기준을 세우고 반복 관리가 가능</div><div class="cell">강우 중 빠르게 바뀌는 상태 반영에는 시간차가 있음</div></div>
+          <div class="row"><div class="cell">시민 신고</div><div class="cell">현장 발견과 위치 제보에 도움이 됨</div><div class="cell">신고 전 상태와 시설별 우선순위 판단에는 공백이 있음</div></div>
+        </div>
+        <p class="caption reveal">검토 기준: 기존 방식을 부정하는 것이 아니라, 현재 상태 판단을 보완할 지점을 찾는 관점입니다.</p>
+      </section>
+
+      <!-- === SLIDE 10 === -->
+      <section class="slide" data-page="10 / 31">
+        <div class="topline"><div><div class="kicker">사례 검토</div><h2>기존 방식/사례 검토 ② QR·센서·관제</h2></div><div class="section-label">관리번호 / 센서 / 관제</div></div>
+        <div class="table reveal">
+          <div class="row head"><div class="cell">방식</div><div class="cell">활용점</div><div class="cell">보완 필요점</div></div>
+          <div class="row"><div class="cell">QR·관리번호</div><div class="cell">신고 위치와 시설 이력을 연결하기 쉬움</div><div class="cell">스스로 상태를 판단하지는 않음</div></div>
+          <div class="row"><div class="cell">센서</div><div class="cell">수위·유속 같은 수치 상태를 확인 가능</div><div class="cell">설치·운영 범위와 이미지 근거 부족이 생길 수 있음</div></div>
+          <div class="row"><div class="cell">관제</div><div class="cell">여러 지점 상태를 모아보는 데 유용</div><div class="cell">개별 빗물받이의 막힘 근거까지 연결해야 함</div></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 11 === -->
+      <section class="slide" data-page="11 / 31">
+        <div class="topline"><div><div class="kicker">제안</div><h2>우수주의보 차별점</h2></div><div class="section-label">보완점</div></div>
+        <div class="table reveal">
+          <div class="row head"><div class="cell">기존 한계</div><div class="cell">우수주의보 보완점</div><div class="cell">서비스 반영</div></div>
+          <div class="row"><div class="cell">상태 근거 분리</div><div class="cell">이미지 + 센서 + AI 판단을 함께 사용</div><div class="cell">상세 화면에서 판단 근거 확인</div></div>
+          <div class="row"><div class="cell">시설 단위 판단 부족</div><div class="cell">개별 빗물받이 단위 상태 관리</div><div class="cell">지도와 위험 시설 목록으로 노출</div></div>
+          <div class="row"><div class="cell">결과 추적 어려움</div><div class="cell">callback 결과와 작업 상태를 DB에 저장</div><div class="cell">대시보드와 상세 화면에 반영</div></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 12 === -->
+      <section class="slide" data-page="12 / 31">
+        <div class="topline"><div><div class="kicker">목표</div><h2>참고 자료/정책/사례 기반 목표</h2></div><div class="section-label">근거 중심</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <ul>
+              <li>기존 관리·신고 체계를 참고해 개별 빗물받이 상태 판단 흐름을 목표로 설정했습니다.</li>
+              <li>확인되지 않은 비용이나 정량 효과는 사용하지 않습니다.</li>
+              <li>목표는 상태 판단, 근거 저장, 화면 반영 흐름을 구현하는 것입니다.</li>
+            </ul>
+          </div>
+          <div class="placeholder reveal">정책·사례 참고 이미지 삽입 예정</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 13 === -->
+      <section class="slide" data-page="13 / 31">
+        <div class="topline"><div><div class="kicker">계획</div><h2>일정표</h2></div><div class="section-label">일정</div></div>
+        <div class="timeline reveal">
+          <div class="timebox" data-step="01"><h3>기획·설계</h3><p>문제 정의와 서비스 흐름 정리</p></div>
+          <div class="timebox" data-step="02"><h3>AI 분석 설계</h3><p>YOLO, OpenCV, XGBoost 기준 구성</p></div>
+          <div class="timebox" data-step="03"><h3>Backend/DB 구현</h3><p>작업 생성, callback, 저장 구조 구현</p></div>
+          <div class="timebox" data-step="04"><h3>Frontend 구현</h3><p>대시보드와 상세 화면 구성</p></div>
+          <div class="timebox" data-step="05"><h3>통합·시연 준비</h3><p>전체 흐름 검증과 발표자료 정리</p></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 14 === -->
+      <section class="slide" data-page="14 / 31">
+        <div class="topline"><div><div class="kicker">AI 설계</div><h2>AI 분석 설계 개요: YOLO + OpenCV</h2></div><div class="section-label">이미지 분석</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <ul>
+              <li>YOLO는 이미지에서 보이는 객체와 후보 영역을 탐지합니다.</li>
+              <li>OpenCV는 전처리와 실제 막힌 영역 해석을 보조합니다.</li>
+              <li>두 결과를 함께 사용해 막힌비율 판단으로 연결합니다.</li>
+            </ul>
+            <div class="flow" style="margin-top:28px; min-height:132px"><div class="step">YOLO 탐지 결과</div><div class="step">OpenCV 처리 결과</div><div class="step">막힌비율 판단</div></div>
+          </div>
+          <div class="feature-grid reveal">
+            <div class="placeholder">YOLO 탐지 결과 이미지 삽입 예정</div>
+            <div class="placeholder">OpenCV 처리 결과 이미지 삽입 예정</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 15 === -->
+      <section class="slide" data-page="15 / 31">
+        <div class="topline"><div><div class="kicker">AI 설계</div><h2>막힌비율 판단 구조</h2></div><div class="section-label">막힌비율</div></div>
+        <div class="layout two">
+          <div>
+            <div class="flow reveal"><div class="step">YOLO<br>객체 탐지</div><div class="step">OpenCV<br>마스크 처리</div><div class="step">막힌비율<br>계산</div></div>
+            <div class="panel reveal" style="margin-top:28px">
+              <ul>
+                <li>배수구와 이물질 후보 영역 탐지</li>
+                <li>전처리, 영역 분리, mask 처리</li>
+                <li>그림자·어두운 영역 보정</li>
+                <li>obstruction area estimation 보조</li>
+              </ul>
+            </div>
+          </div>
+          <div class="placeholder reveal">OpenCV 마스크 처리 이미지 삽입 예정</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 16 === -->
+      <section class="slide" data-page="16 / 31">
+        <div class="topline"><div><div class="kicker">AI 설계</div><h2>XGBoost 입력과 위험도 분류</h2></div><div class="section-label">분류</div></div>
+        <div class="layout two">
+          <div class="table reveal">
+            <div class="row head"><div class="cell">입력 기준</div><div class="cell">의미</div><div class="cell">판단 연결</div></div>
+            <div class="row"><div class="cell">막힌비율</div><div class="cell">입구가 어느 정도 막혔는지</div><div class="cell">영상 막힘 점수</div></div>
+            <div class="row"><div class="cell">탐지 신뢰도</div><div class="cell">분석 결과를 어느 정도 믿을 수 있는지</div><div class="cell">영상 근거 보정</div></div>
+            <div class="row"><div class="cell">수위</div><div class="cell">물이 차오르는 정도</div><div class="cell">정체 징후 판단</div></div>
+            <div class="row"><div class="cell">유속</div><div class="cell">배수 흐름이 유지되는 정도</div><div class="cell">정체 징후 판단</div></div>
+          </div>
+          <div class="diagram reveal">
+            <div class="flow" style="min-height:170px"><div class="step">이미지 분석 결과</div><div class="step">센서값</div><div class="step">XGBoost</div></div>
+            <div class="feature-grid" style="margin-top:28px">
+              <div class="feature-card"><strong class="status-good">양호</strong><span>흐름이 정상에 가까운 상태</span></div>
+              <div class="feature-card"><strong class="status-warn">주의</strong><span>막힘 또는 정체 징후 발생</span></div>
+              <div class="feature-card"><strong class="status-danger">위험</strong><span>수위 상승과 유속 저하 뚜렷</span></div>
+              <div class="feature-card"><strong class="status-unknown">판단불가</strong><span>신뢰도 있는 판단이 어려운 상태</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 17 === -->
+      <section class="slide" data-page="17 / 31">
+        <div class="topline"><div><div class="kicker">AI 결과</div><h2>결과/검증</h2></div><div class="section-label">내부 점수</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <div class="formula">
+              <div>영상 막힘 점수 = <span class="accent">막힌비율 × 탐지 신뢰도</span></div>
+              <div>센서 정체 점수 = <span class="accent">수위 × (1 - 유속)</span></div>
+              <div>최종 위험 점수 = <span class="accent">영상 45% + 센서 45% + 수위 10%</span></div>
+            </div>
+            <p class="caption">최종 위험 점수는 실제 침수 확률이 아니라, 우수주의보 내부 위험도 분류를 위한 계산 점수입니다.</p>
+            <div class="placeholder" style="height:180px; margin-top:20px">검증 그래프 또는 분류 공간 이미지 삽입 예정</div>
+          </div>
+          <div class="table reveal">
+            <div class="row head"><div class="cell">분류</div><div class="cell">요약 기준</div><div class="cell">예외</div></div>
+            <div class="row"><div class="cell">양호</div><div class="cell">0.35 미만이며 배수 흐름이 정상에 가까운 상태</div><div class="cell">-</div></div>
+            <div class="row"><div class="cell">주의</div><div class="cell">0.35 이상이거나 막힘·정체 징후가 나타난 상태</div><div class="cell">-</div></div>
+            <div class="row"><div class="cell">위험</div><div class="cell">0.65 이상이거나 수위 상승과 유속 저하가 뚜렷한 상태</div><div class="cell">YOLO 실패라도 센서가 명확히 위험하면 위험</div></div>
+            <div class="row"><div class="cell">판단불가</div><div class="cell">센서 이상 또는 영상 분석 실패로 신뢰도 있는 판단이 어려운 상태</div><div class="cell">근거 부족 시 억지 분류하지 않음</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 18 === -->
+      <section class="slide" data-page="18 / 31">
+        <div class="topline"><div><div class="kicker">서비스</div><h2>서비스 구축 개요</h2></div><div class="section-label">비동기 흐름</div></div>
+        <p class="lead reveal">시스템은 대시보드, Backend 서버, AI 서버, PostgreSQL, WebSocket으로 구성됩니다. 분석 작업은 scheduler가 생성합니다.</p>
+        <div class="flow reveal" style="margin-top:52px">
+          <div class="step">스케줄러</div><div class="step">Backend<br>작업 생성</div><div class="step">AI 서버<br>요청</div><div class="step">callback<br>수신</div><div class="step">DB 저장</div><div class="step">WebSocket<br>갱신</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 19 === -->
+      <section class="slide" data-page="19 / 31">
+        <div class="topline"><div><div class="kicker">서비스</div><h2>관리자 대시보드 흐름</h2></div><div class="section-label">대시보드</div></div>
+        <div class="layout two">
+          <div class="placeholder reveal">관리자 대시보드 화면 삽입 예정</div>
+          <div class="panel reveal">
+            <ul>
+              <li>전체 현황 확인</li>
+              <li>지도 기반 위치 확인</li>
+              <li>위험 시설 목록 확인</li>
+              <li>선택 시설 정보 확인</li>
+            </ul>
+            <div class="flow" style="margin-top:30px"><div class="step">전체 현황</div><div class="step">위험 시설 선택</div><div class="step">상세 화면 이동</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 20 === -->
+      <section class="slide" data-page="20 / 31">
+        <div class="topline"><div><div class="kicker">서비스</div><h2>상세 화면 흐름</h2></div><div class="section-label">상세 화면</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <ul>
+              <li>이미지 분석 결과</li>
+              <li>센서 추이</li>
+              <li>AI 결과</li>
+              <li>과거 이력</li>
+            </ul>
+            <div class="flow" style="margin-top:30px"><div class="step">이미지 근거</div><div class="step">센서 근거</div><div class="step">AI 결과</div><div class="step">이력</div></div>
+          </div>
+          <div class="placeholder reveal">시설 상세 화면 삽입 예정</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 21 === -->
+      <section class="slide" data-page="21 / 31">
+        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
+        <div class="layout two">
+          <div class="diagram reveal">
+            <div class="erd">
+              <div class="entity"><b>drains</b><span>drain_id</span><span>location</span><span>status</span></div>
+              <div class="entity"><b>sensor_data</b><span>drain_id</span><span>measured_at</span><span>water_level</span><span>flow_velocity</span></div>
+              <div class="entity"><b>analysis_jobs</b><span>job_id</span><span>drain_id</span><span>status</span></div>
+              <div class="entity"><b>yolo_results</b><span>job_id</span><span>blocked_ratio</span><span>confidence</span></div>
+              <div class="entity"><b>xgboost_results</b><span>job_id</span><span>risk_level</span><span>score</span></div>
+            </div>
+            <p class="caption">callback 저장과 WebSocket 갱신을 설명하기 전에 데이터 관계를 먼저 고정합니다.</p>
+          </div>
+          <div class="placeholder reveal">ERD 이미지 삽입 예정</div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 22 === -->
+      <section class="slide" data-page="22 / 31">
+        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>센서 데이터 복합키 설계</h2></div><div class="section-label">시계열</div></div>
+        <div class="layout two">
+          <div class="diagram reveal">
+            <div class="flow"><div class="step">drain_id</div><div class="step">measured_at</div><div class="step">특정 빗물받이의<br>특정 시점 센서값</div></div>
+            <div class="panel soft" style="margin-top:30px"><p>하나의 빗물받이는 여러 시계열 센서 기록을 가지므로, 시설 식별값과 측정 시점을 함께 보면 어떤 센서값이 분석에 사용됐는지 명확해집니다.</p></div>
+          </div>
+          <div class="table reveal">
+            <div class="row head"><div class="cell">설계 기준</div><div class="cell">이유</div><div class="cell">효과</div></div>
+            <div class="row"><div class="cell">drain_id</div><div class="cell">시설 단위 상태를 구분</div><div class="cell">개별 빗물받이 이력 연결</div></div>
+            <div class="row"><div class="cell">measured_at</div><div class="cell">측정 시점을 구분</div><div class="cell">분석에 사용된 시점 명확화</div></div>
+            <div class="row"><div class="cell">조합 기준</div><div class="cell">시계열 데이터 중복과 혼동 방지</div><div class="cell">분석 근거 추적성 확보</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 23 === -->
+      <section class="slide" data-page="23 / 31">
+        <div class="topline"><div><div class="kicker">Backend</div><h2>스케줄러 기반 비동기 분석 작업 생성</h2></div><div class="section-label">스케줄러</div></div>
+        <div class="layout two">
+          <div class="panel reveal">
+            <ul>
+              <li>분석 작업은 Frontend 요청이 아니라 scheduler에 의해 생성됩니다.</li>
+              <li>우기 운영 가정에서는 10분 주기로 작업을 만들 수 있습니다.</li>
+              <li>Backend는 생성된 작업을 기준으로 AI 서버에 분석 요청을 보냅니다.</li>
+            </ul>
+          </div>
+          <div class="flow reveal"><div class="step">스케줄러</div><div class="step">분석 작업 생성</div><div class="step">Backend</div><div class="step">AI 서버 요청</div></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 24 === -->
+      <section class="slide" data-page="24 / 31">
+        <div class="topline"><div><div class="kicker">Backend</div><h2>callback 저장</h2></div><div class="section-label">결과 저장</div></div>
+        <div class="layout two">
+          <div class="flow reveal"><div class="step">AI 서버</div><div class="step">callback</div><div class="step">Backend</div><div class="step">DB 저장</div></div>
+          <div class="table reveal">
+            <div class="row head"><div class="cell">저장 대상</div><div class="cell">내용</div><div class="cell">목적</div></div>
+            <div class="row"><div class="cell">이미지 분석 결과</div><div class="cell">YOLO/OpenCV 기반 막힌비율, 탐지 신뢰도</div><div class="cell">영상 근거 보존</div></div>
+            <div class="row"><div class="cell">최종 위험도 결과</div><div class="cell">XGBoost 결과와 분류 상태</div><div class="cell">화면 상태 반영</div></div>
+            <div class="row"><div class="cell">작업 상태</div><div class="cell">pending, processing, done, failed</div><div class="cell">중복 callback과 실패 추적</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 25 === -->
+      <section class="slide" data-page="25 / 31">
+        <div class="topline"><div><div class="kicker">Frontend</div><h2>WebSocket 갱신</h2></div><div class="section-label">갱신 trigger</div></div>
+        <p class="lead reveal">WebSocket은 모든 데이터를 직접 전달하는 통로가 아니라, 최신 데이터 재조회를 시작하는 화면 갱신 trigger로 사용합니다.</p>
+        <div class="flow reveal" style="margin-top:52px"><div class="step">Backend<br>WebSocket 이벤트</div><div class="step">Frontend<br>수신</div><div class="step">최신 데이터<br>재조회</div><div class="step">화면 갱신</div></div>
+      </section>
+
+      <!-- === SLIDE 26 === -->
+      <section class="slide" data-page="26 / 31">
+        <div class="topline"><div><div class="kicker">서비스</div><h2>전체 서비스 흐름 요약</h2></div><div class="section-label">전체 흐름</div></div>
+        <div class="flow reveal" style="margin-top:38px"><div class="step">스케줄러<br>작업 생성</div><div class="step">Backend<br>요청</div><div class="step">AI 분석</div><div class="step">callback<br>수신</div><div class="step">DB 저장</div><div class="step">WebSocket<br>갱신</div></div>
+        <div class="feature-grid reveal" style="margin-top:44px">
+          <div class="feature-card"><strong>책임 분리</strong><span>작업 생성, 분석 요청, 결과 저장, 화면 갱신 책임을 분리합니다.</span></div>
+          <div class="feature-card"><strong>추적성</strong><span>분석 작업과 결과가 DB 기준으로 연결됩니다.</span></div>
+          <div class="feature-card"><strong>비동기 처리</strong><span>분석 시간이 길어져도 화면 흐름과 분리됩니다.</span></div>
+          <div class="feature-card"><strong>화면 반영</strong><span>event 수신 이후 최신 데이터를 다시 조회합니다.</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 27 === -->
+      <section class="slide" data-page="27 / 31">
+        <div class="topline"><div><div class="kicker">인프라</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
+        <div class="layout two">
+          <div class="placeholder reveal">시스템 아키텍처 이미지 삽입 예정</div>
+          <div class="diagram reveal">
+            <div class="node-map">
+              <div class="node">Browser<small>관리 화면</small></div>
+              <div class="node">Nginx<small>routing</small></div>
+              <div class="node">Frontend<small>Next.js</small></div>
+              <div class="node">Backend<small>FastAPI</small></div>
+              <div class="node">PostgreSQL<small>결과 저장</small></div>
+            </div>
+            <div class="node-map" style="margin-top:22px; grid-template-columns: 1fr 1fr 1fr">
+              <div class="node">AI 서버<small>YOLO / OpenCV / XGBoost</small></div>
+              <div class="node">WebSocket<small>갱신 알림</small></div>
+              <div class="node">Docker<small>service runtime</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 28 === -->
+      <section class="slide" data-page="28 / 31">
+        <div class="topline"><div><div class="kicker">인프라</div><h2>Docker / Nginx / Jenkins CI/CD</h2></div><div class="section-label">빌드 / 배포</div></div>
+        <div class="layout two">
+          <div class="flow reveal"><div class="step">GitHub</div><div class="step">Jenkins</div><div class="step">Docker<br>build/deploy</div><div class="step">Docker Compose<br>실행</div></div>
+          <div class="table reveal">
+            <div class="row head"><div class="cell">구성</div><div class="cell">역할</div><div class="cell">발표 포인트</div></div>
+            <div class="row"><div class="cell">Docker</div><div class="cell">실행 환경과 배포 단위 구성</div><div class="cell">서비스별 runtime 분리</div></div>
+            <div class="row"><div class="cell">Nginx</div><div class="cell">request routing과 entry point 구성</div><div class="cell">Frontend/Backend 접근 경로 정리</div></div>
+            <div class="row"><div class="cell">Jenkins</div><div class="cell">CI/CD flow 구현</div><div class="cell">GitHub 변경 이후 build/deploy 연결</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 29 === -->
+      <section class="slide" data-page="29 / 31">
+        <div class="topline"><div><div class="kicker">향후 확장</div><h2>향후 RTSP, MQTT, 알림 확장</h2></div><div class="section-label">추가 범위</div></div>
+        <div class="layout two">
+          <div class="flow reveal"><div class="step">현재 구조</div><div class="step">RTSP CCTV</div><div class="step">MQTT 센서</div><div class="step">알림</div><div class="step">리포트</div></div>
+          <div class="table reveal">
+            <div class="row head"><div class="cell">구분</div><div class="cell">현재 구현 범위</div><div class="cell">향후 확장</div></div>
+            <div class="row"><div class="cell">이미지</div><div class="cell">sample image 기반 분석 흐름</div><div class="cell">RTSP CCTV 입력 연동</div></div>
+            <div class="row"><div class="cell">센서</div><div class="cell">mock sensor data 기반 판단</div><div class="cell">MQTT 기반 실제 센서 연동</div></div>
+            <div class="row"><div class="cell">운영</div><div class="cell">결과 저장과 화면 반영 흐름</div><div class="cell">알림과 리포트 자동화</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 30 === -->
+      <section class="slide" data-page="30 / 31">
+        <div class="topline"><div><div class="kicker">마무리</div><h2>기대효과</h2></div><div class="section-label">기대효과</div></div>
+        <div class="feature-grid reveal">
+          <div class="feature-card"><strong>시설별 상태 확인</strong><span>개별 빗물받이 단위로 현재 판단 상태를 확인합니다.</span></div>
+          <div class="feature-card"><strong>위험 시설 우선순위</strong><span>주의·위험 상태를 먼저 확인해 점검 순서를 잡는 데 도움을 줍니다.</span></div>
+          <div class="feature-card"><strong>판단 근거 확인</strong><span>이미지, 센서, AI 판단 근거를 상세 화면에서 함께 봅니다.</span></div>
+          <div class="feature-card"><strong>화면 반영 흐름</strong><span>분석 결과 저장 이후 화면 갱신까지 연결된 구조를 확인합니다.</span></div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 31 === -->
+      <section class="slide title-slide" data-page="31 / 31">
+        <div class="title-wrap">
+          <div>
+            <div class="title-mark reveal">Q&A</div>
+            <h1 class="reveal">질문 받겠습니다</h1>
+            <p class="title-sub reveal">우수주의보</p>
+          </div>
+          <div class="placeholder reveal" style="height:720px">GitHub 또는 Demo QR 코드 삽입 예정</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="deck-controls" aria-label="슬라이드 이동">
+    <button type="button" id="prevBtn" aria-label="이전 슬라이드">‹</button>
+    <span id="slideCounter">1 / 31</span>
+    <button type="button" id="nextBtn" aria-label="다음 슬라이드">›</button>
+  </nav>
+  <div class="edit-hotzone" aria-hidden="true"></div>
+  <button class="edit-toggle" id="editToggle" type="button" title="편집 모드 (E)">편집</button>
+
+  <script>
+    /* === SLIDE CONTROLLER === */
+    class SlidePresentation {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll('.slide'));
+        this.currentSlide = 0;
+        this.stage = document.getElementById('deckStage');
+        this.counter = document.getElementById('slideCounter');
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupButtons();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.showSlide(0);
+      }
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener('resize', scale);
+      }
+      setupKeyboardNav() {
+        document.addEventListener('keydown', (e) => {
+          if (e.target && e.target.getAttribute('contenteditable') === 'true') return;
+          if (['ArrowRight', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); this.next(); }
+          if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); this.prev(); }
+          if (e.key === 'Home') this.showSlide(0);
+          if (e.key === 'End') this.showSlide(this.slides.length - 1);
+        });
+      }
+      setupButtons() {
+        document.getElementById('prevBtn').addEventListener('click', () => this.prev());
+        document.getElementById('nextBtn').addEventListener('click', () => this.next());
+      }
+      setupTouchNav() {
+        let startX = 0;
+        window.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
+        window.addEventListener('touchend', (e) => {
+          const dx = e.changedTouches[0].clientX - startX;
+          if (Math.abs(dx) > 50) dx < 0 ? this.next() : this.prev();
+        }, { passive: true });
+      }
+      setupWheelNav() {
+        let last = 0;
+        window.addEventListener('wheel', (e) => {
+          const now = Date.now();
+          if (now - last < 550) return;
+          last = now;
+          e.deltaY > 0 ? this.next() : this.prev();
+        }, { passive: true });
+      }
+      showSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === this.currentSlide);
+          slide.classList.toggle('visible', i === this.currentSlide);
+        });
+        this.counter.textContent = `${this.currentSlide + 1} / ${this.slides.length}`;
+      }
+      next() { this.showSlide(this.currentSlide + 1); }
+      prev() { this.showSlide(this.currentSlide - 1); }
+    }
+
+    /* === INLINE EDITOR === */
+    class InlineEditor {
+      constructor() {
+        this.isActive = false;
+        this.key = 'rain-alert-slide-edits';
+        this.load();
+      }
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.getElementById('editToggle').classList.toggle('active', this.isActive);
+        document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide p, .slide li, .cell, .step, .feature-card strong, .feature-card span, .placeholder, .agenda-item span').forEach((el) => {
+          el.setAttribute('contenteditable', this.isActive ? 'true' : 'false');
+        });
+        if (!this.isActive) this.save();
+      }
+      save() {
+        const data = Array.from(document.querySelectorAll('[contenteditable]')).map((el) => el.innerHTML);
+        localStorage.setItem(this.key, JSON.stringify(data));
+      }
+      load() {
+        try {
+          const data = JSON.parse(localStorage.getItem(this.key) || '[]');
+          if (!data.length) return;
+          Array.from(document.querySelectorAll('.slide h1, .slide h2, .slide h3, .slide p, .slide li, .cell, .step, .feature-card strong, .feature-card span, .placeholder, .agenda-item span')).forEach((el, i) => {
+            if (data[i]) el.innerHTML = data[i];
+          });
+        } catch (err) {
+          console.warn('Edit data could not be loaded', err);
+        }
+      }
+    }
+
+    const deck = new SlidePresentation();
+    const editor = new InlineEditor();
+    const hotzone = document.querySelector('.edit-hotzone');
+    const editToggle = document.getElementById('editToggle');
+    let hideTimeout = null;
+
+    editToggle.addEventListener('click', () => editor.toggleEditMode());
+    hotzone.addEventListener('mouseenter', () => {
+      clearTimeout(hideTimeout);
+      editToggle.classList.add('show');
+    });
+    hotzone.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => { if (!editor.isActive) editToggle.classList.remove('show'); }, 400);
+    });
+    editToggle.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+    editToggle.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => { if (!editor.isActive) editToggle.classList.remove('show'); }, 400);
+    });
+    hotzone.addEventListener('click', () => editor.toggleEditMode());
+    document.addEventListener('keydown', (e) => {
+      if ((e.key === 'e' || e.key === 'E') && (!e.target || e.target.getAttribute('contenteditable') !== 'true')) {
+        editor.toggleEditMode();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        editor.save();
+      }
+    });
+  </script>
+</body>
+</html>
