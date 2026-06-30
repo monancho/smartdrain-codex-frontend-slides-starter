@@ -11,18 +11,21 @@
     /* === THEME === */
     :root {
       --stage-bg: #111827;
-      --slide-bg: #f7f8f3;
-      --ink: #111820;
-      --muted: #657181;
-      --line: #1b2531;
-      --paper: #f7f8f3;
+      --slide-bg: #f6f3ea;
+      --ink: #121c2b;
+      --muted: #647686;
+      --line: #d9e2e3;
+      --strong-line: #152333;
+      --paper: #f6f3ea;
       --panel: #ffffff;
-      --soft: #eef2ed;
-      --teal: #117d7c;
+      --soft: #eef3ee;
+      --teal: #07899a;
       --orange: #d97706;
       --red: #c63d3d;
       --blue: #315f9f;
       --gray: #858b96;
+      --shadow: 0 22px 60px rgba(32, 45, 57, .14);
+      --soft-shadow: 0 14px 36px rgba(32, 45, 57, .1);
       --mono: "IBM Plex Mono", monospace;
       --display: "Archivo", "Noto Sans KR", sans-serif;
       --body: "Noto Sans KR", sans-serif;
@@ -143,29 +146,30 @@
     * { box-sizing: border-box; }
     body { font-family: var(--body); color: var(--ink); }
     .slide {
-      padding: 66px 78px;
+      padding: 68px 92px;
       background:
-        linear-gradient(90deg, rgba(17, 24, 39, .055) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(17, 24, 39, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 28, 43, .052) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(18, 28, 43, .04) 1px, transparent 1px),
         var(--paper);
-      background-size: 80px 80px;
+      background-size: 72px 72px;
     }
     .slide::before {
       content: "";
       position: absolute;
-      left: 78px;
-      right: 78px;
-      top: 50px;
-      height: 8px;
-      background: linear-gradient(90deg, var(--ink), var(--teal) 42%, var(--orange) 70%, var(--red));
+      left: 92px;
+      right: 92px;
+      top: 52px;
+      height: 3px;
+      opacity: .82;
+      background: linear-gradient(90deg, var(--teal), rgba(7,137,154,.45), rgba(217,119,6,.85));
     }
     .slide::after {
       content: attr(data-page);
       position: absolute;
-      right: 78px;
+      right: 92px;
       bottom: 38px;
       font: 700 17px/1 var(--mono);
-      color: var(--muted);
+      color: #8aa0ad;
       letter-spacing: .08em;
     }
     h1, h2, h3, p { margin: 0; }
@@ -177,7 +181,7 @@
     }
     h2 {
       font-family: var(--display);
-      font-size: 56px;
+      font-size: 54px;
       line-height: 1.08;
       letter-spacing: 0;
       margin-bottom: 20px;
@@ -203,23 +207,23 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 30px;
-      margin-bottom: 24px;
+      margin-bottom: 34px;
     }
     .kicker {
       font: 800 16px/1 var(--mono);
       color: var(--teal);
       text-transform: uppercase;
       letter-spacing: .14em;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .section-label {
       flex: 0 0 auto;
       font: 800 17px/1 var(--mono);
       color: var(--muted);
       letter-spacing: .08em;
-      border: 2px solid var(--line);
-      padding: 10px 13px;
-      background: rgba(255,255,255,.72);
+      border: 0;
+      padding: 0;
+      background: transparent;
     }
     .lead {
       font-size: 31px;
@@ -237,9 +241,9 @@
     }
     .message-line {
       display: inline-block;
-      border-left: 8px solid var(--teal);
-      padding-left: 18px;
-      font-size: 28px;
+      border-left: 5px solid var(--teal);
+      padding-left: 20px;
+      font-size: 29px;
       line-height: 1.34;
       font-weight: 900;
       max-width: 1540px;
@@ -271,9 +275,9 @@
     .split-40 { grid-template-columns: .72fr 1.28fr; }
     .split-60 { grid-template-columns: 1.28fr .72fr; }
     .panel, .metric, .table, .flow, .diagram, .asset-frame, .callout {
-      background: rgba(255,255,255,.9);
-      border: 2px solid var(--line);
-      box-shadow: 10px 10px 0 rgba(17,24,39,.12);
+      background: rgba(255,255,255,.92);
+      border: 1px solid var(--line);
+      box-shadow: var(--soft-shadow);
     }
     .panel, .diagram, .callout { padding: 26px; }
     .panel.soft { background: var(--soft); }
@@ -285,16 +289,16 @@
     }
     .tag-row { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 22px; }
     .tag {
-      border: 2px solid var(--line);
+      border: 1px solid rgba(7,137,154,.24);
       padding: 8px 12px;
-      background: #fff;
+      background: rgba(255,255,255,.72);
       font: 800 16px/1 var(--mono);
-      color: var(--ink);
+      color: #1b5d70;
     }
     .asset-frame {
       height: 100%;
       min-height: 220px;
-      padding: 15px;
+      padding: 14px;
       display: grid;
       grid-template-rows: 1fr auto;
       gap: 12px;
@@ -307,6 +311,11 @@
       object-fit: contain;
       display: block;
       background: #fff;
+    }
+    .asset-frame.hero {
+      padding: 18px;
+      border-color: rgba(7,137,154,.15);
+      box-shadow: var(--shadow), 0 0 44px rgba(7,137,154,.08);
     }
     .asset-frame.cover img { object-fit: cover; }
     .asset-frame.zoom img {
@@ -324,10 +333,12 @@
       gap: 20px;
     }
     .feature-card {
-      border: 2px solid var(--line);
-      background: #fff;
-      padding: 22px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.92);
+      padding: 24px;
       min-height: 134px;
+      box-shadow: var(--soft-shadow);
     }
     .feature-card strong {
       display: block;
@@ -350,8 +361,8 @@
       font-size: 29px;
     }
     .feature-card.emphasis {
-      border-width: 3px;
-      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+      border-color: rgba(7,137,154,.24);
+      box-shadow: var(--shadow);
     }
     .feature-grid.three-col {
       grid-template-columns: repeat(3, 1fr);
@@ -444,11 +455,12 @@
       margin-top: 40px;
     }
     .stage-card {
-      border: 3px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.94);
       min-height: 210px;
       padding: 22px;
-      box-shadow: 9px 9px 0 rgba(17,24,39,.1);
+      box-shadow: var(--soft-shadow);
       position: relative;
     }
     .stage-card:not(:last-child)::after {
@@ -466,7 +478,7 @@
       place-items: center;
       width: 44px;
       height: 44px;
-      border: 2px solid var(--line);
+      border: 0;
       background: var(--teal);
       color: #fff;
       font: 900 16px/1 var(--mono);
@@ -517,15 +529,15 @@
     .row {
       display: grid;
       grid-template-columns: 245px 1fr 1fr;
-      border-bottom: 2px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
     .row.four {
       grid-template-columns: 220px 1fr 1fr 1fr;
     }
     .row:last-child { border-bottom: 0; }
     .cell {
-      padding: 16px 18px;
-      border-right: 2px solid var(--line);
+      padding: 18px 20px;
+      border-right: 1px solid var(--line);
       font-size: 20px;
       line-height: 1.35;
       word-break: keep-all;
@@ -534,7 +546,7 @@
     .head .cell {
       background: var(--ink);
       color: #fff;
-      font: 800 17px/1.3 var(--mono);
+      font: 800 18px/1.3 var(--mono);
     }
     .erd {
       display: grid;
@@ -571,19 +583,37 @@
       gap: 16px;
       position: relative;
     }
+    .erd-board.model {
+      height: 620px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .erd-board.model .erd-card b {
+      font-size: 18px;
+      padding: 12px;
+    }
+    .erd-board.model .erd-card span {
+      font-size: 15px;
+      padding: 9px 11px;
+    }
+    .erd-board.model .erd-card small {
+      font-size: 14px;
+      padding: 10px 11px;
+    }
     .erd-card {
-      border: 3px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.96);
       display: block;
       min-width: 0;
       position: relative;
-      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+      box-shadow: var(--soft-shadow);
     }
     .erd-card::after { display: none; }
     .erd-card b {
       display: block;
-      background: var(--ink);
-      color: #fff;
+      background: transparent;
+      color: var(--ink);
       padding: 16px 15px;
       font: 900 20px/1 var(--mono);
       overflow-wrap: anywhere;
@@ -652,14 +682,15 @@
       color: var(--red);
     }
     .sequence-step {
-      border: 3px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.96);
       padding: 18px 14px;
       display: grid;
       grid-template-rows: 52px auto 1fr;
       gap: 12px;
       position: relative;
-      box-shadow: 7px 7px 0 rgba(17,24,39,.1);
+      box-shadow: var(--soft-shadow);
     }
     .sequence-step:not(:last-child)::after {
       display: none;
@@ -690,7 +721,8 @@
     }
     .trigger-note {
       margin-top: 22px;
-      border: 3px solid var(--line);
+      border: 0;
+      border-left: 5px solid var(--teal);
       background: var(--soft);
       padding: 18px 22px;
       font-size: 24px;
@@ -734,9 +766,10 @@
       z-index: 1;
     }
     .arch-node {
-      border: 3px solid var(--line);
-      background: #fff;
-      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--soft-shadow);
       padding: 22px;
       display: grid;
       align-content: center;
@@ -813,8 +846,9 @@
       z-index: -1;
     }
     .timebox {
-      border: 2px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.94);
       padding: 22px;
       min-height: 210px;
       position: relative;
@@ -851,8 +885,9 @@
       position: relative;
       min-height: 0;
       overflow: hidden;
-      border: 2px solid rgba(17,24,39,.16);
+      border: 1px solid rgba(7,137,154,.16);
       background: #fff;
+      box-shadow: var(--shadow);
     }
     .shot-wrap img {
       width: 100%;
@@ -888,8 +923,9 @@
       grid-template-columns: 42px 1fr;
       gap: 12px;
       align-items: start;
-      border: 2px solid var(--line);
-      background: #fff;
+      border: 0;
+      border-left: 4px solid var(--teal);
+      background: rgba(255,255,255,.82);
       padding: 13px 14px;
     }
     .callout-row b {
@@ -924,11 +960,12 @@
       margin-top: 32px;
     }
     .roadmap-card {
-      border: 3px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.94);
       padding: 24px;
       min-height: 300px;
-      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+      box-shadow: var(--soft-shadow);
     }
     .roadmap-card b {
       display: inline-block;
@@ -951,15 +988,247 @@
       color: var(--muted);
       word-break: keep-all;
     }
+    .ref-claim {
+      font-family: var(--display);
+      font-size: 60px;
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: 0;
+      word-break: keep-all;
+      max-width: 720px;
+    }
+    .ref-claim.wide {
+      max-width: 980px;
+      text-align: center;
+      margin: 0 auto;
+    }
+    .ref-sub {
+      margin-top: 28px;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: 28px;
+      line-height: 1.46;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .ref-accent {
+      width: 530px;
+      height: 8px;
+      margin-top: 56px;
+      background: linear-gradient(90deg, var(--teal), rgba(7,137,154,.45), var(--orange));
+    }
+    .hero-split {
+      height: 760px;
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .hero-split.reverse {
+      grid-template-columns: 1.2fr .8fr;
+    }
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      min-width: 0;
+    }
+    .hero-visual {
+      min-width: 0;
+      height: 620px;
+      display: grid;
+    }
+    .hero-visual.tall {
+      height: 690px;
+    }
+    .hero-visual .asset-frame,
+    .hero-visual .shot-wrap {
+      height: 100%;
+    }
+    .keyword-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 34px;
+    }
+    .keyword {
+      border-top: 4px solid var(--teal);
+      padding-top: 20px;
+      min-height: 98px;
+    }
+    .keyword strong {
+      display: block;
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .keyword span {
+      display: block;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .agenda-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-top: 58px;
+    }
+    .agenda-card {
+      min-height: 270px;
+      padding: 26px 22px;
+      border-top: 4px solid var(--teal);
+      background: rgba(255,255,255,.84);
+      box-shadow: var(--soft-shadow);
+    }
+    .agenda-card b {
+      font: 900 18px/1 var(--mono);
+      color: var(--teal);
+    }
+    .agenda-card strong {
+      display: block;
+      margin-top: 32px;
+      font-size: 25px;
+      line-height: 1.2;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .agenda-card span {
+      display: block;
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 1.38;
+      color: var(--muted);
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .line-modules {
+      display: grid;
+      gap: 24px;
+    }
+    .line-module {
+      border-top: 4px solid var(--teal);
+      padding-top: 18px;
+    }
+    .line-module strong {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+    .line-module span {
+      display: block;
+      font-size: 21px;
+      color: var(--muted);
+      line-height: 1.38;
+      word-break: keep-all;
+    }
+    .simple-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-top: 54px;
+    }
+    .simple-step {
+      border-top: 4px solid var(--teal);
+      padding-top: 18px;
+      min-height: 160px;
+      position: relative;
+    }
+    .simple-step:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -14px;
+      top: 28px;
+      color: var(--orange);
+      font: 900 22px/1 var(--mono);
+    }
+    .simple-step b {
+      font: 900 16px/1 var(--mono);
+      color: var(--teal);
+    }
+    .simple-step strong {
+      display: block;
+      margin-top: 16px;
+      font-size: 24px;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .simple-step span {
+      display: block;
+      margin-top: 10px;
+      font-size: 18px;
+      line-height: 1.34;
+      color: var(--muted);
+      font-weight: 700;
+      word-break: keep-all;
+    }
+    .status-chip {
+      display: inline-block;
+      min-width: 86px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #fff;
+      text-align: center;
+      font: 900 16px/1 var(--mono);
+    }
+    .status-chip.good { background: var(--teal); }
+    .status-chip.warn { background: var(--orange); }
+    .status-chip.danger { background: var(--red); }
+    .status-chip.unknown { background: var(--gray); }
+    .diagram-map {
+      position: relative;
+      height: 620px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+    .map-node {
+      position: absolute;
+      width: 210px;
+      min-height: 96px;
+      border-top: 4px solid var(--teal);
+      background: #fff;
+      box-shadow: var(--soft-shadow);
+      padding: 18px;
+    }
+    .map-node strong {
+      display: block;
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .map-node span {
+      display: block;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+    .map-node.future {
+      border-top-color: var(--orange);
+      background: repeating-linear-gradient(-45deg, rgba(217,119,6,.06), rgba(217,119,6,.06) 10px, #fff 10px, #fff 22px);
+    }
+    .map-line {
+      position: absolute;
+      height: 3px;
+      background: rgba(7,137,154,.45);
+      transform-origin: left center;
+    }
+    .map-line.dotted {
+      background: repeating-linear-gradient(90deg, rgba(217,119,6,.75) 0 10px, transparent 10px 18px);
+    }
 
     /* === TITLE AND SECTION SLIDES === */
     .title-slide {
       padding: 76px 88px;
       background:
-        linear-gradient(90deg, rgba(17,24,39,.08) 1px, transparent 1px),
-        linear-gradient(0deg, rgba(17,24,39,.055) 1px, transparent 1px),
-        #f5f6ef;
-      background-size: 84px 84px;
+        linear-gradient(90deg, rgba(18,28,43,.052) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(18,28,43,.04) 1px, transparent 1px),
+        var(--paper);
+      background-size: 72px 72px;
     }
     .title-wrap {
       height: 920px;
@@ -976,9 +1245,10 @@
       white-space: nowrap;
     }
     .title-slide h1.qa-title {
-      font-size: 128px;
-      line-height: 1.06;
-      max-width: 900px;
+      font-size: 116px;
+      line-height: 1.02;
+      max-width: 980px;
+      white-space: nowrap;
       word-break: keep-all;
     }
     .title-mark {
@@ -995,9 +1265,9 @@
     }
     .status-tower {
       height: 770px;
-      border: 3px solid var(--line);
-      background: #fff;
-      box-shadow: 16px 16px 0 rgba(17,24,39,.16);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.94);
+      box-shadow: var(--shadow);
       display: grid;
       grid-template-rows: 86px 1fr;
     }
@@ -1158,33 +1428,30 @@
     <main class="deck-stage" id="deckStage">
 
       <section class="slide title-slide active" data-page="01 / 36">
-        <div class="title-wrap">
-          <div>
-            <div class="title-mark reveal">이미지 · 센서 · 화면 반영</div>
+        <div class="hero-split">
+          <div class="hero-copy">
+            <div class="title-mark reveal">이미지·센서 기반 빗물받이 위험도 모니터링</div>
             <h1 class="reveal title-name">우수주의보</h1>
-            <p class="title-sub reveal">이미지·센서 기반 빗물받이 상태 판단 및 관리 화면 반영</p>
-            <div class="tag-row reveal">
-              <span class="tag">YOLO</span><span class="tag">OpenCV</span><span class="tag">XGBoost</span><span class="tag">PostgreSQL</span><span class="tag">WebSocket</span>
+            <p class="ref-sub reveal">이미지·센서 기반 빗물받이 상태 판단 및 관리자 화면 반영 시스템</p>
+            <div class="ref-accent reveal"></div>
+            <div class="keyword-strip reveal">
+              <div class="keyword"><strong>실시간</strong><span>지도 기반 상태 확인</span></div>
+              <div class="keyword"><strong>AI 판단</strong><span>막힘·수위·유속 통합</span></div>
+              <div class="keyword"><strong>우선순위</strong><span>위험 시설 선별</span></div>
             </div>
           </div>
-          <div class="status-tower reveal">
-            <div class="tower-head"><span>발표 핵심</span><span>2026</span></div>
-            <div class="tower-body">
-              <div class="gauge"><b>이미지</b><div class="bar"><span style="--w: 78%; --c: var(--orange)"></span></div></div>
-              <div class="gauge"><b>센서값</b><div class="bar"><span style="--w: 74%; --c: var(--red)"></span></div></div>
-              <div class="gauge"><b>화면 반영</b><div class="bar"><span style="--w: 84%; --c: var(--teal)"></span></div></div>
-              <div class="panel soft">
-                <h3>한 문장 요약</h3>
-                <p>sample image와 mock sensor data를 분석 작업으로 연결하고, 결과 저장 후 화면 갱신까지 이어지는 흐름을 구현했습니다.</p>
-              </div>
+          <div class="hero-visual tall reveal">
+            <div class="asset-frame hero">
+              <img src="assets/dashboard-main.png" alt="관리자 대시보드 화면">
+              <div class="asset-caption">관리자 대시보드: 위험 지도, 시설 목록, 상세 정보가 한 화면에 배치된 구조</div>
             </div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="02 / 36">
-        <div class="topline"><div><div class="kicker">인트로</div><h2>프로젝트 한 줄 요약</h2></div><div class="section-label">현재 구현 범위</div></div>
-        <p class="lead reveal full">입력, 분석, 저장, 반영을 하나의 요청 흐름으로 연결해 개별 빗물받이 상태를 화면에서 확인하게 합니다.</p>
+        <div class="topline"><div><div class="kicker">00 요약</div><h2>프로젝트 한 줄 요약</h2></div><div class="section-label">입력에서 화면 반영까지</div></div>
+        <p class="ref-claim wide reveal">sample image와 mock sensor data를 하나의 작업으로 묶고, 분석 결과를 화면 갱신까지 연결합니다.</p>
         <div class="stage-flow reveal">
           <div class="stage-card"><b>01</b><strong>입력</strong><span>sample image와 mock sensor data를 시연 입력으로 사용합니다.</span></div>
           <div class="stage-card"><b>02</b><strong>분석</strong><span>Backend가 AnalysisJob을 만들고 AI server에 비동기 요청을 보냅니다.</span></div>
@@ -1194,106 +1461,105 @@
       </section>
 
       <section class="slide" data-page="03 / 36">
-        <div class="topline"><div><div class="kicker">인트로</div><h2>팀 구성과 역할</h2></div><div class="section-label">역할 중심</div></div>
-        <p class="message-line reveal">개인 소개보다 발표 흐름에 필요한 책임 단위와 산출물을 먼저 보여줍니다.</p>
+        <div class="topline"><div><div class="kicker">00 팀 구성</div><h2>팀 구성과 역할</h2></div><div class="section-label">역할 중심</div></div>
+        <p class="message-line reveal">역할, 담당 범위, 산출물을 기준으로 발표 흐름을 분리했습니다.</p>
         <div class="layout two after-lead">
           <div class="feature-grid reveal">
-            <div class="feature-card"><strong>AI pipeline</strong><span>담당: YOLO/OpenCV 처리. 산출물: 이미지 feature. 기술: YOLO, OpenCV.</span></div>
-            <div class="feature-card"><strong>Backend / DB</strong><span>담당: 작업 생성과 저장. 산출물: callback, ERD. 기술: FastAPI, PostgreSQL.</span></div>
-            <div class="feature-card"><strong>Frontend / Infra</strong><span>담당: 화면 반영과 배포 구성. 산출물: dashboard/detail, Docker. 기술: React, Nginx, Jenkins.</span></div>
-            <div class="feature-card"><strong>분류 기준 / 발표</strong><span>담당: feature 정의와 설명 흐름. 산출물: 판단 기준, 시연 시나리오. 기술: XGBoost.</span></div>
+            <div class="feature-card"><strong>AI pipeline</strong><span>담당 범위: YOLO/OpenCV 처리<br>산출물: 이미지 feature 정의</span></div>
+            <div class="feature-card"><strong>Backend / DB</strong><span>담당 범위: 작업 생성과 저장<br>산출물: callback, ERD</span></div>
+            <div class="feature-card"><strong>Frontend / Infra</strong><span>담당 범위: 화면 반영과 배포 구성<br>산출물: dashboard/detail, Docker</span></div>
+            <div class="feature-card"><strong>분류 기준 / 발표</strong><span>담당 범위: 판단 기준과 설명 흐름<br>산출물: 시연 시나리오</span></div>
           </div>
-          <div class="panel soft reveal">
-            <h3>협업 기준</h3>
-            <div class="mini-list">
-              <div class="mini-row"><b>회의</b><span>파트별 진행 상황과 blocker를 짧게 공유합니다.</span></div>
-              <div class="mini-row"><b>이슈 관리</b><span>기능, 데이터, 발표 리스크를 항목별로 분리합니다.</span></div>
-              <div class="mini-row"><b>브랜치/PR</b><span>작업 단위 변경을 기록하고 통합 시점에 충돌을 줄입니다.</span></div>
-              <div class="mini-row"><b>발표 준비</b><span>시연 가능 범위와 과장 금지 표현을 같이 점검합니다.</span></div>
-            </div>
+          <div class="line-modules reveal">
+            <div class="line-module"><strong>역할 분리</strong><span>AI, Backend, Frontend, Infra 책임을 분리해 설명합니다.</span></div>
+            <div class="line-module"><strong>PR / issue 기준</strong><span>작업 단위 변경과 데이터·발표 리스크를 이슈로 관리합니다.</span></div>
+            <div class="line-module"><strong>발표 / 시연 정리</strong><span>현재 구현 범위와 향후 확장을 분리해 과장 표현을 줄입니다.</span></div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="04 / 36">
-        <div class="topline"><div><div class="kicker">인트로</div><h2>목차</h2></div><div class="section-label">5개 파트</div></div>
-        <p class="message-line reveal">문제 인식에서 판단 구조, 구현 근거, 시연 가능 범위, 확장 가능성 순서로 전개합니다.</p>
-        <div class="agenda reveal" style="margin-top:24px">
-          <div class="agenda-item"><b>01</b><div><strong>개발 필요성과 벤치마킹</strong><em>왜 빗물받이 상태 판단 흐름이 필요한지 정리합니다.</em></div></div>
-          <div class="agenda-item"><b>02</b><div><strong>AI 분석 설계</strong><em>이미지 근거와 센서 근거가 최종 분류로 이어지는 구조를 설명합니다.</em></div></div>
-          <div class="agenda-item"><b>03</b><div><strong>웹 서버 및 서비스 구축</strong><em>비동기 분석, DB 저장, 화면 갱신의 구현 흐름을 보여줍니다.</em></div></div>
-          <div class="agenda-item"><b>04</b><div><strong>인프라 / 운영 설계</strong><em>배포 구성과 운영 점검 항목을 현재 구현 범위 안에서 설명합니다.</em></div></div>
-          <div class="agenda-item"><b>05</b><div><strong>시연과 마무리</strong><em>sample image와 mock sensor data 기반 시연 흐름을 연결합니다.</em></div></div>
+        <div class="topline"><div><div class="kicker">00 목차</div><h2>목차</h2></div><div class="section-label">5개 파트</div></div>
+        <p class="ref-claim wide reveal">문제 정의부터 시연 흐름까지 순서대로 설명합니다.</p>
+        <div class="agenda-grid reveal">
+          <div class="agenda-card"><b>01</b><strong>개발 필요성과 벤치마킹</strong><span>왜 이 서비스가 필요한가?</span></div>
+          <div class="agenda-card"><b>02</b><strong>AI 분석 설계</strong><span>이미지를 어떻게 판단 근거로 바꾸는가?</span></div>
+          <div class="agenda-card"><b>03</b><strong>웹 서버 및 서비스 구축</strong><span>결과는 어떻게 저장되고 화면에 반영되는가?</span></div>
+          <div class="agenda-card"><b>04</b><strong>인프라 / 운영 설계</strong><span>배포와 운영은 어떻게 고려했는가?</span></div>
+          <div class="agenda-card"><b>05</b><strong>시연과 마무리</strong><span>어떤 흐름으로 동작을 보여주는가?</span></div>
         </div>
       </section>
 
       <section class="slide" data-page="05 / 36">
-        <div class="topline"><div><div class="kicker">인트로</div><h2>전체 기술 스택/구성 한 장 요약</h2></div><div class="section-label">시스템</div></div>
-        <p class="lead compact reveal">화면, API, AI 분석, 저장소, 배포 구성이 어떤 책임으로 연결되는지 먼저 잡고 들어갑니다.</p>
-        <div class="layout two after-lead">
-          <div class="diagram reveal">
-            <div class="node-map">
-              <div class="node">Frontend<small>Next.js / React</small></div>
-              <div class="node">Backend<small>FastAPI</small></div>
-              <div class="node">AI<small>YOLO / OpenCV / XGBoost</small></div>
-              <div class="node">DB<small>PostgreSQL</small></div>
-              <div class="node">Infra<small>Docker / Nginx / Jenkins</small></div>
-            </div>
-            <div class="flow" style="margin-top:30px"><div class="step">Browser</div><div class="step">Nginx</div><div class="step">Backend</div><div class="step">AI server</div><div class="step">PostgreSQL</div></div>
-            <p class="caption" style="margin-top:22px">작은 글자보다 책임 흐름을 중심으로 설명합니다. 상세 아키텍처는 29번에서 다시 확대합니다.</p>
+        <div class="topline"><div><div class="kicker">00 시스템</div><h2>전체 기술 스택/구성 한 장 요약</h2></div><div class="section-label">MVP 구성</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">프론트엔드, 백엔드, AI 서버, DB를 분리해 MVP를 구성했습니다.</p>
+            <p class="ref-sub">화면, API, 분석, 저장소, 배포 책임을 나눠 설명합니다.</p>
+            <div class="tag-row"><span class="tag">Next.js / React</span><span class="tag">FastAPI</span><span class="tag">YOLO / OpenCV / XGBoost</span><span class="tag">PostgreSQL</span><span class="tag">Docker / Nginx / Jenkins</span></div>
           </div>
-          <div class="asset-frame zoom reveal">
+          <div class="hero-visual reveal">
+            <div class="asset-frame hero">
             <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
-            <div class="asset-caption">시스템 구성 원본 이미지는 보조 자료로 사용하고, 핵심 흐름은 왼쪽 도식으로 설명</div>
+              <div class="asset-caption">브라우저 → Nginx → Backend/AI/PostgreSQL 연결 구조</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="06 / 36">
-        <div class="topline"><div><div class="kicker">필요성</div><h2>도시 침수와 빗물받이</h2></div><div class="section-label">문제 정의</div></div>
-        <p class="lead compact reveal">이 프로젝트의 목표는 도시 전체 침수 예측이 아니라 개별 빗물받이 상태를 빠르게 확인하는 흐름입니다.</p>
-        <div class="layout split-40 after-lead">
-          <div class="panel reveal">
-            <h3>왜 상태 판단이 필요한가</h3>
+        <div class="topline"><div><div class="kicker">01 문제 제기</div><h2>도시 침수와 빗물받이</h2></div><div class="section-label">상태 판단 필요</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">빗물받이 하나가 막히면 도로의 배수 흐름이 달라집니다.</p>
+            <p class="ref-sub">목표는 도시 전체 침수 예측이 아니라 개별 시설 상태를 빠르게 확인하는 흐름입니다.</p>
             <ul>
               <li>빗물받이는 도로 빗물이 배수관으로 들어가는 첫 지점입니다.</li>
               <li>낙엽, 쓰레기, 토사로 막히면 강우 중 배수 흐름이 제한됩니다.</li>
               <li>개별 시설 상태를 확인해야 점검 우선순위를 잡을 수 있습니다.</li>
             </ul>
           </div>
-          <div class="asset-frame cover reveal">
+          <div class="hero-visual reveal">
+            <div class="asset-frame hero cover">
             <img src="assets/drain-danger.png" alt="막힌 빗물받이 sample image">
-            <div class="asset-caption">sample image: 막힘 상태를 발표에서 설명하기 위한 빗물받이 예시</div>
+              <div class="asset-caption">sample image: 유입부가 이물질로 가려진 예시</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="07 / 36">
-        <div class="topline"><div><div class="kicker">필요성</div><h2>강우 중 상태 변화</h2></div><div class="section-label">상태 변화</div></div>
-        <p class="lead compact reveal">강우 중에는 유입량, 차폐 가능성, 수위·유속 변화가 함께 움직이므로 화면 반영까지 이어지는 판단 흐름이 필요합니다.</p>
-        <div class="flow reveal" style="margin-top:42px"><div class="step">강우</div><div class="step">유입량 증가</div><div class="step">차폐/역류 가능성</div><div class="step">위험도 판단</div><div class="step">화면 반영</div></div>
-        <div class="feature-grid reveal" style="margin-top:38px">
-          <div class="feature-card primary"><strong>시각화 필요</strong><span>상태가 바뀐 시설을 지도와 목록에서 빠르게 구분해야 합니다.</span></div>
-          <div class="feature-card primary"><strong>동시성 필요</strong><span>여러 시설이 동시에 변할 수 있으므로 비동기 처리와 갱신 trigger가 필요합니다.</span></div>
+        <div class="topline"><div><div class="kicker">02 상태 변화</div><h2>강우 중 상태 변화</h2></div><div class="section-label">화면 반영 필요</div></div>
+        <p class="ref-claim wide reveal">강우 중에는 상태가 빠르게 변하므로, 변화가 발생한 뒤 화면에 반영되는 흐름이 필요합니다.</p>
+        <div class="simple-steps reveal">
+          <div class="simple-step"><b>01</b><strong>강우</strong><span>빗물이 유입되기 시작합니다.</span></div>
+          <div class="simple-step"><b>02</b><strong>유입량 증가</strong><span>시설별 유량 차이가 커집니다.</span></div>
+          <div class="simple-step"><b>03</b><strong>차폐 증가</strong><span>이물질이 유입부를 가립니다.</span></div>
+          <div class="simple-step"><b>04</b><strong>수위 상승</strong><span>mock sensor data에서 수위 변화를 봅니다.</span></div>
+          <div class="simple-step"><b>05</b><strong>유속 저하</strong><span>흐름 둔화가 판단 근거가 됩니다.</span></div>
+          <div class="simple-step"><b>06</b><strong>상태 갱신</strong><span>UI가 최신 상태를 반영합니다.</span></div>
         </div>
+        <p class="caption reveal" style="margin-top:32px">시각화와 동시성 처리가 필요한 이유는 여러 시설의 상태 변화가 같은 시간대에 발생할 수 있기 때문입니다.</p>
       </section>
 
       <section class="slide" data-page="08 / 36">
-        <div class="topline"><div><div class="kicker">필요성</div><h2>기존 점검 방식의 한계</h2></div><div class="section-label">우선순위 공백</div></div>
-        <p class="message-line reveal">기존 점검은 유지관리에 필요하지만, 강우 중 개별 시설 상태를 즉시 정렬하는 데는 공백이 있습니다.</p>
-        <div class="layout two after-lead">
-          <div class="panel reveal">
-            <h3>기존 유지관리의 필요성</h3>
-            <p>정기 점검과 청소는 기준, 이력, 위치 관리를 만드는 기본 활동입니다.</p>
-            <div class="tag-row"><span class="tag">정기 점검</span><span class="tag">청소</span><span class="tag">이력 관리</span></div>
+        <div class="topline"><div><div class="kicker">03 점검 한계</div><h2>기존 점검 방식의 한계</h2></div><div class="section-label">우선순위 공백</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">기존 관리는 발견 이후 대응에 가깝습니다.</p>
+            <p class="ref-sub">강우 중 개별 시설 변화를 즉시 설명하려면 이미지와 센서 기반 판단이 필요합니다.</p>
+            <div class="ref-accent"></div>
           </div>
-          <div class="panel soft reveal">
-            <h3>강우 중 판단 공백</h3>
-            <p>시민 신고는 현장 발견에 강점이 있지만, 신고 전 상태 변화와 우선순위를 자동으로 정렬하기 어렵습니다.</p>
-            <div class="tag-row"><span class="tag">상태 변화</span><span class="tag">우선순위</span><span class="tag">화면 반영</span></div>
+          <div class="hero-visual reveal">
+            <div class="table">
+              <div class="row head"><div class="cell">방식</div><div class="cell">장점</div><div class="cell">남는 한계</div></div>
+              <div class="row"><div class="cell">정기 점검</div><div class="cell">기준과 이력 관리</div><div class="cell">강우 중 상태 변화 반영이 늦을 수 있음</div></div>
+              <div class="row"><div class="cell">시민 신고</div><div class="cell">현장 발견과 민원 접수</div><div class="cell">신고 전 우선순위 정렬이 어려움</div></div>
+              <div class="row"><div class="cell">QR / 관리번호</div><div class="cell">위치 특정과 이력 연결</div><div class="cell">현재 상태 판단 근거가 부족함</div></div>
+              <div class="row"><div class="cell">센서 / 관제</div><div class="cell">수치 상태 모니터링</div><div class="cell">이미지 근거와 화면 반영 연결이 필요함</div></div>
+            </div>
           </div>
         </div>
-        <p class="trigger-note reveal" style="margin-top:22px">따라서 이미지와 센서 기반 판단을 통해 우선 확인 대상을 제시하는 흐름이 필요합니다.</p>
       </section>
 
       <section class="slide" data-page="09 / 36">
@@ -1310,30 +1576,30 @@
       </section>
 
       <section class="slide" data-page="10 / 36">
-        <div class="topline"><div><div class="kicker">제안</div><h2>우수주의보 차별점</h2></div><div class="section-label">보완점</div></div>
-        <p class="message-line reveal">신고 대체가 아니라 이미지·센서 근거를 저장하고 화면에 반영해 점검 우선순위를 보조합니다.</p>
-        <div class="layout two after-lead">
-          <div class="feature-grid reveal">
-            <div class="feature-card emphasis"><strong>이미지 근거</strong><span>sample image에서 막힘 후보, 차폐율, 이미지 품질을 확인합니다.</span></div>
-            <div class="feature-card emphasis"><strong>센서 근거</strong><span>mock sensor data로 수위와 유속 feature를 함께 사용합니다.</span></div>
-            <div class="feature-card emphasis"><strong>DB 추적성</strong><span>작업, 결과, 상태를 PostgreSQL 기준으로 연결합니다.</span></div>
-            <div class="feature-card emphasis"><strong>UI 실시간 반영</strong><span>WebSocket event 이후 대시보드와 상세 화면이 최신 상태를 조회합니다.</span></div>
+        <div class="topline"><div><div class="kicker">05 차별점</div><h2>우수주의보 차별점</h2></div><div class="section-label">방식 전환</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">사람이 먼저 찾는 방식에서, 시스템이 먼저 알려주는 방식으로 바꿉니다.</p>
+            <p class="ref-sub">신고 대체가 아니라 이미지·센서 근거를 저장하고 화면에 반영해 점검 우선순위를 보조합니다.</p>
+            <div class="tag-row"><span class="tag">이미지 근거</span><span class="tag">센서 근거</span><span class="tag">DB 추적성</span><span class="tag">UI 실시간 반영</span></div>
           </div>
-          <div class="diagram reveal">
-            <div class="stage-card" style="min-height:530px">
-              <b>FLOW</b><strong>근거 기반 상태 판단</strong>
-              <span>기존 관리 흐름에 이미지 근거와 센서 근거를 결합하고, 내부 분류 결과를 저장한 뒤 화면 갱신 trigger로 연결합니다.</span>
-              <div class="flow" style="margin-top:34px"><div class="step">기존 관리</div><div class="step">근거 결합</div><div class="step">내부 분류</div><div class="step">화면 반영</div></div>
+          <div class="hero-visual reveal">
+            <div class="table">
+              <div class="row head"><div class="cell">구분</div><div class="cell">기존 방식</div><div class="cell">우수주의보</div></div>
+              <div class="row"><div class="cell">문제 발견</div><div class="cell">점검 또는 신고 이후 파악</div><div class="cell">상태 변화 후보를 화면에서 먼저 확인</div></div>
+              <div class="row"><div class="cell">판단 방식</div><div class="cell">현장 확인 중심</div><div class="cell">이미지 feature와 센서 feature 결합</div></div>
+              <div class="row"><div class="cell">관리 단위</div><div class="cell">시설 이력 중심</div><div class="cell">개별 빗물받이 + 분석 작업 단위</div></div>
+              <div class="row"><div class="cell">결과 활용</div><div class="cell">기록과 사후 대응</div><div class="cell">우선 확인 대상과 상세 근거 제공</div></div>
             </div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="11 / 36">
-        <div class="topline"><div><div class="kicker">목표</div><h2>참고 자료/정책/사례 기반 목표</h2></div><div class="section-label">근거 중심</div></div>
-        <p class="lead compact reveal">근거가 없는 비용이나 현장 검증 수치 대신, 구현 가능한 상태 판단과 저장·반영 흐름을 목표로 잡았습니다.</p>
+        <div class="topline"><div><div class="kicker">06 목표</div><h2>참고 자료/정책/사례 기반 목표</h2></div><div class="section-label">근거 중심</div></div>
+        <p class="ref-claim wide reveal">근거 자료는 정량 기준, 운영성, 화면 반영 목표로 변환했습니다.</p>
         <div class="layout two after-lead">
-          <div class="asset-frame zoom-strong reveal">
+          <div class="asset-frame hero zoom-strong reveal">
             <img src="assets/reference-policy-page.png" alt="참고 자료 페이지">
             <div class="asset-caption">참고 자료: 정책/사례 페이지의 세부 글자는 보조 근거이며 핵심 목표는 오른쪽에 요약</div>
           </div>
@@ -1359,50 +1625,55 @@
       </section>
 
       <section class="slide" data-page="13 / 36">
-        <div class="topline"><div><div class="kicker">AI 설계</div><h2>AI 분석 설계 개요</h2></div><div class="section-label">판단 흐름</div></div>
-        <p class="lead compact reveal">AI 분석은 이미지 근거와 mock sensor data를 feature로 만들고, XGBoost가 내부 상태 분류로 연결합니다.</p>
-        <div class="stage-flow reveal">
-          <div class="stage-card"><b>IN</b><strong>입력값</strong><span>sample image, water level, flow velocity를 하나의 분석 요청에 연결합니다.</span></div>
-          <div class="stage-card"><b>CV</b><strong>처리 과정</strong><span>YOLO가 후보를 찾고 OpenCV가 mask, 품질, 영역 해석을 보정합니다.</span></div>
-          <div class="stage-card"><b>ML</b><strong>분류</strong><span>이미지 feature와 센서 feature를 XGBoost 입력으로 결합합니다.</span></div>
-          <div class="stage-card"><b>OUT</b><strong>출력값</strong><span>양호, 주의, 위험, 판단불가 상태와 근거를 저장합니다.</span></div>
+        <div class="topline"><div><div class="kicker">07 AI pipeline</div><h2>AI 분석 설계 개요</h2></div><div class="section-label">판단 흐름</div></div>
+        <p class="ref-claim wide reveal">이미지 근거와 센서 근거를 결합해 내부 위험도 분류로 연결합니다.</p>
+        <div class="simple-steps reveal">
+          <div class="simple-step"><b>01</b><strong>원본 이미지</strong><span>sample image를 분석 입력으로 받습니다.</span></div>
+          <div class="simple-step"><b>02</b><strong>YOLO</strong><span>보이는 객체와 후보 영역을 찾습니다.</span></div>
+          <div class="simple-step"><b>03</b><strong>OpenCV</strong><span>mask와 막힘 비율을 수치화합니다.</span></div>
+          <div class="simple-step"><b>04</b><strong>핵심 feature</strong><span>차폐율, 품질, 수위, 유속을 정리합니다.</span></div>
+          <div class="simple-step"><b>05</b><strong>XGBoost</strong><span>센서 feature와 함께 상태를 분류합니다.</span></div>
+          <div class="simple-step"><b>06</b><strong>상태 분류</strong><span>양호, 주의, 위험, 판단불가로 저장합니다.</span></div>
         </div>
-        <p class="trigger-note reveal" style="margin-top:30px">YOLO 단독이 아니라 OpenCV와 XGBoost를 결합하는 이유는 “보이는 객체”를 “판단 가능한 feature”로 바꾸기 위해서입니다.</p>
+        <p class="caption reveal" style="margin-top:32px">YOLO는 보이는 객체를 찾고, OpenCV는 막힘 비율을 수치화하며, XGBoost는 센서 feature와 결합해 상태를 분류합니다.</p>
       </section>
 
       <section class="slide" data-page="14 / 36">
-        <div class="topline"><div><div class="kicker">AI 설계</div><h2>YOLO 단독 분석 한계</h2></div><div class="section-label">후처리 필요</div></div>
-        <p class="lead compact reveal">객체 탐지 결과만으로 배수 위험도를 안정적으로 판단하기 어렵기 때문에 후처리와 센서 feature가 필요합니다.</p>
-        <div class="layout split-40 after-lead">
-          <div class="panel reveal">
-            <h3>발표 핵심</h3>
+        <div class="topline"><div><div class="kicker">08 AI 한계</div><h2>YOLO 단독 분석 한계</h2></div><div class="section-label">후처리 필요</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">객체 탐지만으로는 배수 위험도를 안정적으로 판단하기 어렵습니다.</p>
+            <p class="ref-sub">성능 평가를 주장하기보다 sample/mock 기반 경향 확인으로 설명합니다.</p>
             <ul>
               <li>YOLO는 보이는 객체와 후보 영역 탐지에 강점이 있습니다.</li>
               <li>어두운 이미지, 빗물 반사, 낙엽/토사 혼재 상황은 해석을 흔듭니다.</li>
               <li>따라서 mask, 품질 보정, 센서 feature가 함께 필요합니다.</li>
             </ul>
           </div>
-          <div class="asset-frame reveal">
-            <img src="assets/yolo-opencv-error-graph.png" alt="YOLO와 OpenCV 분석 보정 그래프">
-            <div class="asset-caption">보조 그래프: YOLO 단독 해석이 흔들릴 수 있어 후처리 기준을 추가한다는 인사이트를 설명</div>
+          <div class="hero-visual reveal">
+            <div class="asset-frame hero">
+              <img src="assets/yolo-opencv-error-graph.png" alt="YOLO와 OpenCV 분석 보정 그래프">
+              <div class="asset-caption">보조 그래프: YOLO 단독 해석이 흔들릴 수 있어 후처리 기준을 추가한다는 인사이트를 설명</div>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="15 / 36">
-        <div class="topline"><div><div class="kicker">AI 설계</div><h2>OpenCV 결합 이유</h2></div><div class="section-label">영역 해석</div></div>
-        <p class="lead compact reveal">OpenCV는 탐지 결과를 실제 feature로 바꾸는 중간 단계입니다.</p>
-        <div class="layout wide-left after-lead">
-          <div class="asset-frame zoom reveal">
-            <img src="assets/yolo-opencv-process.jpg" alt="YOLO와 OpenCV 처리 과정">
-            <div class="asset-caption">처리 예시: raw image에서 mask와 어두운 영역을 확인해 obstruction ratio feature로 연결</div>
+        <div class="topline"><div><div class="kicker">09 OpenCV</div><h2>OpenCV 결합 이유</h2></div><div class="section-label">영역 해석</div></div>
+        <div class="hero-split reverse">
+          <div class="hero-visual reveal">
+            <div class="asset-frame hero zoom">
+              <img src="assets/yolo-opencv-process.jpg" alt="YOLO와 OpenCV 처리 과정">
+              <div class="asset-caption">원본 → 보정/전처리 → mask/검출 → obstruction ratio로 이어지는 이미지 처리 과정</div>
+            </div>
           </div>
-          <div class="panel reveal">
-            <h3>feature로 바뀌는 지점</h3>
-            <div class="mini-list">
-              <div class="mini-row"><b>mask</b><span>후보 영역을 분리해 막힘 영역 계산의 기준으로 사용합니다.</span></div>
-              <div class="mini-row"><b>dark area</b><span>어두운 이미지 조건을 품질 판단 feature로 반영합니다.</span></div>
-              <div class="mini-row"><b>ratio</b><span>후보 영역과 차폐 영역을 obstruction ratio로 정리합니다.</span></div>
+          <div class="hero-copy reveal">
+            <p class="ref-claim">OpenCV는 탐지 결과를 실제 feature로 바꾸는 중간 단계입니다.</p>
+            <div class="line-modules" style="margin-top:34px">
+              <div class="line-module"><strong>mask</strong><span>분석 영역을 분리해 막힘 계산 기준으로 사용합니다.</span></div>
+              <div class="line-module"><strong>dark area</strong><span>어두운 영역과 품질 조건을 판단 근거로 반영합니다.</span></div>
+              <div class="line-module"><strong>ratio</strong><span>후보 영역과 차폐 영역을 obstruction ratio로 정리합니다.</span></div>
             </div>
           </div>
         </div>
@@ -1443,10 +1714,10 @@
         <p class="lead compact reveal">상태 분류는 점검 우선순위를 설명하기 위한 내부 계산 결과이며, 실제 물리적 침수 확률로 말하지 않습니다.</p>
         <div class="table reveal" style="margin-top:24px">
           <div class="row four head"><div class="cell">상태</div><div class="cell">판단 조건 예시</div><div class="cell">화면 처리</div><div class="cell">발표 표현</div></div>
-          <div class="row four"><div class="cell status-good">양호</div><div class="cell">차폐율과 센서 정체 징후가 낮음</div><div class="cell">일반 상태로 표시</div><div class="cell">우선 확인 낮음</div></div>
-          <div class="row four"><div class="cell status-warn">주의</div><div class="cell">막힘 또는 수위·유속 변화 징후가 있음</div><div class="cell">목록에서 점검 후보 표시</div><div class="cell">관찰 필요</div></div>
-          <div class="row four"><div class="cell status-danger">위험</div><div class="cell">이미지와 센서 근거가 함께 강함</div><div class="cell">대시보드 우선 확인 대상으로 표시</div><div class="cell">우선 확인</div></div>
-          <div class="row four"><div class="cell status-unknown">판단불가</div><div class="cell">이미지 품질 낮음, feature 결측, 분석 실패</div><div class="cell">재분석 또는 현장 확인 상태로 표시</div><div class="cell">재확인 필요</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip good">양호</span></div><div class="cell">차폐율과 센서 정체 징후가 낮음</div><div class="cell">일반 상태로 표시</div><div class="cell">우선 확인 낮음</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip warn">주의</span></div><div class="cell">막힘 또는 수위·유속 변화 징후가 있음</div><div class="cell">목록에서 점검 후보 표시</div><div class="cell">관찰 필요</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip danger">위험</span></div><div class="cell">이미지와 센서 근거가 함께 강함</div><div class="cell">대시보드 우선 확인 대상으로 표시</div><div class="cell">우선 확인</div></div>
+          <div class="row four"><div class="cell"><span class="status-chip unknown">판단불가</span></div><div class="cell">이미지 품질 낮음, feature 결측, 분석 실패</div><div class="cell">재분석 또는 현장 확인 상태로 표시</div><div class="cell">재확인 필요</div></div>
         </div>
         <p class="caption reveal" style="margin-top:18px">`risk_score`는 우수주의보 내부 분류용 계산 점수이며 실제 현장 검증 기반 침수 예측값이 아닙니다.</p>
       </section>
@@ -1469,43 +1740,52 @@
       </section>
 
       <section class="slide" data-page="20 / 36">
-        <div class="topline"><div><div class="kicker">서비스</div><h2>서비스 구축 개요</h2></div><div class="section-label">책임 분리</div></div>
-        <p class="lead compact reveal">Frontend는 분석을 직접 수행하지 않고, Backend가 AnalysisJob을 기준으로 비동기 요청과 결과 저장을 관리합니다.</p>
-        <div class="flow reveal" style="margin-top:38px"><div class="step">dashboard</div><div class="step">Backend</div><div class="step">AnalysisJob</div><div class="step">AI server</div><div class="step">PostgreSQL</div><div class="step">WebSocket</div></div>
-        <div class="feature-grid reveal" style="margin-top:34px">
-          <div class="feature-card primary"><strong>AnalysisJob 상태</strong><span>pending -> processing -> done 또는 failed로 작업 흐름을 추적합니다.</span></div>
-          <div class="feature-card primary"><strong>Frontend가 직접 분석하지 않는 이유</strong><span>화면 응답성과 분석 처리 시간을 분리하고, 결과 저장 책임을 Backend에 고정하기 위해서입니다.</span></div>
+        <div class="topline"><div><div class="kicker">12 Service flow</div><h2>서비스 구축 개요</h2></div><div class="section-label">책임 분리</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">Frontend는 분석을 직접 수행하지 않고, Backend가 작업과 결과 저장을 관리합니다.</p>
+            <p class="ref-sub">화면 응답성과 분석 처리 시간을 분리하고, 결과 저장 책임을 Backend에 고정합니다.</p>
+            <div class="keyword-strip" style="grid-template-columns: repeat(2, 1fr)">
+              <div class="keyword"><strong>작업 추적</strong><span>AnalysisJob 상태 관리</span></div>
+              <div class="keyword"><strong>화면 분리</strong><span>응답과 분석 처리 분리</span></div>
+            </div>
+          </div>
+          <div class="hero-visual reveal">
+            <div class="flow" style="height:100%; align-items:center"><div class="step">Dashboard</div><div class="step">Backend</div><div class="step">AnalysisJob</div><div class="step">AI Server</div><div class="step">PostgreSQL</div><div class="step">WebSocket</div></div>
+          </div>
         </div>
       </section>
 
       <section class="slide" data-page="21 / 36">
-        <div class="topline"><div><div class="kicker">서비스</div><h2>관리자 대시보드 흐름</h2></div><div class="section-label">대시보드</div></div>
-        <p class="message-line reveal">대시보드는 전체 위치, 위험 시설, 상세 진입, 갱신 상태를 한 화면에서 확인하는 진입점입니다.</p>
-        <div class="layout split-60 after-lead">
-          <div class="asset-frame reveal">
+        <div class="topline"><div><div class="kicker">MAIN DASHBOARD</div><h2>관리자 대시보드 흐름</h2></div><div class="section-label">지도와 목록</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">상태 요약, 위험 지도, 시설 목록을 한 화면에 배치했습니다.</p>
+            <p class="ref-sub">운영자는 먼저 봐야 할 시설을 지도와 목록에서 동시에 확인합니다.</p>
+            <div class="tag-row"><span class="tag">1 전체 상태 요약</span><span class="tag">2 위험 시설 목록</span><span class="tag">3 상세 정보 패널</span><span class="tag">4 지도/마커 상태 갱신</span></div>
+          </div>
+          <div class="hero-visual tall reveal">
             <div class="shot-wrap">
               <img src="assets/dashboard-main.png" alt="관리자 대시보드 화면">
-              <span class="shot-callout" style="--x:24%; --y:34%">1</span>
-              <span class="shot-callout" style="--x:64%; --y:28%">2</span>
-              <span class="shot-callout" style="--x:82%; --y:62%">3</span>
-              <span class="shot-callout" style="--x:42%; --y:78%">4</span>
+              <span class="shot-callout" style="--x:53%; --y:20%">1</span>
+              <span class="shot-callout" style="--x:69%; --y:41%">2</span>
+              <span class="shot-callout" style="--x:88%; --y:48%">3</span>
+              <span class="shot-callout" style="--x:36%; --y:69%">4</span>
             </div>
-            <div class="asset-caption">관리자 대시보드: 지도, 위험 리스트, 상세 진입, 갱신 상태를 함께 확인</div>
-          </div>
-          <div class="callout-list reveal">
-            <div class="callout-row"><b>1</b><span>지도: 시설 위치와 상태를 공간적으로 확인합니다.</span></div>
-            <div class="callout-row"><b>2</b><span>위험 리스트: 먼저 확인할 시설을 빠르게 찾습니다.</span></div>
-            <div class="callout-row"><b>3</b><span>상세 진입: 선택 시설의 이미지·센서 근거로 이동합니다.</span></div>
-            <div class="callout-row"><b>4</b><span>상태 갱신: WebSocket event 이후 최신 데이터를 다시 조회합니다.</span></div>
+            <div class="asset-caption">관리자 대시보드: 지도, 위험 리스트, 상세 정보, 상태 갱신을 함께 확인</div>
           </div>
         </div>
       </section>
 
       <section class="slide" data-page="22 / 36">
-        <div class="topline"><div><div class="kicker">서비스</div><h2>상세 화면 흐름</h2></div><div class="section-label">근거 확인</div></div>
-        <p class="message-line reveal">상세 화면은 왜 특정 상태로 판단됐는지 이미지, 센서, 결과, 메타정보를 시설 단위로 확인하는 화면입니다.</p>
-        <div class="layout split-60 after-lead">
-          <div class="asset-frame reveal">
+        <div class="topline"><div><div class="kicker">DETAIL VIEW</div><h2>상세 화면 흐름</h2></div><div class="section-label">근거 확인</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">한 시설의 현재 상태와 판단 근거를 동시에 봅니다.</p>
+            <p class="ref-sub">이미지 분석, 수위·유속 추세, AI 결과, 메타정보를 함께 보여줍니다.</p>
+            <div class="tag-row"><span class="tag">1 이미지 분석 결과</span><span class="tag">2 센서 시계열</span><span class="tag">3 위험도 요약</span><span class="tag">4 메타정보/상태 이력</span></div>
+          </div>
+          <div class="hero-visual tall reveal">
             <div class="shot-wrap">
               <img src="assets/dashboard-detail.png" alt="시설 상세 화면">
               <span class="shot-callout" style="--x:31%; --y:34%">1</span>
@@ -1515,63 +1795,31 @@
             </div>
             <div class="asset-caption">상세 화면: 판단 근거와 저장된 결과를 시설 단위로 확인</div>
           </div>
-          <div class="callout-list reveal">
-            <div class="callout-row"><b>1</b><span>이미지 분석 결과: sample image와 이미지 feature를 확인합니다.</span></div>
-            <div class="callout-row"><b>2</b><span>센서 시계열: mock sensor data의 수위·유속 추이를 봅니다.</span></div>
-            <div class="callout-row"><b>3</b><span>위험도: 내부 분류 결과와 상태 라벨을 확인합니다.</span></div>
-            <div class="callout-row"><b>4</b><span>메타정보: request_id, 시간, 작업 상태를 추적합니다.</span></div>
-          </div>
         </div>
       </section>
 
       <section class="slide" data-page="23 / 36">
-        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
-        <p class="lead compact reveal">callback과 WebSocket을 설명하기 전에, 어떤 테이블에 어떤 근거가 저장되는지 먼저 고정합니다.</p>
-        <div class="diagram reveal" style="margin-top:22px">
-          <div class="erd-board compact">
-            <div class="erd-card">
-              <b>drains</b>
-              <span class="key">id PK</span>
-              <span>location</span>
-              <span>current_status</span>
-              <small>개별 빗물받이 시설 단위</small>
-            </div>
-            <div class="erd-card">
-              <b>sensor_data</b>
-              <span class="key">id PK</span>
-              <span class="fk">drain_id FK</span>
-              <span>measured_at</span>
-              <span>water_level_cm</span>
-              <span>flow_velocity_mps</span>
-              <small>단일 id PK를 가진 시계열 센서값</small>
-            </div>
-            <div class="erd-card">
-              <b>analysis_jobs</b>
-              <span class="key">request_id</span>
-              <span class="fk">drain_id FK</span>
-              <span class="fk">sensor_data_id FK</span>
-              <span>status</span>
-              <small>비동기 분석 요청과 작업 상태 추적</small>
-            </div>
-            <div class="erd-card">
-              <b>yolo_results</b>
-              <span class="fk">job_id FK</span>
-              <span>obstruction_ratio</span>
-              <span>confidence</span>
-              <span>image evidence</span>
-              <small>이미지 기반 중간 분석 결과</small>
-            </div>
-            <div class="erd-card">
-              <b>xgboost_results</b>
-              <span class="fk">job_id FK</span>
-              <span>risk_level</span>
-              <span>risk_score</span>
-              <span>created_at</span>
-              <small>내부 분류용 최종 결과</small>
+        <div class="topline"><div><div class="kicker">15 Data model</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">센서·이미지·위험도를 같은 시설 기준으로 묶습니다.</p>
+            <div class="line-modules" style="margin-top:38px">
+              <div class="line-module"><strong>시설 기준</strong><span>drains를 기준으로 센서값과 작업을 연결합니다.</span></div>
+              <div class="line-module"><strong>판단 근거 분리</strong><span>YOLO/OpenCV 중간 결과와 XGBoost 최종 결과를 분리 저장합니다.</span></div>
+              <div class="line-module"><strong>작업 관리</strong><span>AnalysisJob 상태로 callback과 화면 갱신을 추적합니다.</span></div>
             </div>
           </div>
-          <div class="erd-relation-note">
-            <span>drains 1:N sensor_data</span><span>drains 1:N analysis_jobs</span><span>analysis_jobs 1:1 yolo_results</span><span>analysis_jobs 1:1 xgboost_results</span>
+          <div class="hero-visual reveal">
+            <div class="diagram" style="height:100%">
+              <div class="erd-board model">
+                <div class="erd-card"><b>drains</b><span class="key">id PK</span><span>location</span><span>current_status</span><small>개별 시설 단위</small></div>
+                <div class="erd-card"><b>sensor_data</b><span class="key">id PK</span><span class="fk">drain_id FK</span><span>measured_at</span><span>water_level_cm</span><span>flow_velocity_mps</span><small>시계열 센서값</small></div>
+                <div class="erd-card"><b>analysis_jobs</b><span class="key">request_id</span><span class="fk">drain_id FK</span><span class="fk">sensor_data_id FK</span><span>status</span><small>비동기 작업 상태</small></div>
+                <div class="erd-card"><b>yolo_results</b><span class="fk">job_id FK</span><span>obstruction_ratio</span><span>confidence</span><small>이미지 기반 중간 결과</small></div>
+                <div class="erd-card"><b>xgboost_results</b><span class="fk">job_id FK</span><span>risk_level</span><span>risk_score</span><small>내부 분류용 결과</small></div>
+                <div class="erd-card"><b>relations</b><span>drains 1:N sensor_data</span><span>drains 1:N jobs</span><span>jobs 1:1 results</span><small>callback과 WebSocket의 기준</small></div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1659,20 +1907,31 @@
       </section>
 
       <section class="slide" data-page="29 / 36">
-        <div class="topline"><div><div class="kicker">인프라</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
-        <p class="message-line reveal">현재 구현 구조와 향후 확장 범위를 시각적으로 분리해 과장 없이 설명합니다.</p>
-        <div class="diagram reveal" style="margin-top:22px">
-          <div class="arch-board connected">
-            <div class="arch-node current"><strong>Browser</strong><span>관리자 대시보드와 상세 화면 진입점</span></div>
-            <div class="arch-node current gateway"><strong>Nginx</strong><span>Frontend, Backend API, WebSocket routing entry</span></div>
-            <div class="arch-node current frontend"><strong>Frontend</strong><span>Next.js dashboard/detail UI와 event 수신</span></div>
-            <div class="arch-node current backend"><strong>Backend</strong><span>FastAPI, AnalysisJob, callback 저장</span></div>
-            <div class="arch-node current"><strong>PostgreSQL</strong><span>sensor_data, analysis_jobs, yolo/xgboost results 저장</span></div>
-            <div class="arch-node current"><strong>AI server</strong><span>YOLO, OpenCV, XGBoost 분석 처리</span></div>
-            <div class="arch-node current"><strong>Docker / Jenkins</strong><span>서비스 실행 단위와 build/deploy 흐름 구성</span></div>
-            <div class="arch-node future"><strong>RTSP / MQTT / Alert</strong><span>현재 구현이 아니라 향후 확장 범위</span></div>
+        <div class="topline"><div><div class="kicker">21 Architecture</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">Browser, Nginx, Frontend, Backend, AI server, PostgreSQL을 분리해 연결했습니다.</p>
+            <p class="ref-sub">현재 구현과 향후 확장을 solid/dotted line으로 구분합니다.</p>
+            <div class="arch-legend"><span class="legend-chip">현재 구현 구조</span><span class="legend-chip future">향후 확장 범위</span></div>
           </div>
-          <div class="arch-legend"><span class="legend-chip">현재 구현 구조</span><span class="legend-chip future">향후 확장 범위</span></div>
+          <div class="hero-visual reveal">
+            <div class="diagram-map">
+              <div class="map-line" style="left:170px; top:150px; width:180px"></div>
+              <div class="map-line" style="left:390px; top:150px; width:180px"></div>
+              <div class="map-line" style="left:610px; top:150px; width:180px"></div>
+              <div class="map-line" style="left:705px; top:250px; width:140px; transform:rotate(90deg)"></div>
+              <div class="map-line" style="left:705px; top:255px; width:160px; transform:rotate(125deg)"></div>
+              <div class="map-line dotted" style="left:765px; top:420px; width:150px"></div>
+              <div class="map-node" style="left:35px; top:95px"><strong>Browser</strong><span>대시보드와 상세 화면 진입점</span></div>
+              <div class="map-node" style="left:255px; top:95px"><strong>Nginx</strong><span>Frontend, API, WebSocket routing</span></div>
+              <div class="map-node" style="left:475px; top:95px"><strong>Frontend</strong><span>event 수신과 UI 갱신</span></div>
+              <div class="map-node" style="left:695px; top:95px"><strong>Backend</strong><span>AnalysisJob, callback 저장</span></div>
+              <div class="map-node" style="left:560px; top:365px"><strong>PostgreSQL</strong><span>sensor_data, jobs, results 저장</span></div>
+              <div class="map-node" style="left:820px; top:285px"><strong>AI server</strong><span>YOLO, OpenCV, XGBoost 분석</span></div>
+              <div class="map-node" style="left:255px; top:365px"><strong>Docker / Jenkins</strong><span>build/deploy 흐름 구성</span></div>
+              <div class="map-node future" style="left:820px; top:445px"><strong>RTSP / MQTT / Alert</strong><span>향후 확장 범위</span></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1771,9 +2030,10 @@
       <section class="slide title-slide" data-page="36 / 36">
         <div class="title-wrap">
           <div>
-            <div class="title-mark reveal">기대효과 / Q&A</div>
-            <h1 class="reveal qa-title">질문<br>받겠습니다</h1>
+            <div class="title-mark reveal">Q&A</div>
+            <h1 class="reveal qa-title">질문 받겠습니다</h1>
             <p class="title-sub reveal">시설별 상태 확인, 위험 시설 우선 확인, 판단 근거 저장과 화면 반영 흐름을 제시했습니다.</p>
+            <div class="ref-accent reveal"></div>
           </div>
           <div class="status-tower reveal">
             <div class="tower-head"><span>정리</span><span>Q&A</span></div>
