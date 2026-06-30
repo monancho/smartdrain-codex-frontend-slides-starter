@@ -1,0 +1,15 @@
+.DS_Store
+node_modules/
+*.log
+output/*.bak.html
+
+# Local working/generated files
+tmp/*
+work/*
+.frontend-slides/
+output/qa/
+output/*.pdf
+
+# Keep directory placeholders
+!tmp/.gitkeep
+!work/.gitkeep
