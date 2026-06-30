@@ -292,6 +292,34 @@
         repeating-linear-gradient(-45deg, rgba(17,24,39,.045), rgba(17,24,39,.045) 12px, transparent 12px, transparent 24px),
         #fff;
     }
+    .asset-frame {
+      height: 100%;
+      min-height: 220px;
+      border: 2px solid var(--line);
+      background: #fff;
+      box-shadow: 10px 10px 0 rgba(17,24,39,.12);
+      padding: 16px;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 12px;
+      overflow: hidden;
+    }
+    .asset-frame img {
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      object-fit: contain;
+      display: block;
+    }
+    .asset-frame.cover img {
+      object-fit: cover;
+    }
+    .asset-caption {
+      font: 800 16px/1.35 var(--mono);
+      color: var(--muted);
+      text-align: center;
+      word-break: keep-all;
+    }
     .tag-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
     .tag {
       border: 2px solid var(--line);
@@ -728,7 +756,10 @@
             </div>
           </div>
           <div class="diagram reveal">
-            <div class="placeholder" style="height:220px">전체 시스템 아키텍처 이미지 삽입 예정</div>
+            <div class="asset-frame" style="height:220px">
+              <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처 요약 이미지">
+              <div class="asset-caption">로컬 VM 배포와 Backend-AI-DB 연결 구조</div>
+            </div>
             <div class="flow" style="margin-top:24px; min-height:130px">
               <div class="step">Frontend</div><div class="step">Backend</div><div class="step">AI 서버</div><div class="step">DB</div><div class="step">화면 갱신</div>
             </div>
@@ -750,7 +781,10 @@
               <div class="step">도로 위<br>빗물</div><div class="step">빗물받이</div><div class="step">배수관<br>흐름</div>
             </div>
           </div>
-          <div class="placeholder reveal">막힌 빗물받이 사진 삽입 예정</div>
+          <div class="asset-frame cover reveal">
+            <img src="assets/drain-sample.jpg" alt="샘플 빗물받이 이미지">
+            <div class="asset-caption">AI 서버 내부 목업 이미지 예시</div>
+          </div>
         </div>
       </section>
 
@@ -833,7 +867,10 @@
               <li>목표는 상태 판단, 근거 저장, 화면 반영 흐름을 구현하는 것입니다.</li>
             </ul>
           </div>
-          <div class="placeholder reveal">정책·사례 참고 이미지 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/reference-policy-page.png" alt="기존 관리 방식 참고 자료">
+            <div class="asset-caption">기존 점검·정비 관리 자료를 참고 이미지로 사용</div>
+          </div>
         </div>
       </section>
 
@@ -861,9 +898,9 @@
             </ul>
             <div class="flow" style="margin-top:28px; min-height:132px"><div class="step">YOLO 탐지 결과</div><div class="step">OpenCV 처리 결과</div><div class="step">막힌비율 판단</div></div>
           </div>
-          <div class="feature-grid reveal">
-            <div class="placeholder">YOLO 탐지 결과 이미지 삽입 예정</div>
-            <div class="placeholder">OpenCV 처리 결과 이미지 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/yolo-opencv-process.jpg" alt="YOLO와 OpenCV 분석 과정">
+            <div class="asset-caption">YOLO + OpenCV 분석 과정</div>
           </div>
         </div>
       </section>
@@ -883,7 +920,10 @@
               </ul>
             </div>
           </div>
-          <div class="placeholder reveal">OpenCV 마스크 처리 이미지 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/yolo-opencv-process.jpg" alt="OpenCV 처리 과정 이미지">
+            <div class="asset-caption">OpenCV 처리와 막힌비율 산정 과정</div>
+          </div>
         </div>
       </section>
 
@@ -921,7 +961,10 @@
               <div>최종 위험 점수 = <span class="accent">영상 45% + 센서 45% + 수위 10%</span></div>
             </div>
             <p class="caption">최종 위험 점수는 실제 침수 확률이 아니라, 우수주의보 내부 위험도 분류를 위한 계산 점수입니다.</p>
-            <div class="placeholder" style="height:180px; margin-top:20px">검증 그래프 또는 분류 공간 이미지 삽입 예정</div>
+            <div class="asset-frame" style="height:180px; margin-top:20px">
+              <img src="assets/yolo-opencv-error-graph.png" alt="YOLO OpenCV 오차 그래프">
+              <div class="asset-caption">실제 막힌비율과 AI 예측 막힌비율 비교</div>
+            </div>
           </div>
           <div class="table reveal">
             <div class="row head"><div class="cell">분류</div><div class="cell">요약 기준</div><div class="cell">예외</div></div>
@@ -946,7 +989,10 @@
       <section class="slide" data-page="19 / 31">
         <div class="topline"><div><div class="kicker">서비스</div><h2>관리자 대시보드 흐름</h2></div><div class="section-label">대시보드</div></div>
         <div class="layout two">
-          <div class="placeholder reveal">관리자 대시보드 화면 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/dashboard-main.png" alt="관리자 대시보드 화면">
+            <div class="asset-caption">관리자 대시보드 구현 화면</div>
+          </div>
           <div class="panel reveal">
             <ul>
               <li>전체 현황 확인</li>
@@ -972,7 +1018,10 @@
             </ul>
             <div class="flow" style="margin-top:30px"><div class="step">이미지 근거</div><div class="step">센서 근거</div><div class="step">AI 결과</div><div class="step">이력</div></div>
           </div>
-          <div class="placeholder reveal">시설 상세 화면 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/dashboard-detail.png" alt="시설 상세 화면">
+            <div class="asset-caption">시설 상세 화면 구현 캡처</div>
+          </div>
         </div>
       </section>
 
@@ -990,23 +1039,26 @@
             </div>
             <p class="caption">callback 저장과 WebSocket 갱신을 설명하기 전에 데이터 관계를 먼저 고정합니다.</p>
           </div>
-          <div class="placeholder reveal">ERD 이미지 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/erd.png" alt="ERD 이미지">
+            <div class="asset-caption">실제 문서 기준 ERD 이미지</div>
+          </div>
         </div>
       </section>
 
       <!-- === SLIDE 22 === -->
       <section class="slide" data-page="22 / 31">
-        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>센서 데이터 복합키 설계</h2></div><div class="section-label">시계열</div></div>
+        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>센서 데이터 시계열 조회 기준</h2></div><div class="section-label">시계열</div></div>
         <div class="layout two">
           <div class="diagram reveal">
-            <div class="flow"><div class="step">drain_id</div><div class="step">measured_at</div><div class="step">특정 빗물받이의<br>특정 시점 센서값</div></div>
-            <div class="panel soft" style="margin-top:30px"><p>하나의 빗물받이는 여러 시계열 센서 기록을 가지므로, 시설 식별값과 측정 시점을 함께 보면 어떤 센서값이 분석에 사용됐는지 명확해집니다.</p></div>
+            <div class="flow"><div class="step">id<br>PK</div><div class="step">drain_id<br>FK</div><div class="step">measured_at<br>조회 기준</div></div>
+            <div class="panel soft" style="margin-top:30px"><p>dev 브랜치 기준 `sensor_data`는 단일 `id`를 PK로 사용합니다. 분석에는 `drain_id`와 `measured_at`으로 특정 시설의 최신 센서값을 조회해 연결합니다.</p></div>
           </div>
           <div class="table reveal">
-            <div class="row head"><div class="cell">설계 기준</div><div class="cell">이유</div><div class="cell">효과</div></div>
-            <div class="row"><div class="cell">drain_id</div><div class="cell">시설 단위 상태를 구분</div><div class="cell">개별 빗물받이 이력 연결</div></div>
-            <div class="row"><div class="cell">measured_at</div><div class="cell">측정 시점을 구분</div><div class="cell">분석에 사용된 시점 명확화</div></div>
-            <div class="row"><div class="cell">조합 기준</div><div class="cell">시계열 데이터 중복과 혼동 방지</div><div class="cell">분석 근거 추적성 확보</div></div>
+            <div class="row head"><div class="cell">컬럼</div><div class="cell">코드 기준 역할</div><div class="cell">발표 포인트</div></div>
+            <div class="row"><div class="cell">id</div><div class="cell">sensor_data 단일 primary key</div><div class="cell">실제 migration 기준과 일치</div></div>
+            <div class="row"><div class="cell">drain_id</div><div class="cell">drains.id 참조</div><div class="cell">시설별 시계열 연결</div></div>
+            <div class="row"><div class="cell">measured_at</div><div class="cell">측정 시각</div><div class="cell">최신 센서값 조회 기준</div></div>
           </div>
         </div>
       </section>
@@ -1030,7 +1082,10 @@
       <section class="slide" data-page="24 / 31">
         <div class="topline"><div><div class="kicker">Backend</div><h2>callback 저장</h2></div><div class="section-label">결과 저장</div></div>
         <div class="layout two">
-          <div class="flow reveal"><div class="step">AI 서버</div><div class="step">callback</div><div class="step">Backend</div><div class="step">DB 저장</div></div>
+          <div class="asset-frame reveal">
+            <img src="assets/sequence-callback-websocket.png" alt="callback과 WebSocket 시퀀스 다이어그램">
+            <div class="asset-caption">callback 저장과 WebSocket 이벤트 흐름</div>
+          </div>
           <div class="table reveal">
             <div class="row head"><div class="cell">저장 대상</div><div class="cell">내용</div><div class="cell">목적</div></div>
             <div class="row"><div class="cell">이미지 분석 결과</div><div class="cell">YOLO/OpenCV 기반 막힌비율, 탐지 신뢰도</div><div class="cell">영상 근거 보존</div></div>
@@ -1063,7 +1118,10 @@
       <section class="slide" data-page="27 / 31">
         <div class="topline"><div><div class="kicker">인프라</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
         <div class="layout two">
-          <div class="placeholder reveal">시스템 아키텍처 이미지 삽입 예정</div>
+          <div class="asset-frame reveal">
+            <img src="assets/architecture-cropped.png" alt="시스템 아키텍처 이미지">
+            <div class="asset-caption">Nginx, Frontend, Backend, AI 서버, PostgreSQL 구성</div>
+          </div>
           <div class="diagram reveal">
             <div class="node-map">
               <div class="node">Browser<small>관리 화면</small></div>
@@ -1128,7 +1186,10 @@
             <h1 class="reveal">질문 받겠습니다</h1>
             <p class="title-sub reveal">우수주의보</p>
           </div>
-          <div class="placeholder reveal" style="height:720px">GitHub 또는 Demo QR 코드 삽입 예정</div>
+          <div class="asset-frame reveal" style="height:720px">
+            <img src="assets/qr-code.png" alt="GitHub 또는 Demo QR 코드">
+            <div class="asset-caption">GitHub 또는 Demo QR 코드</div>
+          </div>
         </div>
       </section>
     </main>

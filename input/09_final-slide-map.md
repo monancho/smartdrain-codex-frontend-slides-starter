@@ -200,13 +200,14 @@
 - [도식: drains, sensor_data, yolo_results, xgboost_results, analysis_jobs 관계]
 - [캡션: ERD 이미지 삽입 예정]
 
-### 22. 센서 데이터 복합키 설계
+### 22. 센서 데이터 시계열 조회 기준
 
-- 센서 데이터는 특정 빗물받이와 특정 측정 시점을 함께 식별해야 한다.
+- dev 브랜치 실제 코드 기준으로 `sensor_data`는 단일 `id`를 primary key로 사용한다.
 - 하나의 빗물받이는 여러 시계열 센서 기록을 가진다.
-- drain id + measured time 조합은 어떤 센서값이 분석에 사용됐는지 명확히 해준다.
-- [도식: drain_id + measured_at → 특정 빗물받이의 특정 시점 센서값]
-- [표: 센서 데이터 복합키 설계 이유]
+- 분석 작업은 `drain_id`와 `measured_at` 기준으로 특정 시설의 최신 센서값을 조회해 연결한다.
+- [도식: id PK → drain_id FK → measured_at 조회 기준]
+- [표: 센서 데이터 시계열 조회 기준 - id, drain_id, measured_at]
+- [금지: sensor_data composite primary key claim]
 
 ### 23. 스케줄러 기반 비동기 분석 작업 생성
 
