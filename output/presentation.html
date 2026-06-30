@@ -1006,6 +1006,62 @@
       font: 900 15px/1 var(--mono);
       text-align: center;
     }
+    .websocket-focus {
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .websocket-card {
+      min-height: 245px;
+      border: 1px solid var(--line);
+      border-top: 5px solid var(--teal);
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--soft-shadow);
+      padding: 26px 24px;
+      display: grid;
+      grid-template-rows: 52px auto 1fr;
+      gap: 16px;
+    }
+    .websocket-card .num {
+      display: inline-grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      background: var(--teal);
+      color: #fff;
+      font: 900 20px/1 var(--mono);
+    }
+    .websocket-card strong {
+      font-size: 30px;
+      line-height: 1.12;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .websocket-card span {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.38;
+      font-weight: 800;
+      word-break: keep-all;
+    }
+    .websocket-detail {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+    .websocket-detail span {
+      border: 1px solid rgba(18,28,43,.14);
+      background: rgba(255,255,255,.82);
+      padding: 14px 10px;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.25;
+      font-weight: 900;
+      text-align: center;
+      word-break: keep-all;
+    }
     .arch-board {
       height: 650px;
       display: grid;
@@ -1717,7 +1773,7 @@
             <p class="ref-sub reveal">이미지·센서 기반 빗물받이 상태 판단 및 관리자 화면 반영 시스템</p>
             <div class="ref-accent reveal"></div>
             <div class="keyword-strip cover-keywords reveal">
-              <div class="keyword"><strong>실시간</strong><span>지도 기반 상태 확인</span></div>
+              <div class="keyword"><strong>화면 갱신</strong><span>지도 기반 상태 확인</span></div>
               <div class="keyword"><strong>AI 판단</strong><span>막힘·수위·유속 통합</span></div>
               <div class="keyword"><strong>우선순위</strong><span>위험 시설 선별</span></div>
             </div>
@@ -1882,7 +1938,7 @@
           <div class="hero-copy reveal">
             <p class="ref-claim">사람이 먼저 찾는 방식에서, 시스템이 먼저 알려주는 방식으로 바꿉니다.</p>
             <p class="ref-sub">신고 대체가 아니라 이미지·센서 근거를 저장하고 화면에 반영해 점검 우선순위를 보조합니다.</p>
-            <div class="tag-row"><span class="tag">이미지 근거</span><span class="tag">센서 근거</span><span class="tag">DB 추적성</span><span class="tag">UI 실시간 반영</span></div>
+            <div class="tag-row"><span class="tag">이미지 근거</span><span class="tag">센서 근거</span><span class="tag">DB 추적성</span><span class="tag">UI 상태 반영</span></div>
           </div>
           <div class="hero-visual reveal">
             <div class="table compact-table">
@@ -1953,8 +2009,8 @@
           <div class="simple-step"><b>01</b><strong>원본 이미지</strong><span>sample image를 분석 입력으로 받습니다.</span></div>
           <div class="simple-step"><b>02</b><strong>YOLO</strong><span>보이는 객체와 후보 영역을 찾습니다.</span></div>
           <div class="simple-step"><b>03</b><strong>OpenCV</strong><span>mask와 막힘 비율을 수치화합니다.</span></div>
-          <div class="simple-step"><b>05</b><strong>XGBoost</strong><span>센서 feature와 함께 상태를 분류합니다.</span></div>
-          <div class="simple-step"><b>06</b><strong>상태 분류</strong><span>양호, 주의, 위험, 판단불가로 저장합니다.</span></div>
+          <div class="simple-step"><b>04</b><strong>XGBoost</strong><span>센서 feature와 함께 상태를 분류합니다.</span></div>
+          <div class="simple-step"><b>05</b><strong>상태 분류</strong><span>양호, 주의, 위험, 판단불가로 저장합니다.</span></div>
         </div>
         <p class="caption reveal" style="margin-top:32px">YOLO는 보이는 객체를 찾고, OpenCV는 막힘 비율을 수치화하며, XGBoost는 센서 feature와 결합해 상태를 분류합니다.</p>
       </section>
@@ -2173,16 +2229,21 @@
       <section class="slide" data-page="25 / 34">
         <div class="topline"><div><div class="kicker">Frontend</div><h2>WebSocket 갱신</h2></div><div class="section-label">갱신 trigger</div></div>
         <p class="lead compact reveal">WebSocket은 전체 데이터를 직접 운반하는 통로가 아니라, 최신 데이터 재조회를 시작하는 화면 갱신 trigger입니다.</p>
-        <div class="diagram reveal" style="margin-top:22px">
-          <div class="swimlane-labels"><span>AI / Backend</span><span>Persistence</span><span>Event</span><span>Frontend UI</span></div>
-          <div class="sequence-board swimlane">
-            <div class="sequence-step"><div class="num">01</div><strong>AI server callback</strong><span>분석 결과를 Backend callback endpoint로 전달</span></div>
-            <div class="sequence-step"><div class="num">02</div><strong>Backend persistence</strong><span>YOLO/OpenCV와 XGBoost 결과를 분리 저장</span></div>
-            <div class="sequence-step"><div class="num">03</div><strong>PostgreSQL 저장</strong><span>result table과 AnalysisJob 상태 갱신</span></div>
-            <div class="sequence-step"><div class="num">04</div><strong>WebSocket event</strong><span>데이터 본문이 아니라 갱신 알림을 발행</span></div>
-            <div class="sequence-step"><div class="num">05</div><strong>Frontend 수신</strong><span>dashboard/detail 화면에서 event 수신</span></div>
-            <div class="sequence-step"><div class="num">06</div><strong>최신 데이터 재조회</strong><span>REST/API query로 최신 상태를 다시 조회</span></div>
-            <div class="sequence-step"><div class="num">07</div><strong>UI 갱신</strong><span>대시보드와 상세 화면에 결과 반영</span></div>
+        <div class="diagram reveal">
+          <div class="websocket-focus">
+            <div class="websocket-card"><div class="num">01</div><strong>AI callback</strong><span>AI server가 분석 결과를 Backend callback endpoint로 전달합니다.</span></div>
+            <div class="websocket-card"><div class="num">02</div><strong>Backend 저장</strong><span>YOLO/OpenCV, XGBoost 결과와 AnalysisJob 상태를 PostgreSQL에 남깁니다.</span></div>
+            <div class="websocket-card"><div class="num">03</div><strong>WebSocket event</strong><span>전체 데이터가 아니라 최신 데이터 재조회를 시작하는 갱신 알림을 보냅니다.</span></div>
+            <div class="websocket-card"><div class="num">04</div><strong>Frontend 갱신</strong><span>dashboard/detail 화면이 event를 받은 뒤 API로 최신 데이터를 다시 조회합니다.</span></div>
+          </div>
+          <div class="websocket-detail">
+            <span>AI server callback</span>
+            <span>Backend persistence</span>
+            <span>PostgreSQL 저장</span>
+            <span>WebSocket event</span>
+            <span>Frontend 수신</span>
+            <span>최신 데이터 재조회</span>
+            <span>UI 갱신</span>
           </div>
         </div>
       </section>
