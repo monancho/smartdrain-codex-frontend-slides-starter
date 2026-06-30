@@ -10,16 +10,16 @@
 
 | 파일 | 사용처 | 역할 |
 | --- | --- | --- |
-| `architecture-cropped.png` | 5, 29 | 전체 시스템 구성과 배포 관점 아키텍처 |
+| `architecture-cropped.png` | 5 | 전체 시스템 구성 보조 리소스 |
 | `dashboard-main.png` | 21, 35 | 관리자 대시보드 구현 캡처 |
 | `dashboard-detail.png` | 22, 35 | 상세 화면 구현 캡처 |
 | `drain-danger.png` | 6 | 막힘 상태 sample image |
 | `drain-caution.jpg` | 34 | 시연용 sample image |
 | `drain-good.png` | 19 | 양호 상태 sample image |
-| `erd.png` | 23 | 제공 리소스 기반 ERD |
+| `erd.png` | 보조 리소스 | 원본 ERD 참고용. 최종 Slide 23은 HTML/CSS ERD 사용 |
 | `qr-code.png` | 36 | GitHub 또는 Demo QR 코드 |
 | `reference-policy-page.png` | 11 | 정책/사례 참고 자료 |
-| `sequence-callback-websocket.png` | 27 | callback 저장 이후 WebSocket event 흐름 |
+| `sequence-callback-websocket.png` | 보조 리소스 | 원본 sequence 참고용. 최종 Slide 27은 HTML/CSS sequence 사용 |
 | `yolo-opencv-error-graph.png` | 14 | YOLO 단독 해석 한계 설명 |
 | `yolo-opencv-process.jpg` | 15 | YOLO/OpenCV 처리 과정 설명 |
 
@@ -36,8 +36,10 @@
 - 기존 방식/서비스 벤치마킹 table
 - AI 분석 설계 flow
 - XGBoost feature cards
-- DB entity cards
+- DB/ERD entity cards
 - 비동기 분석 요청 flow
+- callback/WebSocket sequence flow
+- system architecture board
 - PostgreSQL 저장 구조 cards
 - 운영 모니터링 고려 cards
 - 현재 구현 범위 vs 향후 확장 table
@@ -47,7 +49,8 @@
 - 이전 프로젝트명이나 불필요한 제목이 보이는 이미지는 crop된 리소스를 사용한다.
 - 사진형 sample image는 실제 운영 입력처럼 설명하지 않는다.
 - dashboard/detail screenshot은 구현 화면 근거로 사용한다.
-- ERD와 architecture는 이미지 단독으로 두지 않고 HTML 도식 또는 설명 caption을 함께 둔다.
+- ERD, callback/WebSocket sequence, system architecture는 최종 발표 화면에서 HTML/CSS 도식을 우선 사용한다.
+- 원본 ERD, sequence, architecture 이미지는 참고용 또는 보조 리소스로만 둔다.
 - real-time CCTV, real IoT sensor, MQTT 운영 연동을 현재 구현처럼 보이게 하는 이미지는 사용하지 않는다.
 
 ## 향후 개선 후보

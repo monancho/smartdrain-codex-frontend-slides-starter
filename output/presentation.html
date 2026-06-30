@@ -419,6 +419,172 @@
       font: 700 15px/1.2 var(--mono);
       color: var(--muted);
     }
+    .erd-board {
+      height: 690px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    .erd-card {
+      border: 3px solid var(--line);
+      background: #fff;
+      display: block;
+      min-width: 0;
+      position: relative;
+      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+    }
+    .erd-card::after { display: none; }
+    .erd-card b {
+      display: block;
+      background: var(--ink);
+      color: #fff;
+      padding: 16px 15px;
+      font: 900 20px/1 var(--mono);
+      overflow-wrap: anywhere;
+    }
+    .erd-card span {
+      display: block;
+      padding: 12px 14px;
+      border-top: 1px solid rgba(17,24,39,.2);
+      font: 800 18px/1.25 var(--mono);
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+    .erd-card .key {
+      color: var(--teal);
+      background: rgba(17,125,124,.08);
+    }
+    .erd-card small {
+      display: block;
+      padding: 12px 14px;
+      border-top: 2px solid var(--line);
+      font: 800 15px/1.25 var(--body);
+      color: var(--ink);
+      word-break: keep-all;
+      background: var(--soft);
+    }
+    .sequence-board {
+      height: 645px;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      align-items: stretch;
+      position: relative;
+    }
+    .sequence-step {
+      border: 3px solid var(--line);
+      background: #fff;
+      padding: 18px 14px;
+      display: grid;
+      grid-template-rows: 52px auto 1fr;
+      gap: 12px;
+      position: relative;
+      box-shadow: 7px 7px 0 rgba(17,24,39,.1);
+    }
+    .sequence-step:not(:last-child)::after {
+      display: none;
+    }
+    .sequence-step .num {
+      display: inline-grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border: 2px solid var(--line);
+      background: var(--teal);
+      color: #fff;
+      font: 900 19px/1 var(--mono);
+    }
+    .sequence-step strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1.18;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .sequence-step span {
+      display: block;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+    .trigger-note {
+      margin-top: 22px;
+      border: 3px solid var(--line);
+      background: var(--soft);
+      padding: 18px 22px;
+      font-size: 24px;
+      font-weight: 900;
+      word-break: keep-all;
+    }
+    .arch-board {
+      height: 650px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 18px;
+    }
+    .arch-node {
+      border: 3px solid var(--line);
+      background: #fff;
+      box-shadow: 8px 8px 0 rgba(17,24,39,.1);
+      padding: 22px;
+      display: grid;
+      align-content: center;
+      position: relative;
+      min-width: 0;
+    }
+    .arch-node strong {
+      display: block;
+      font: 900 28px/1.1 var(--display);
+      margin-bottom: 12px;
+      word-break: keep-all;
+    }
+    .arch-node span {
+      display: block;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+    .arch-node.current { background: #fff; }
+    .arch-node.future {
+      background: repeating-linear-gradient(-45deg, rgba(17,24,39,.04), rgba(17,24,39,.04) 11px, #fff 11px, #fff 22px);
+      border-style: dashed;
+    }
+    .arch-node.gateway::after,
+    .arch-node.frontend::after,
+    .arch-node.backend::after {
+      display: none;
+    }
+    .arch-node.backend::before {
+      display: none;
+    }
+    .arch-legend {
+      display: flex;
+      gap: 14px;
+      margin-top: 22px;
+      align-items: center;
+      font: 800 17px/1 var(--mono);
+      color: var(--muted);
+    }
+    .legend-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-chip::before {
+      content: "";
+      width: 24px;
+      height: 14px;
+      border: 2px solid var(--line);
+      background: #fff;
+    }
+    .legend-chip.future::before {
+      border-style: dashed;
+      background: repeating-linear-gradient(-45deg, rgba(17,24,39,.08), rgba(17,24,39,.08) 5px, #fff 5px, #fff 10px);
+    }
     .timeline {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -960,21 +1126,51 @@
 
       <section class="slide" data-page="23 / 36">
         <div class="topline"><div><div class="kicker">데이터베이스</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
-        <div class="layout two">
-          <div class="diagram reveal">
-            <div class="erd">
-              <div class="entity"><b>drains</b><span>id</span><span>location</span><span>status</span></div>
-              <div class="entity"><b>sensor_data</b><span>id PK</span><span>drain_id FK</span><span>measured_at</span></div>
-              <div class="entity"><b>analysis_jobs</b><span>request_id</span><span>drain_id</span><span>status</span></div>
-              <div class="entity"><b>yolo_results</b><span>job_id</span><span>obstruction</span><span>confidence</span></div>
-              <div class="entity"><b>xgboost_results</b><span>job_id</span><span>risk_level</span><span>risk_score</span></div>
+        <div class="diagram reveal">
+          <div class="erd-board">
+            <div class="erd-card">
+              <b>drains</b>
+              <span class="key">id PK</span>
+              <span>location</span>
+              <span>current_status</span>
+              <small>개별 빗물받이 시설 단위</small>
             </div>
-            <p class="caption" style="margin-top:20px">callback 저장과 WebSocket 갱신을 설명하기 전에 데이터 관계를 먼저 고정합니다.</p>
+            <div class="erd-card">
+              <b>sensor_data</b>
+              <span class="key">id PK</span>
+              <span>drain_id FK</span>
+              <span>measured_at</span>
+              <span>water_level_cm</span>
+              <span>flow_velocity_mps</span>
+              <small>단일 id PK를 가진 시계열 센서값</small>
+            </div>
+            <div class="erd-card">
+              <b>analysis_jobs</b>
+              <span class="key">request_id</span>
+              <span>drain_id FK</span>
+              <span>sensor_data_id</span>
+              <span>status</span>
+              <span>trigger_type</span>
+              <small>비동기 분석 요청과 작업 상태 추적</small>
+            </div>
+            <div class="erd-card">
+              <b>yolo_results</b>
+              <span class="key">job_id FK</span>
+              <span>obstruction_ratio</span>
+              <span>confidence</span>
+              <span>image evidence</span>
+              <small>이미지 기반 중간 분석 결과</small>
+            </div>
+            <div class="erd-card">
+              <b>xgboost_results</b>
+              <span class="key">job_id FK</span>
+              <span>risk_level</span>
+              <span>risk_score</span>
+              <span>created_at</span>
+              <small>내부 분류용 최종 결과</small>
+            </div>
           </div>
-          <div class="asset-frame reveal">
-            <img src="assets/erd.png" alt="ERD 리소스">
-            <div class="asset-caption">제공 리소스 기반 ERD</div>
-          </div>
+          <p class="caption" style="margin-top:20px">callback 저장과 WebSocket 갱신을 설명하기 전에 데이터 관계를 먼저 고정합니다. `sensor_data`는 composite key가 아니라 단일 `id PK`입니다.</p>
         </div>
       </section>
 
@@ -1023,15 +1219,17 @@
 
       <section class="slide" data-page="27 / 36">
         <div class="topline"><div><div class="kicker">Frontend</div><h2>WebSocket 갱신</h2></div><div class="section-label">갱신 trigger</div></div>
-        <div class="layout two">
-          <div class="asset-frame reveal">
-            <img src="assets/sequence-callback-websocket.png" alt="callback과 WebSocket 시퀀스">
-            <div class="asset-caption">callback 저장 이후 WebSocket event 흐름</div>
+        <div class="diagram reveal">
+          <div class="sequence-board">
+            <div class="sequence-step"><div class="num">01</div><strong>AI server callback</strong><span>분석 결과를 Backend callback endpoint로 전달</span></div>
+            <div class="sequence-step"><div class="num">02</div><strong>Backend persistence</strong><span>YOLO/OpenCV와 XGBoost 결과를 분리 저장</span></div>
+            <div class="sequence-step"><div class="num">03</div><strong>PostgreSQL 저장</strong><span>result table과 AnalysisJob 상태 갱신</span></div>
+            <div class="sequence-step"><div class="num">04</div><strong>WebSocket event</strong><span>데이터 본문이 아니라 갱신 알림을 발행</span></div>
+            <div class="sequence-step"><div class="num">05</div><strong>Frontend 수신</strong><span>dashboard/detail 화면에서 event 수신</span></div>
+            <div class="sequence-step"><div class="num">06</div><strong>최신 데이터 재조회</strong><span>REST/API query로 최신 상태를 다시 조회</span></div>
+            <div class="sequence-step"><div class="num">07</div><strong>UI 갱신</strong><span>대시보드와 상세 화면에 결과 반영</span></div>
           </div>
-          <div class="panel reveal">
-            <p>WebSocket은 전체 데이터를 직접 전달하는 통로가 아니라, 최신 데이터 재조회를 시작하는 화면 갱신 trigger입니다.</p>
-            <div class="flow" style="margin-top:30px"><div class="step">event</div><div class="step">수신</div><div class="step">재조회</div><div class="step">화면 갱신</div></div>
-          </div>
+          <div class="trigger-note">WebSocket은 전체 데이터를 직접 전달하는 통로가 아니라, 최신 데이터 재조회를 시작하는 화면 갱신 trigger입니다.</div>
         </div>
       </section>
 
@@ -1048,25 +1246,18 @@
 
       <section class="slide" data-page="29 / 36">
         <div class="topline"><div><div class="kicker">인프라</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
-        <div class="layout two">
-          <div class="asset-frame reveal">
-            <img src="assets/architecture-cropped.png" alt="시스템 아키텍처 이미지">
-            <div class="asset-caption">Nginx, Frontend, Backend, AI server, PostgreSQL 구성</div>
+        <div class="diagram reveal">
+          <div class="arch-board">
+            <div class="arch-node current"><strong>Browser</strong><span>관리자 대시보드와 상세 화면을 사용하는 진입점</span></div>
+            <div class="arch-node current gateway"><strong>Nginx</strong><span>Frontend, Backend API, WebSocket routing entry</span></div>
+            <div class="arch-node current frontend"><strong>Frontend</strong><span>Next.js dashboard/detail UI와 event 수신</span></div>
+            <div class="arch-node current backend"><strong>Backend</strong><span>FastAPI, AnalysisJob, callback 저장</span></div>
+            <div class="arch-node current"><strong>PostgreSQL</strong><span>sensor_data, analysis_jobs, yolo/xgboost results 저장</span></div>
+            <div class="arch-node current"><strong>AI server</strong><span>YOLO, OpenCV, XGBoost 분석 처리</span></div>
+            <div class="arch-node current"><strong>Docker / Jenkins</strong><span>서비스 실행 단위와 build/deploy 흐름 구성</span></div>
+            <div class="arch-node future"><strong>RTSP / MQTT / Alert</strong><span>현재 구현이 아니라 향후 확장 범위</span></div>
           </div>
-          <div class="diagram reveal">
-            <div class="node-map">
-              <div class="node">Browser<small>관리 화면</small></div>
-              <div class="node">Nginx<small>routing</small></div>
-              <div class="node">Frontend<small>Next.js</small></div>
-              <div class="node">Backend<small>FastAPI</small></div>
-              <div class="node">PostgreSQL<small>결과 저장</small></div>
-            </div>
-            <div class="node-map" style="margin-top:22px; grid-template-columns: 1fr 1fr 1fr">
-              <div class="node">AI server<small>YOLO / OpenCV / XGBoost</small></div>
-              <div class="node">WebSocket<small>갱신 event</small></div>
-              <div class="node">Docker<small>service runtime</small></div>
-            </div>
-          </div>
+          <div class="arch-legend"><span class="legend-chip">현재 구현 구조</span><span class="legend-chip future">향후 확장 범위</span></div>
         </div>
       </section>
 

@@ -92,7 +92,7 @@ XGBoost에는 obstruction ratio, detection confidence, water level, flow velocit
 
 ## 23. DB 설계 / ERD
 
-DB는 callback과 WebSocket보다 먼저 이해해야 하는 부분입니다. drains, sensor_data, analysis_jobs, yolo_results, xgboost_results가 연결되고, 분석 작업은 센서값, 이미지 분석 결과, 최종 분류 결과를 묶는 중심 역할을 합니다.
+DB는 callback과 WebSocket보다 먼저 이해해야 하는 부분입니다. drains, sensor_data, analysis_jobs, yolo_results, xgboost_results가 연결되고, 분석 작업은 센서값, 이미지 분석 결과, 최종 분류 결과를 묶는 중심 역할을 합니다. 특히 sensor_data는 단일 id를 primary key로 쓰고, drain_id와 measured_at으로 시설별 시계열 조회를 연결합니다.
 
 ## 24. 센서 데이터 시계열 조회 기준
 
@@ -108,7 +108,7 @@ AI server가 분석을 마치면 Backend callback으로 결과를 전달합니�
 
 ## 27. WebSocket 갱신
 
-WebSocket은 전체 데이터를 직접 전달하는 통로가 아니라 화면 갱신 trigger입니다. result persistence 이후 event가 발생하면 Frontend가 최신 데이터를 다시 조회해 대시보드와 상세 화면을 갱신합니다.
+WebSocket은 전체 데이터를 직접 전달하는 통로가 아니라 화면 갱신 trigger입니다. AI server callback 이후 Backend가 결과를 저장하고, PostgreSQL과 작업 상태를 갱신한 뒤 event를 발행합니다. Frontend는 event를 받은 뒤 최신 데이터를 다시 조회해 대시보드와 상세 화면을 갱신합니다.
 
 ## 28. 전체 서비스 흐름 요약
 
@@ -116,7 +116,7 @@ WebSocket은 전체 데이터를 직접 전달하는 통로가 아니라 화면 
 
 ## 29. 시스템 아키텍처
 
-시스템은 Browser, Nginx, Frontend, Backend, AI server, PostgreSQL로 나누어 볼 수 있습니다. Nginx는 routing entry를 맡고, Backend와 AI server는 분석 요청과 결과 저장 책임을 분리합니다.
+시스템은 Browser, Nginx, Frontend, Backend, AI server, PostgreSQL로 나누어 볼 수 있습니다. Nginx는 routing entry를 맡고, Backend와 AI server는 분석 요청과 결과 저장 책임을 분리합니다. RTSP, MQTT, 알림은 현재 구현이 아니라 향후 확장 영역으로 분리해서 보겠습니다.
 
 ## 30. Docker / Nginx / Jenkins
 
@@ -128,7 +128,7 @@ PostgreSQL에서는 drains가 시설 단위, sensor_data가 시계열 센서값,
 
 ## 32. 운영 모니터링 고려
 
-운영 모니터링은 완성된 production monitoring system으로 주장하지 않습니다. Backend health check, PostgreSQL 상태, AI 분석 실패 로그, WebSocket 연결, callback 실패와 중복 요청을 확인해야 할 항목으로 제시합니다.
+운영 모니터링은 완성된 운영 체계로 주장하지 않습니다. Backend health check, PostgreSQL 상태, AI 분석 실패 로그, WebSocket 연결, callback 실패와 중복 요청을 확인해야 할 항목으로 제시합니다.
 
 ## 33. 향후 RTSP, MQTT, 알림 확장
 
