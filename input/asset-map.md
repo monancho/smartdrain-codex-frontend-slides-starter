@@ -1,67 +1,58 @@
-# SmartDrain Asset Map
+# 우수주의보 Asset Map
 
-## Current Asset Status
+이 문서는 최종 HTML 발표자료 `output/presentation.html`에서 사용하는 리소스와 대체 도식 기준을 정리한다.
 
-No final curated `input/assets` set has been rebuilt yet.
+## 현재 리소스 상태
 
-For the next style-preview step, use CSS/SVG/HTML-generated visuals rather than relying on missing image assets. The previews should look like real SmartDrain title slides, but they do not need project screenshots yet.
+최종 발표자료는 `output/assets`의 실제 리소스와 HTML/CSS 도식을 함께 사용한다. 이미지가 없거나 읽기 어려운 경우에는 깨진 이미지 대신 HTML diagram을 사용한다.
 
-## Available References
+## 사용 리소스
 
-### Source Decks
+| 파일 | 사용처 | 역할 |
+| --- | --- | --- |
+| `architecture-cropped.png` | 5, 29 | 전체 시스템 구성과 배포 관점 아키텍처 |
+| `dashboard-main.png` | 21, 35 | 관리자 대시보드 구현 캡처 |
+| `dashboard-detail.png` | 22, 35 | 상세 화면 구현 캡처 |
+| `drain-danger.png` | 6 | 막힘 상태 sample image |
+| `drain-caution.jpg` | 34 | 시연용 sample image |
+| `drain-good.png` | 19 | 양호 상태 sample image |
+| `erd.png` | 23 | 제공 리소스 기반 ERD |
+| `qr-code.png` | 36 | GitHub 또는 Demo QR 코드 |
+| `reference-policy-page.png` | 11 | 정책/사례 참고 자료 |
+| `sequence-callback-websocket.png` | 27 | callback 저장 이후 WebSocket event 흐름 |
+| `yolo-opencv-error-graph.png` | 14 | YOLO 단독 해석 한계 설명 |
+| `yolo-opencv-process.jpg` | 15 | YOLO/OpenCV 처리 과정 설명 |
 
-- `references/source-decks/01-low-density-static-reference.pdf`
-  - Use only as a cleanliness reference.
-  - Do not copy its slide layout directly.
+## 보조 리소스
 
-- `references/source-decks/02-content-heavy-draft-reference.pdf`
-  - Use as SmartDrain content reference.
-  - Do not copy draft notes, sticky notes, inconsistent density, or old layout.
+- `drain-sample.jpg`: 추가 sample image가 필요할 때 사용 가능
+- `drain-unknown.png`: 판단불가 상태를 별도 장면으로 분리할 때 사용 가능
 
-### Code Excerpts
+## HTML/CSS로 재작성한 도식
 
-- `references/code-excerpts/smartdrain-readme.md`
-- `references/code-excerpts/frontend-drain-status-socket.ts`
-- `references/code-excerpts/backend/models/sensor_data.py`
-- `references/code-excerpts/backend/models/analysis_job.py`
-- `references/code-excerpts/backend/models/yolo_result.py`
-- `references/code-excerpts/backend/models/xgboost_result.py`
-- `references/code-excerpts/backend/routers/ai_callback.py`
-- `references/code-excerpts/backend/services/analysis_async_service.py`
-- `references/code-excerpts/backend/websocket/events.py`
-- `references/code-excerpts/ai-service/analysis_service.py`
-- `references/code-excerpts/ai-service/xgboost_adapter.py`
-- `references/code-excerpts/ai-service/yolo_analyzer.py`
+- 프로젝트 한 줄 요약 end-to-end flow
+- 전체 기술 스택 계층 도식
+- 강우 중 상태 변화 flow
+- 기존 방식/서비스 벤치마킹 table
+- AI 분석 설계 flow
+- XGBoost feature cards
+- DB entity cards
+- 비동기 분석 요청 flow
+- PostgreSQL 저장 구조 cards
+- 운영 모니터링 고려 cards
+- 현재 구현 범위 vs 향후 확장 table
 
-Use these for technical accuracy and claim checking.
+## 리소스 사용 원칙
 
-## Visuals To Recreate As Diagrams
+- 이전 프로젝트명이나 불필요한 제목이 보이는 이미지는 crop된 리소스를 사용한다.
+- 사진형 sample image는 실제 운영 입력처럼 설명하지 않는다.
+- dashboard/detail screenshot은 구현 화면 근거로 사용한다.
+- ERD와 architecture는 이미지 단독으로 두지 않고 HTML 도식 또는 설명 caption을 함께 둔다.
+- real-time CCTV, real IoT sensor, MQTT 운영 연동을 현재 구현처럼 보이게 하는 이미지는 사용하지 않는다.
 
-The final deck should recreate these as clean HTML/CSS/SVG diagrams instead of placing dense screenshots directly:
+## 향후 개선 후보
 
-- AI pipeline: sample image -> YOLO/OpenCV -> XGBoost -> risk level
-- async analysis: request -> AnalysisJob -> AI Service -> callback -> DB
-- WebSocket update: result persisted -> event -> frontend refresh
-- DB/ERD: facilities/drains, sensor_data, analysis_jobs, yolo_results, xgboost_results
-- service architecture: Frontend, Backend, AI Service, PostgreSQL, Nginx, Docker/Jenkins
-
-## Visuals To Avoid
-
-- old PPT sticky notes
-- draft comments
-- blurry diagrams
-- unreadable ERD screenshots
-- source-code screenshots with tiny text
-- news screenshots unless source handling is confirmed
-- real CCTV imagery that implies current integration
-
-## Future Asset Work
-
-Before final deck generation, rebuild `input/assets` if screenshots or sample images are needed:
-
-- dashboard screenshot
-- detail page screenshot
-- sample drain images
-- AI result example images
-- clean ERD or architecture export
-
+- ERD를 고해상도 HTML/SVG로 완전 재작성
+- callback/WebSocket sequence를 HTML/SVG로 완전 재작성
+- AI 결과 예시를 상태별로 한 장씩 더 분리
+- 발표용 PDF export 이후 페이지별 가독성 재검수
