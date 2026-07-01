@@ -2116,6 +2116,336 @@
   font-weight: 800;
   color: #121b2a;
 }
+
+/* 23~26 replacement: sequence / request / websocket / summary */
+.comm-flow-overview {
+  margin-top: 52px;
+  display: grid;
+  grid-template-columns: 0.42fr 0.58fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.comm-flow-copy {
+  padding-top: 34px;
+}
+
+.comm-flow-claim {
+  margin: 0;
+  font-size: 45px;
+  line-height: 1.16;
+  font-weight: 900;
+  word-break: keep-all;
+}
+
+.comm-flow-sub {
+  margin-top: 24px;
+  max-width: 640px;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1.48;
+  font-weight: 720;
+  word-break: keep-all;
+}
+
+.comm-flow-list {
+  margin-top: 34px;
+  border-top: 4px solid var(--teal);
+}
+
+.comm-flow-item {
+  padding: 18px 0;
+  border-bottom: 2px solid rgba(20, 143, 158, 0.38);
+}
+
+.comm-flow-item strong {
+  display: block;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.comm-flow-item span {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.42;
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.comm-flow-frame {
+  background: #fff;
+  border: 1px solid rgba(18, 28, 43, 0.14);
+  box-shadow: var(--soft-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.comm-flow-frame.overview {
+  height: 565px;
+  padding: 18px;
+}
+
+.comm-flow-frame.diagram {
+  height: 600px;
+  padding: 20px;
+}
+
+.comm-flow-frame img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.comm-flow-caption {
+  margin-top: 12px;
+  color: var(--muted);
+  font: 800 15px/1.45 var(--mono);
+  text-align: center;
+  word-break: keep-all;
+}
+
+.comm-detail-grid {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: 0.36fr 0.64fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+.comm-detail-panel {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(18, 28, 43, 0.12);
+  border-top: 5px solid var(--teal);
+  box-shadow: var(--soft-shadow);
+  padding: 34px 32px;
+  min-height: 600px;
+}
+
+.comm-detail-panel.dark-line {
+  border-top-color: var(--ink);
+}
+
+.comm-detail-panel h3 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.18;
+  font-weight: 900;
+  word-break: keep-all;
+}
+
+.comm-detail-panel .lead-text {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 21px;
+  line-height: 1.48;
+  font-weight: 720;
+  word-break: keep-all;
+}
+
+.comm-detail-steps {
+  margin-top: 28px;
+  border-top: 2px solid rgba(20, 143, 158, 0.35);
+}
+
+.comm-detail-step {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 16px;
+  padding: 17px 0;
+  border-bottom: 1px solid rgba(18, 28, 43, 0.1);
+}
+
+.comm-detail-step b {
+  color: var(--teal);
+  font: 900 18px/1.3 var(--mono);
+}
+
+.comm-detail-step strong {
+  display: block;
+  font-size: 20px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.comm-detail-step span {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.38;
+  font-weight: 650;
+  word-break: keep-all;
+}
+
+.comm-detail-note {
+  margin-top: 24px;
+  border-left: 5px solid var(--teal);
+  background: var(--soft);
+  padding: 16px 18px;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.42;
+  font-weight: 850;
+  word-break: keep-all;
+}
+
+.comm-summary-lead {
+  margin: 44px 0 26px;
+  border-left: 5px solid var(--teal);
+  padding-left: 22px;
+  max-width: 1420px;
+  font-size: 28px;
+  line-height: 1.38;
+  font-weight: 850;
+  word-break: keep-all;
+}
+
+.comm-summary-rail {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(18, 28, 43, 0.12);
+  box-shadow: var(--soft-shadow);
+}
+
+.comm-summary-rail span {
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(18, 28, 43, 0.12);
+  background: #fff;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.25;
+  font-weight: 900;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.comm-summary-lanes {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.comm-summary-lane {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(18, 28, 43, 0.12);
+  border-top: 5px solid var(--teal);
+  box-shadow: var(--soft-shadow);
+  padding: 28px 30px;
+}
+
+.comm-summary-lane:nth-child(2) {
+  border-top-color: var(--orange);
+}
+
+.comm-summary-lane h3 {
+  margin: 0 0 18px;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.comm-summary-lane p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.48;
+  font-weight: 720;
+  word-break: keep-all;
+}
+
+.comm-summary-lane ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comm-summary-lane li {
+  padding: 11px 0;
+  border-top: 1px solid rgba(18, 28, 43, 0.1);
+  color: var(--ink);
+  font-size: 19px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.comm-summary-note {
+  margin-top: 24px;
+  border-left: 5px solid var(--teal);
+  background: var(--soft);
+  padding: 16px 20px;
+  color: var(--ink);
+  font-size: 21px;
+  line-height: 1.42;
+  font-weight: 850;
+  word-break: keep-all;
+}
+.comm-process-grid {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+.comm-process-card {
+  min-height: 250px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(18, 28, 43, 0.12);
+  border-top: 5px solid var(--teal);
+  box-shadow: var(--soft-shadow);
+  padding: 30px 28px;
+}
+
+.comm-process-card:nth-child(2) {
+  border-top-color: var(--ink);
+}
+
+.comm-process-card:nth-child(3) {
+  border-top-color: var(--orange);
+}
+
+.comm-process-card:nth-child(4) {
+  border-top-color: var(--teal);
+}
+
+.comm-process-card b {
+  display: block;
+  color: var(--teal);
+  font: 900 18px/1 var(--mono);
+  letter-spacing: 0.08em;
+}
+
+.comm-process-card strong {
+  display: block;
+  margin-top: 18px;
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 900;
+  word-break: keep-all;
+}
+
+.comm-process-card span {
+  display: block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 20px;
+  line-height: 1.44;
+  font-weight: 700;
+  word-break: keep-all;
+}
   </style>
 </head>
 <body>
@@ -2761,85 +3091,192 @@
   </div>
 </section>
 
-      <section class="slide" data-page="23 / 34">
-        <div class="topline"><div><div class="kicker">Backend / AI / Frontend</div><h2>분석 요청과 화면 갱신 흐름</h2></div><div class="section-label">overview</div></div>
-        <div class="hero-split sequence-overview">
-          <div class="hero-copy sequence-copy reveal">
-            <p class="ref-claim">먼저 전체 시퀀스를 보고,<br>이후 Backend-AI 통신과<br>Backend-Frontend 화면 갱신을 나눠 설명합니다.</p>
-            <div class="line-modules" style="margin-top:34px">
-              <div class="line-module"><strong>01 전체 흐름 확인</strong><span>Scheduler가 분석 대상을 확인하고, AI 처리와 화면 반영까지 이어지는 순서를 먼저 봅니다.</span></div>
-              <div class="line-module"><strong>02 Backend ↔ AI Server</strong><span>Backend는 최신 센서값과 배수구 정보를 바탕으로 AI 분석을 요청하고, AI Server는 YOLO와 XGBoost 결과를 callback으로 전달합니다.</span></div>
-              <div class="line-module"><strong>03 Backend ↔ Frontend</strong><span>WebSocket 연결을 유지한 상태에서 YOLO 결과와 최종 위험도 결과를 단계적으로 화면에 반영합니다.</span></div>
-            </div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="sequence-resource-frame" style="height:655px">
-              <img src="assets/sequence-analysis-websocket-full.png" alt="분석 요청, AI callback, DB 저장, WebSocket 화면 갱신 전체 sequence">
-            </div>
-            <div class="asset-caption" style="margin-top:16px">전체 시퀀스 다이어그램은 구조 확인용이며, 세부 통신은 다음 페이지에서 나눠 설명합니다.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-page="24 / 34">
-        <div class="topline"><div><div class="kicker">Backend / AI Server</div><h2>Backend ↔ AI Server 통신</h2></div><div class="section-label">request / callback</div></div>
-        <p class="message-line reveal">Backend는 Scheduler를 통해 분석 대상을 확인하고, 최신 센서값과 배수구 정보를 AI Server에 전달합니다. AI Server는 이미지 처리와 위험도 분류 결과를 callback으로 반환합니다.</p>
-        <div class="layout two after-lead">
-          <div class="table comm-table reveal">
-            <div class="row head"><div class="cell">단계</div><div class="cell">처리 내용</div><div class="cell">핵심 포인트</div></div>
-            <div class="row"><div class="cell">1. 분석 대상 확인</div><div class="cell">Backend Scheduler가 주기적으로 분석 대상 여부를 확인합니다.</div><div class="cell">분석이 필요한 경우에만 후속 작업을 진행합니다.</div></div>
-            <div class="row"><div class="cell">2. 최신 센서값 조회</div><div class="cell">Backend가 Database에서 분석 대상의 최신 센서값을 조회합니다.</div><div class="cell">AI 요청에 사용할 입력 근거를 확보합니다.</div></div>
-            <div class="row"><div class="cell">3. 분석 작업 등록</div><div class="cell">분석 작업을 생성하고 진행 상태를 관리합니다.</div><div class="cell">pending, processing, done, failed 상태 관리와 연결됩니다.</div></div>
-            <div class="row"><div class="cell">4. AI 분석 요청</div><div class="cell">Backend가 AI Server에 센서값과 배수구 정보를 전달합니다.</div><div class="cell">화면 응답과 AI 처리 시간을 분리하는 비동기 구조입니다.</div></div>
-            <div class="row"><div class="cell">5. callback 수신</div><div class="cell">AI Server가 YOLO 결과와 XGBoost 결과를 각각 callback으로 전달합니다.</div><div class="cell">중간 결과와 최종 결과를 구분해 처리합니다.</div></div>
-          </div>
-          <div class="diagram comm-flow reveal">
-            <div class="line-modules" style="gap:15px">
-              <div class="line-module"><strong>Backend Scheduler</strong><span>분석 대상 확인</span></div>
-              <div class="line-module"><strong>Database</strong><span>최신 센서값 반환</span></div>
-              <div class="line-module"><strong>Backend → AI Server</strong><span>센서값 + 배수구 정보로 분석 요청</span></div>
-              <div class="line-module"><strong>AI Server</strong><span>이미지 확보 → OpenCV 전처리 → YOLO 분석 → XGBoost 판단</span></div>
-              <div class="line-module"><strong>AI Server → Backend</strong><span>YOLO callback / XGBoost callback 반환</span></div>
-            </div>
-            <p class="caption" style="margin-top:20px">callback 실패, 중복 요청, 재시도 정책은 운영 점검 대상으로 분리합니다.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-page="25 / 34">
-        <div class="topline"><div><div class="kicker">Backend / Frontend</div><h2>Backend ↔ Frontend 화면 갱신</h2></div><div class="section-label">WebSocket event</div></div>
-        <p class="lead compact reveal">WebSocket은 전체 데이터를 직접 운반하는 통로가 아니라, 분석 결과 변화가 생겼을 때 Frontend 화면 상태 갱신을 알리는 이벤트 채널입니다.</p>
-        <div class="diagram reveal">
-          <div class="websocket-focus">
-            <div class="websocket-card"><div class="num">01</div><strong>WebSocket 연결</strong><span>Frontend와 Backend는 WebSocket 연결을 유지합니다.</span></div>
-            <div class="websocket-card"><div class="num">02</div><strong>YOLO 결과 반영</strong><span>YOLO callback 수신 직후, 탐지 결과를 화면에 1차 반영합니다.</span></div>
-            <div class="websocket-card"><div class="num">03</div><strong>최종 위험도 반영</strong><span>XGBoost callback 수신 후, 최종 위험도와 배수구 상태를 반영합니다.</span></div>
-            <div class="websocket-card"><div class="num">04</div><strong>화면 상태 갱신</strong><span>dashboard/detail 화면이 event payload 또는 후속 API 확인을 통해 최신 상태로 갱신됩니다.</span></div>
-          </div>
-          <div class="websocket-detail">
-            <span>WebSocket 연결 유지</span>
-            <span>YOLO callback</span>
-            <span>YOLO 정보 화면 갱신</span>
-            <span>XGBoost callback</span>
-            <span>최종 위험도 반영</span>
-            <span>대시보드 상태 갱신</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-page="26 / 34">
-        <div class="topline"><div><div class="kicker">서비스</div><h2>전체 서비스 흐름 요약</h2></div><div class="section-label">end-to-end</div></div>
-        <p class="lead compact reveal">하나의 분석 작업은 분석 대상 확인, AI 처리, callback 수신, DB 반영, WebSocket 화면 갱신까지 이어지는 흐름으로 정리됩니다.</p>
-        <div class="flow reveal" style="margin-top:34px"><div class="step">WebSocket 연결</div><div class="step">분석 대상 확인</div><div class="step">최신 센서값 조회</div><div class="step">AI 분석 요청</div><div class="step">YOLO 1차 callback</div><div class="step">XGBoost 최종 callback</div><div class="step">화면 반영</div></div>
-        <div class="feature-grid service-summary reveal" style="margin-top:34px">
-          <div class="feature-card"><strong>분석 분리</strong><span>화면 응답과 AI 처리 시간을 분리해 비동기 분석 구조로 처리합니다.</span></div>
-          <div class="feature-card"><strong>요청 추적</strong><span>분석 작업과 센서 row, YOLO 결과, XGBoost 결과를 연결해 추적합니다.</span></div>
-          <div class="feature-card"><strong>단계적 반영</strong><span>YOLO 결과를 먼저 반영하고, 이후 XGBoost 최종 위험도를 반영합니다.</span></div>
-          <div class="feature-card"><strong>상태 갱신</strong><span>결과 저장과 작업 상태 변경 이후 dashboard/detail 화면 상태를 갱신합니다.</span></div>
-        </div>
-      </section>
-
+     
   
+<section class="slide" data-page="23 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">Backend / AI / Frontend</div>
+      <h2>분석 요청부터 화면 갱신까지</h2>
+    </div>
+    <div class="section-label">overview</div>
+  </div>
+
+  <div class="comm-flow-overview">
+    <div class="comm-flow-copy reveal">
+      <p class="comm-flow-claim">
+        전체 시퀀스를 먼저 보고,<br>
+        AI 분석 구간과 화면 갱신 구간을<br>
+        나눠서 확인합니다.
+      </p>
+      <p class="comm-flow-sub">
+        백엔드는 분석 대상 확인, AI 요청, 결과 저장, 화면 갱신을 연결하는 중심 역할을 합니다.
+      </p>
+
+      <div class="comm-flow-list">
+        <div class="comm-flow-item">
+          <strong>01 전체 구조</strong>
+          <span>분석 대상 확인부터 화면 반영까지의 큰 순서를 먼저 잡습니다.</span>
+        </div>
+        <div class="comm-flow-item">
+          <strong>02 AI 분석 구간</strong>
+          <span>백엔드가 입력을 준비하고, AI 서버가 결과를 콜백으로 반환합니다.</span>
+        </div>
+        <div class="comm-flow-item">
+          <strong>03 화면 갱신 구간</strong>
+          <span>저장된 결과 변화는 WebSocket 이벤트로 화면에 반영됩니다.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="comm-flow-frame overview">
+        <img src="assets/sequence-analysis-websocket-full.png" alt="분석 요청, AI 콜백, DB 저장, WebSocket 화면 갱신 전체 시퀀스">
+      </div>
+      <div class="comm-flow-caption">전체 시퀀스는 구조 확인용이며, 다음 페이지에서 주요 구간을 나눠 설명합니다.</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-page="24 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">Backend / AI Server</div>
+      <h2>AI 분석 요청과 결과 반환</h2>
+    </div>
+    <div class="section-label">request / callback</div>
+  </div>
+
+  <div class="comm-detail-grid">
+    <div class="comm-detail-panel reveal">
+      <h3>백엔드가 입력을 준비하고, AI 서버가 분석 결과를 반환합니다.</h3>
+      <p class="lead-text">
+        화면 응답과 AI 처리 시간을 분리하기 위해 분석은 작업 단위로 넘기고,
+        결과는 콜백으로 받아 저장합니다.
+      </p>
+
+      <div class="comm-detail-steps">
+        <div class="comm-detail-step">
+          <b>01</b>
+          <div><strong>분석 대상 확인</strong><span>Scheduler가 분석이 필요한 배수구를 확인합니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>02</b>
+          <div><strong>최신 센서값 조회</strong><span>분석 시점에 가까운 수위와 유속 값을 가져옵니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>03</b>
+          <div><strong>AI 분석 요청</strong><span>배수구 정보와 센서값을 AI 서버 입력으로 전달합니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>04</b>
+          <div><strong>결과 콜백</strong><span>OpenCV, YOLO, XGBoost 처리 결과를 백엔드로 반환합니다.</span></div>
+        </div>
+      </div>
+
+      <div class="comm-detail-note">핵심은 AI 서버가 DB를 직접 수정하지 않고, 백엔드 콜백을 통해 결과를 저장한다는 점입니다.</div>
+    </div>
+
+    <div class="reveal">
+      <div class="comm-flow-frame diagram">
+        <img src="assets/시퀀스_01.png" alt="AI 분석 요청과 결과 반환 시퀀스">
+      </div>
+      <div class="comm-flow-caption">AI 분석 구간: 대상 확인 → 센서값 조회 → 분석 요청 → 결과 콜백</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-page="25 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">Backend / Frontend</div>
+      <h2>WebSocket 기반 화면 갱신</h2>
+    </div>
+    <div class="section-label">event channel</div>
+  </div>
+
+  <div class="comm-detail-grid">
+    <div class="comm-detail-panel dark-line reveal">
+      <h3>저장된 결과 변화를 화면에 알리는 이벤트 채널입니다.</h3>
+      <p class="lead-text">
+        WebSocket은 분석 데이터 전체를 운반하는 통로가 아니라,
+        결과가 바뀌었음을 프론트엔드에 알려 화면 상태를 갱신하게 합니다.
+      </p>
+
+      <div class="comm-detail-steps">
+        <div class="comm-detail-step">
+          <b>01</b>
+          <div><strong>연결 유지</strong><span>Frontend와 Backend가 WebSocket 연결을 유지합니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>02</b>
+          <div><strong>YOLO 결과 반영</strong><span>탐지 결과 저장 이후 상세 화면에 1차 결과를 반영합니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>03</b>
+          <div><strong>최종 위험도 반영</strong><span>XGBoost 결과 저장 이후 배수구 상태를 갱신합니다.</span></div>
+        </div>
+        <div class="comm-detail-step">
+          <b>04</b>
+          <div><strong>화면 상태 갱신</strong><span>dashboard/detail 화면이 변경된 상태를 표시합니다.</span></div>
+        </div>
+      </div>
+
+      <div class="comm-detail-note">YOLO 중간 결과와 최종 위험도 결과를 단계적으로 보여줄 수 있다는 점이 핵심입니다.</div>
+    </div>
+
+    <div class="reveal">
+      <div class="comm-flow-frame diagram">
+        <img src="assets/시퀀스_02.png" alt="WebSocket 기반 화면 갱신 시퀀스">
+      </div>
+      <div class="comm-flow-caption">화면 갱신 구간: 연결 유지 → 결과 저장 → 이벤트 전달 → 화면 반영</div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-page="26 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">서비스</div>
+      <h2>서비스 처리 과정 요약</h2>
+    </div>
+    <div class="section-label">end-to-end</div>
+  </div>
+
+  <p class="comm-summary-lead reveal">
+    하나의 분석 작업은 입력 준비, AI 처리, 결과 저장, 화면 반영까지 같은 작업 단위로 추적됩니다.
+  </p>
+
+  <div class="comm-process-grid reveal">
+    <div class="comm-process-card">
+      <b>01</b>
+      <strong>입력 준비</strong>
+      <span>분석 대상과 최신 센서값을 확인하고, AI 요청에 필요한 입력을 구성합니다.</span>
+    </div>
+
+    <div class="comm-process-card">
+      <b>02</b>
+      <strong>AI 처리</strong>
+      <span>AI 서버가 OpenCV 전처리, YOLO 분석, XGBoost 판단을 수행합니다.</span>
+    </div>
+
+    <div class="comm-process-card">
+      <b>03</b>
+      <strong>결과 저장</strong>
+      <span>백엔드가 콜백 결과를 저장하고, 분석 작업 상태와 배수구 상태를 갱신합니다.</span>
+    </div>
+
+    <div class="comm-process-card">
+      <b>04</b>
+      <strong>화면 반영</strong>
+      <span>WebSocket 이벤트로 dashboard/detail 화면에 변경된 상태를 반영합니다.</span>
+    </div>
+  </div>
+
+  <div class="comm-summary-note reveal">
+    결과적으로 화면 응답, AI 처리, DB 저장, 화면 갱신을 분리하면서도 하나의 분석 작업으로 추적할 수 있습니다.
+  </div>
+</section>
 
       
 
