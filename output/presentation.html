@@ -3292,20 +3292,15 @@
       </section>
 
       <section class="slide" data-page="28 / 30">
-        <div class="topline"><div><div class="kicker">시연</div><h2>시연 시나리오</h2></div><div class="section-label">demo setup</div></div>
-        <p class="lead compact reveal">발표자는 sample image와 mock sensor data가 들어와 작업 생성, 결과 저장, 화면 갱신으로 이어지는 장면을 보여줍니다.</p>
-        <div class="layout split-40 after-lead">
-          <div class="asset-frame cover reveal">
-            <img src="assets/drain-caution.jpg" alt="시연용 빗물받이 sample image">
-            <div class="asset-caption">입력 준비 화면: 시연용 sample image와 mock sensor data가 함께 들어간다고 설명</div>
-          </div>
-          <div class="stage-flow no-arrow reveal" style="grid-template-columns: repeat(2, 1fr); margin-top:0">
-            <div class="stage-card"><b>1</b><strong>입력 준비</strong><span>sample drain image와 mock sensor data를 준비합니다.</span></div>
-            <div class="stage-card"><b>2</b><strong>작업 생성</strong><span>Backend가 AnalysisJob을 만들고 AI server 요청으로 이어집니다.</span></div>
-            <div class="stage-card"><b>3</b><strong>결과 저장</strong><span>callback 결과가 PostgreSQL에 저장되고 job 상태가 갱신됩니다.</span></div>
-            <div class="stage-card"><b>4</b><strong>화면 갱신</strong><span>WebSocket event 이후 dashboard/detail UI가 최신 데이터를 반영합니다.</span></div>
-          </div>
+        <div class="topline"><div><div class="kicker">시연</div><h2>실제 동작 화면으로 확인합니다</h2></div><div class="section-label">demo overview</div></div>
+        <p class="lead compact reveal">다음 영상에서는 위험 시설 선택부터 분석 결과가 화면에 반영되는 과정까지 간단히 확인합니다.</p>
+        <div class="stage-flow no-arrow reveal" style="grid-template-columns: repeat(4, 1fr); margin-top:86px">
+          <div class="stage-card"><b>1</b><strong>위험 시설 선택</strong><span>대시보드에서 확인할 빗물받이를 선택합니다.</span></div>
+          <div class="stage-card"><b>2</b><strong>상세 정보 확인</strong><span>이미지, 센서값, 현재 상태를 한 화면에서 확인합니다.</span></div>
+          <div class="stage-card"><b>3</b><strong>분석 요청</strong><span>선택한 시설의 데이터를 기준으로 AI 분석을 실행합니다.</span></div>
+          <div class="stage-card"><b>4</b><strong>결과 반영</strong><span>분석 결과가 저장되고 대시보드 상태가 갱신됩니다.</span></div>
         </div>
+        <p class="caption reveal" style="margin-top:42px">영상에서는 대시보드 → 상세 화면 → 분석 요청 → 상태 갱신 순서로 확인합니다.</p>
       </section>
 
       <section class="slide" data-page="29 / 30">
