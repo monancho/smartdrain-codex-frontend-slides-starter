@@ -2324,54 +2324,154 @@
       </section>
 
       <section class="slide overview-part" data-page="08 / 34">
-        <div class="topline"><div><div class="kicker">03 벤치마킹</div><h2>기존 방식의 한계와 반영 요구사항</h2></div><div class="section-label">요구사항 도출</div></div>
-        <p class="lead compact reveal">벤치마킹은 디자인 참고가 아니라, 상태 판단 서비스가 가져야 할 요구사항을 정리하는 과정입니다.</p>
-        <div class="table reveal" style="margin-top:24px">
-          <div class="row head"><div class="cell">방식</div><div class="cell">강점</div><div class="cell">우수주의보가 반영할 요구사항</div></div>
-          <div class="row"><div class="cell">정기 점검</div><div class="cell">기준과 이력 관리</div><div class="cell">강우 중 상태 변화가 생긴 뒤 화면에 반영되는 흐름</div></div>
-          <div class="row"><div class="cell">시민 신고</div><div class="cell">현장 발견과 민원 접수</div><div class="cell">신고 전 시설별 우선 확인 대상을 제시하는 보조 흐름</div></div>
-          <div class="row"><div class="cell">QR·관리번호</div><div class="cell">위치 특정과 이력 연결</div><div class="cell">시설 단위 데이터 추적성과 상세 화면 연결</div></div>
-          <div class="row"><div class="cell">센서·관제</div><div class="cell">수치 상태 모니터링</div><div class="cell">이미지 근거와 센서 근거를 함께 쓰는 판단 구조</div></div>
-        </div>
-        <p class="trigger-note reveal" style="margin-top:20px">결론: 발견, 판단, 저장, 화면 반영을 하나의 흐름으로 묶는 것이 차별점입니다.</p>
-      </section>
+  <div class="topline">
+    <div>
+      <div class="kicker">03 기존 방식 검토</div>
+      <h2>기존 관리 방식에서 확인한 한계</h2>
+    </div>
+    <div class="section-label">한계 정리</div>
+  </div>
 
-      <section class="slide overview-part" data-page="09 / 34">
-        <div class="topline"><div><div class="kicker">04 차별점</div><h2>우수주의보 차별점</h2></div><div class="section-label">방식 전환</div></div>
-        <div class="hero-split">
-          <div class="hero-copy reveal">
-            <p class="ref-claim">사람이 먼저 발견한 뒤 대응하는 방식에서,<br>시스템이 상태 변화 후보를 먼저 보여주는 방식으로 바꿉니다.</p>
-            <p class="ref-sub">신고를 대체하는 시스템이 아니라, 이미지·센서 근거를 저장하고 화면에 반영해 점검 우선순위를 보조합니다.</p>
-            <div class="tag-row"><span class="tag">이미지 근거</span><span class="tag">센서 근거</span><span class="tag">DB 추적성</span><span class="tag">UI 상태 반영</span></div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="table compact-table">
-              <div class="row head"><div class="cell">구분</div><div class="cell">기존 방식</div><div class="cell">우수주의보</div></div>
-              <div class="row"><div class="cell">문제 발견</div><div class="cell">점검 또는 신고 이후 파악</div><div class="cell">상태 변화 후보를 화면에서 먼저 확인</div></div>
-              <div class="row"><div class="cell">판단 방식</div><div class="cell">현장 확인 중심</div><div class="cell">이미지 feature와 센서 feature 결합</div></div>
-              <div class="row"><div class="cell">관리 단위</div><div class="cell">시설 이력 중심</div><div class="cell">개별 빗물받이와 분석 작업 단위</div></div>
-              <div class="row"><div class="cell">결과 활용</div><div class="cell">기록과 사후 대응</div><div class="cell">우선 확인 대상과 상세 근거 제공</div></div>
-            </div>
-          </div>
-        </div>
-      </section>
+  <p class="lead compact reveal">
+    기존 방식은 위치 확인, 이력 관리, 현장 접수에는 강점이 있지만,
+    강우 중 빠르게 변하는 시설 상태를 선제적으로 판단하기에는 한계가 있었습니다.
+  </p>
 
-      <section class="slide overview-part" data-page="10 / 34">
-        <div class="topline"><div><div class="kicker">05 목표</div><h2>참고 자료/정책/사례 기반 목표</h2></div><div class="section-label">근거 중심</div></div>
-        <div class="layout two after-lead">
-          <div class="evidence-crop-grid reveal">
-            <div class="evidence-crop policy-main">
-              <img src="assets/reference-policy-smart-maintenance-db.png" alt="빗물받이 설치 및 유지관리 기준 참고 자료">
-            </div>
-          </div>
-          <div class="stack reveal">
-            <div class="feature-card primary goal-card"><strong>정량 기준</strong><span>차폐율, 탐지 신뢰도, 수위, 유속을 위험도 판단 feature로 정리합니다.</span></div>
-            <div class="feature-card primary goal-card"><strong>운영 추적</strong><span>분석 작업 상태, 결과 반환, 실패 로그를 추적 가능한 구조로 둡니다.</span></div>
-            <div class="feature-card primary goal-card"><strong>화면 반영</strong><span>상태 변화 이벤트를 통해 대시보드와 상세 화면이 갱신되는 흐름을 구성합니다.</span></div>
-            <p class="caption source-caption">출처: 물과미래 Vol.58 No.6, 「배수기능 확보를 위한 빗물받이 설치 및 유지관리 기준 마련」</p>
-          </div>
+  <div class="table reveal" style="margin-top:24px">
+    <div class="row head">
+      <div class="cell">방식</div>
+      <div class="cell">강점</div>
+      <div class="cell">한계</div>
+    </div>
+
+    <div class="row">
+      <div class="cell">정기 점검</div>
+      <div class="cell">기준과 이력 관리 가능</div>
+      <div class="cell">강우 중 급격한 상태 변화를 즉시 반영하기 어려움</div>
+    </div>
+
+    <div class="row">
+      <div class="cell">시민 신고</div>
+      <div class="cell">현장 발견과 접수에 강점</div>
+      <div class="cell">신고가 들어오기 전까지 선제 대응이 어려움</div>
+    </div>
+
+    <div class="row">
+      <div class="cell">QR·관리번호</div>
+      <div class="cell">위치 특정과 이력 연결에 유리</div>
+      <div class="cell">시설 추적은 가능하지만 상태 판단은 별도로 필요함</div>
+    </div>
+
+    <div class="row">
+      <div class="cell">센서·관제</div>
+      <div class="cell">수치 기반 상태 확인 가능</div>
+      <div class="cell">설치·유지관리 비용과 운영 부담이 큼</div>
+    </div>
+  </div>
+
+  <p class="trigger-note reveal" style="margin-top:20px">
+    결론: 시설별 상태를 자동으로 분류하고, 그 결과를 화면에 빠르게 반영하는 흐름이 필요합니다.
+  </p>
+</section>
+
+     <section class="slide overview-part" data-page="09 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">04 방식 전환</div>
+      <h2>사후 확인에서 우선 확인으로</h2>
+    </div>
+    <div class="section-label">차별점</div>
+  </div>
+
+  <div class="hero-split">
+    <div class="hero-copy reveal">
+      <p class="ref-claim">
+        신고, 점검 뒤에 확인하던 방식을,
+        시설별 상태를 먼저 확인하는 방식으로 바꿉니다.
+      </p>
+      <p class="ref-sub">
+        시민 신고를 대체하기보다, 이미지·센서 근거를 저장하고 화면에 반영해
+        점검 우선순위 판단을 보조합니다.
+      </p>
+      <div class="tag-row">
+        <span class="tag">상태 분류</span>
+        <span class="tag">이미지 근거</span>
+        <span class="tag">센서 근거</span>
+        <span class="tag">상세 이력</span>
+        <span class="tag">화면 반영</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="table compact-table">
+        <div class="row head">
+          <div class="cell">구분</div>
+          <div class="cell">기존 방식</div>
+          <div class="cell">우수주의보</div>
         </div>
-      </section>
+        <div class="row">
+          <div class="cell">문제 확인</div>
+          <div class="cell">점검·신고 이후 파악</div>
+          <div class="cell">시설별 상태를 먼저 분류</div>
+        </div>
+        <div class="row">
+          <div class="cell">판단 근거</div>
+          <div class="cell">현장 확인 중심</div>
+          <div class="cell">이미지 feature + 센서 feature</div>
+        </div>
+        <div class="row">
+          <div class="cell">관리 단위</div>
+          <div class="cell">시설 이력 중심</div>
+          <div class="cell">개별 빗물받이 + 분석 작업</div>
+        </div>
+        <div class="row">
+          <div class="cell">결과 활용</div>
+          <div class="cell">기록과 사후 대응</div>
+          <div class="cell">우선 확인 대상과 상세 근거 제공</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <section class="slide overview-part" data-page="10 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">05 목표</div>
+      <h2>정책·사례에서 확인한 운영 목표</h2>
+    </div>
+    <div class="section-label">근거 중심</div>
+  </div>
+
+  <div class="layout two after-lead">
+    <div class="evidence-crop-grid reveal">
+      <div class="evidence-crop policy-main">
+        <img src="assets/reference-policy-smart-maintenance-db.png" alt="빗물받이 관리를 위한 DB 구축 및 스마트 유지관리 방안">
+      </div>
+    </div>
+
+    <div class="stack reveal">
+      <div class="feature-card primary goal-card">
+        <strong>시설 데이터 통합</strong>
+        <span>빗물받이별 센서값, 이미지 분석 결과, 상태 이력을 같은 시설 기준으로 묶습니다.</span>
+      </div>
+
+      <div class="feature-card primary goal-card">
+        <strong>상태 변화 확인</strong>
+        <span>강우 중 변하는 현장 상태를 분석 결과와 함께 화면에서 확인할 수 있게 합니다.</span>
+      </div>
+
+      <div class="feature-card primary goal-card">
+        <strong>점검 우선순위 지원</strong>
+        <span>관리자가 먼저 확인해야 할 시설을 고를 수 있도록 상태 분류와 근거를 제공합니다.</span>
+      </div>
+
+      <p class="caption source-caption">
+        출처: 물과미래 Vol.58 No.6, 「배수기능 확보를 위한 빗물받이 설치 및 유지관리 기준 마련」
+      </p>
+    </div>
+  </div>
+</section>
 
       <section class="slide" data-page="11 / 34">
         <div class="topline"><div><div class="kicker">계획</div><h2>프로젝트 진행 일정</h2></div><div class="section-label">개발 흐름</div></div>
@@ -2558,7 +2658,22 @@
           </div>
         </div>
       </section>
-
+    <section class="slide" data-page="27 / 34">
+        <div class="topline"><div><div class="kicker">21 Architecture</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
+        <div class="hero-split">
+          <div class="hero-copy reveal">
+            <p class="ref-claim">배포 관점에서는 Nginx가 진입점이 되고, 각 서비스는 컨테이너 단위로 분리됩니다.</p>
+            <p class="ref-sub">현재 구현과 향후 확장을 solid/dotted line으로 구분합니다.</p>
+            <div class="arch-legend"><span class="legend-chip">Nginx routing</span><span class="legend-chip">Frontend container</span><span class="legend-chip">Backend API</span><span class="legend-chip">AI service</span><span class="legend-chip future">PostgreSQL volume</span></div>
+          </div>
+          <div class="hero-visual reveal">
+            <div class="asset-frame hero">
+              <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
+              <div class="asset-caption">브라우저, Nginx, Backend/AI/PostgreSQL 연결 구조</div>
+            </div>
+          </div>
+        </div>
+      </section>
 <section class="slide" data-page="21 / 34">
   <div class="topline">
     <div>
@@ -2724,63 +2839,9 @@
         </div>
       </section>
 
-      <section class="slide" data-page="27 / 34">
-        <div class="topline"><div><div class="kicker">21 Architecture</div><h2>시스템 아키텍처</h2></div><div class="section-label">배포 관점</div></div>
-        <div class="hero-split">
-          <div class="hero-copy reveal">
-            <p class="ref-claim">배포 관점에서는 Nginx가 진입점이 되고, 각 서비스는 컨테이너 단위로 분리됩니다.</p>
-            <p class="ref-sub">현재 구현과 향후 확장을 solid/dotted line으로 구분합니다.</p>
-            <div class="arch-legend"><span class="legend-chip">Nginx routing</span><span class="legend-chip">Frontend container</span><span class="legend-chip">Backend API</span><span class="legend-chip">AI service</span><span class="legend-chip future">PostgreSQL volume</span></div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="asset-frame hero">
-              <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
-              <div class="asset-caption">브라우저, Nginx, Backend/AI/PostgreSQL 연결 구조</div>
-            </div>
-          </div>
-        </div>
-      </section>
+  
 
-      <section class="slide" data-page="28 / 34">
-        <div class="topline"><div><div class="kicker">인프라</div><h2>Docker / Nginx / Jenkins</h2></div><div class="section-label">build / deploy</div></div>
-        <p class="lead compact reveal">배포 관점에서는 GitHub 변경이 Jenkins, Docker build, Compose 실행, Nginx routing으로 이어집니다.</p>
-        <div class="layout two after-lead">
-          <div class="diagram reveal">
-            <div class="flow"><div class="step">GitHub push</div><div class="step">Jenkins</div><div class="step">Docker build</div><div class="step">Docker Compose</div><div class="step">Nginx routing</div></div>
-            <p class="caption" style="margin-top:30px">운영 완료 시스템이 아니라, 발표 시점의 build/deploy 흐름 구성으로 설명합니다.</p>
-          </div>
-          <div class="table reveal">
-            <div class="row head"><div class="cell">구성</div><div class="cell">역할</div><div class="cell">검증 포인트</div></div>
-            <div class="row"><div class="cell">Docker</div><div class="cell">서비스별 실행 환경 구성</div><div class="cell">컨테이너 실행과 환경 변수</div></div>
-            <div class="row"><div class="cell">Nginx</div><div class="cell">Frontend, API, WebSocket routing</div><div class="cell">경로와 WebSocket proxy</div></div>
-            <div class="row"><div class="cell">Jenkins</div><div class="cell">GitHub 변경 이후 build/deploy 흐름</div><div class="cell">빌드 로그와 배포 상태</div></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" data-page="29 / 34">
-        <div class="topline"><div><div class="kicker">인프라</div><h2>PostgreSQL 저장 구조</h2></div><div class="section-label">저장 책임</div></div>
-        <p class="message-line reveal">ERD가 아니라 저장 책임 관점에서 보면 시설, 센서 row, 분석 job, AI result, 화면 상태가 차례로 이어집니다.</p>
-        <div class="flow reveal" style="margin-top:34px"><div class="step">facility</div><div class="step">sensor row</div><div class="step">analysis job</div><div class="step">AI result</div><div class="step">screen state</div></div>
-        <div class="feature-grid reveal" style="margin-top:34px">
-          <div class="feature-card"><strong>저장 목적</strong><span>시설 단위 상태, 센서 시계열, 분석 결과를 재조회 가능하게 남깁니다.</span></div>
-          <div class="feature-card"><strong>조회 기준</strong><span>drain_id, measured_at, request_id로 화면과 분석 결과를 연결합니다.</span></div>
-          <div class="feature-card"><strong>화면 반영 기준</strong><span>저장된 최신 결과가 dashboard/detail 상태 표시의 근거가 됩니다.</span></div>
-          <div class="feature-card"><strong>결과 분리</strong><span>YOLO/OpenCV 중간 결과와 XGBoost 최종 결과를 분리해 설명합니다.</span></div>
-        </div>
-      </section>
-
-      <section class="slide" data-page="30 / 34">
-        <div class="topline"><div><div class="kicker">운영</div><h2>운영 모니터링 고려</h2></div><div class="section-label">정성적 점검</div></div>
-        <p class="lead compact reveal">완성된 production monitoring이라고 주장하지 않고, 운영 시 확인해야 할 대상과 대응 방향을 정리합니다.</p>
-        <div class="table reveal" style="margin-top:24px">
-          <div class="row four head"><div class="cell">감지 대상</div><div class="cell">확인 방법</div><div class="cell">대응</div><div class="cell">운영 목적</div></div>
-          <div class="row four"><div class="cell">Backend health</div><div class="cell">health check, job 상태</div><div class="cell">API 재시작 또는 로그 확인</div><div class="cell">요청 처리 지속성</div></div>
-          <div class="row four"><div class="cell">PostgreSQL</div><div class="cell">connection, migration, storage</div><div class="cell">연결과 스키마 확인</div><div class="cell">결과 저장 안정성</div></div>
-          <div class="row four"><div class="cell">AI 실패 로그</div><div class="cell">timeout, failed job</div><div class="cell">재시도 또는 판단불가 표시</div><div class="cell">분석 실패 추적</div></div>
-          <div class="row four"><div class="cell">WebSocket / callback</div><div class="cell">연결 상태, 중복 request</div><div class="cell">재연결, idempotency 확인</div><div class="cell">화면 갱신 신뢰성</div></div>
-        </div>
-      </section>
+      
 
       <section class="slide" data-page="31 / 34">
         <div class="topline"><div><div class="kicker">향후 확장</div><h2>향후 RTSP, MQTT, 알림 확장</h2></div><div class="section-label">현재 구현 / 향후 확장</div></div>
