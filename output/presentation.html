@@ -94,6 +94,57 @@
         transform: translateX(-50%);
         z-index: 1000;
     }
+
+    .tech-stack-panel {
+  width: 100%;
+  background: #fff;
+  border: 1px solid rgba(18, 27, 42, 0.1);
+  box-shadow: 0 22px 42px rgba(18, 27, 42, 0.08);
+  padding: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.tech-card {
+  min-height: 168px;
+  background: #fff;
+  border: 1px solid rgba(18, 27, 42, 0.12);
+  padding: 22px 22px 20px;
+  position: relative;
+}
+
+.tech-card .tech-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #0097a7;
+}
+
+.tech-card h3 {
+  margin: 12px 0 14px;
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #121b2a;
+}
+
+.tech-card p {
+  margin: 7px 0;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #647386;
+}
+
+.tech-card.frontend .tech-bar { background: #3a86c8; }
+.tech-card.backend .tech-bar { background: #0097a7; }
+.tech-card.ai .tech-bar { background: #7a6ff0; }
+.tech-card.database .tech-bar { background: #3bae69; }
+.tech-card.infra .tech-bar { background: #ee9b2d; }
+.tech-card.collab .tech-bar { background: #5b6f8f; }
     @media print {
         html,
         body {
@@ -1965,6 +2016,106 @@
       outline: 3px solid rgba(17,125,124,.45);
       background: rgba(255,255,255,.8);
     }
+
+    .pk-clean-panel {
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(18, 27, 42, 0.1);
+  box-shadow: 0 20px 38px rgba(18, 27, 42, 0.06);
+  padding: 34px 38px 30px;
+  border-top: 5px solid #008c99;
+}
+
+.pk-choice {
+  display: grid;
+  grid-template-columns: 0.95fr 1.35fr;
+  gap: 36px;
+  align-items: center;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(18, 27, 42, 0.1);
+}
+
+.pk-eyebrow {
+  display: block;
+  font-size: 15px;
+  font-weight: 900;
+  color: #008c99;
+  margin-bottom: 10px;
+}
+
+.pk-key-clean {
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 900;
+  color: #121b2a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.pk-choice p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.55;
+  font-weight: 700;
+  color: #617285;
+}
+
+.pk-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.pk-metric-card {
+  background: rgba(0, 140, 153, 0.045);
+  border: 1px solid rgba(0, 140, 153, 0.18);
+  padding: 22px 22px 20px;
+}
+
+.pk-metric-card span {
+  display: block;
+  font-size: 17px;
+  font-weight: 900;
+  color: #121b2a;
+  margin-bottom: 14px;
+}
+
+.pk-metric-card strong {
+  display: block;
+  font-size: 34px;
+  font-weight: 900;
+  color: #008c99;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  margin-bottom: 8px;
+}
+
+.pk-metric-card em {
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 900;
+  color: #008c99;
+}
+
+.pk-metric-card.muted {
+  background: rgba(100, 115, 134, 0.045);
+  border-color: rgba(100, 115, 134, 0.18);
+}
+
+.pk-metric-card.muted strong,
+.pk-metric-card.muted em {
+  color: #647386;
+}
+
+.pk-final-line {
+  margin-top: 24px;
+  border-left: 5px solid #008c99;
+  padding: 14px 18px;
+  background: rgba(0, 140, 153, 0.06);
+  font-size: 18px;
+  line-height: 1.45;
+  font-weight: 800;
+  color: #121b2a;
+}
   </style>
 </head>
 <body>
@@ -2055,22 +2206,87 @@
         <div class="team-common reveal">API 명세 공유 · 단위 통일 · 통합 점검 · 시연 정리</div>
       </section>
 
-      <section class="slide overview-part" data-page="05 / 34">
-        <div class="topline"><div><div class="kicker">00 시스템</div><h2>전체 기술 스택/구성 한 장 요약</h2></div><div class="section-label">MVP 구성</div></div>
-        <div class="hero-split">
-          <div class="hero-copy reveal">
-            <p class="ref-claim">프론트엔드, 백엔드, AI 서버, 데이터베이스를 분리해 MVP를 구성했습니다.</p>
-            <p class="ref-sub">화면, API, 분석, 저장소, 배포 책임을 나눠 구현했습니다.</p>
-            <div class="tag-row"><span class="tag">Next.js / React</span><span class="tag">FastAPI</span><span class="tag">YOLO / OpenCV / XGBoost</span><span class="tag">PostgreSQL</span><span class="tag">Docker / Nginx / Jenkins</span></div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="asset-frame hero">
-              <img src="assets/architecture-cropped.png" alt="전체 시스템 아키텍처">
-              <div class="asset-caption">시스템 구성도</div>
-            </div>
-          </div>
+  <section class="slide overview-part" data-page="05 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">00 시스템</div>
+      <h2>MVP 기술 스택 요약</h2>
+    </div>
+    <div class="section-label">MVP 구성</div>
+  </div>
+
+  <div class="hero-split">
+    <div class="hero-copy reveal">
+      <p class="ref-claim">
+        MVP는 화면, API, AI 분석, 저장소,<br>
+        배포와 협업 도구를 역할별로 분리해 구성했습니다.
+      </p>
+      <p class="ref-sub">
+        각 영역의 책임을 나눠 개발·점검·배포 흐름을 관리했습니다.
+      </p>
+      <div class="tag-row">
+        <span class="tag">Next.js / React</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">YOLO / OpenCV / XGBoost</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker / Nginx / Jenkins</span>
+        <span class="tag">Slack / Discord / FigJam</span>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="tech-stack-panel">
+        <div class="tech-card frontend">
+          <div class="tech-bar"></div>
+          <h3>프론트엔드</h3>
+          <p>Next.js / React</p>
+          <p>관리자 대시보드</p>
+          <p>WebSocket 화면 반영</p>
         </div>
-      </section>
+
+        <div class="tech-card backend">
+          <div class="tech-bar"></div>
+          <h3>백엔드</h3>
+          <p>FastAPI</p>
+          <p>Scheduler / REST API</p>
+          <p>Callback 수신·상태 관리</p>
+        </div>
+
+        <div class="tech-card ai">
+          <div class="tech-bar"></div>
+          <h3>AI 서버</h3>
+          <p>YOLO 객체 탐지</p>
+          <p>OpenCV 후처리</p>
+          <p>XGBoost 위험도 분류</p>
+        </div>
+
+        <div class="tech-card database">
+          <div class="tech-bar"></div>
+          <h3>데이터베이스</h3>
+          <p>PostgreSQL</p>
+          <p>sensor_data 저장</p>
+          <p>AI 분석 결과 저장</p>
+        </div>
+
+        <div class="tech-card infra">
+          <div class="tech-bar"></div>
+          <h3>인프라 / 배포</h3>
+          <p>Docker Compose</p>
+          <p>Nginx 라우팅</p>
+          <p>Jenkins 배포 자동화</p>
+        </div>
+
+        <div class="tech-card collab">
+          <div class="tech-bar"></div>
+          <h3>협업 도구</h3>
+          <p>Slack</p>
+          <p>Discord</p>
+          <p>FigJam</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       <section class="slide overview-part" data-page="06 / 34">
         <div class="topline"><div><div class="kicker">01 문제 제기</div><h2>도시 침수와 빗물받이</h2></div><div class="section-label">상태 확인 필요</div></div>
@@ -2288,22 +2504,6 @@
         <p class="caption reveal" style="margin-top:22px">`risk_score`는 우수주의보 내부 분류용 계산 점수이며 실제 현장 검증 기반 침수 예측값이 아닙니다.</p>
       </section>
 
-      <section class="slide ai-tuned" data-page="17 / 34">
-        <div class="topline"><div><div class="kicker">AI 결과</div><h2>MVP 검증 범위</h2></div><div class="section-label">sample / mock</div></div>
-        <p class="message-line reveal">검증 범위는 sample image와 mock sensor data를 입력으로 받아, 중간 feature와 최종 분류가 연결되는지 확인하는 수준입니다.</p>
-        <div class="layout split-40 after-lead">
-          <div class="asset-frame cover reveal">
-            <img src="assets/drain-good.png" alt="양호 sample image">
-            <div class="asset-caption">sample image: 상태 예시와 이미지 feature 설명에 사용하는 리소스</div>
-          </div>
-          <div class="stage-flow reveal" style="grid-template-columns: repeat(3, 1fr); margin-top:0">
-            <div class="stage-card"><b>01</b><strong>입력</strong><span>sample image와 mock sensor data를 하나의 요청으로 묶어 분석을 시작합니다.</span></div>
-            <div class="stage-card"><b>02</b><strong>중간 feature</strong><span>obstruction_ratio, confidence_score, water_level, flow_velocity가 생성되는지 확인합니다.</span></div>
-            <div class="stage-card"><b>03</b><strong>최종 분류</strong><span>risk_level과 risk_score가 저장 가능한 결과로 남는지 확인합니다.</span></div>
-          </div>
-        </div>
-        <p class="caption reveal" style="margin-top:24px">한계: 실제 현장 검증 완료나 실제 침수 예측 성능을 주장하지 않습니다.</p>
-      </section>
 
       <section class="slide ai-tuned" data-page="18 / 34">
         <div class="topline"><div><div class="kicker">서비스 구축</div><h2>AI 결과 활용 흐름</h2></div><div class="section-label">상태 반영</div></div>
@@ -2359,55 +2559,92 @@
         </div>
       </section>
 
-      <section class="slide" data-page="21 / 34">
-        <div class="topline"><div><div class="kicker">15 Data model</div><h2>DB 설계 / ERD</h2></div><div class="section-label">callback 전</div></div>
-        <div class="hero-split erd-overview">
-          <div class="hero-copy erd-copy reveal">
-            <p class="ref-claim">센서·이미지·위험도를 같은 시설 기준으로 묶습니다.</p>
-            <div class="line-modules" style="margin-top:34px">
-              <div class="line-module"><strong>시설 기준</strong><span>빗물받이 시설을 중심으로 센서값, 이미지 분석 결과, 최종 위험도 결과를 연결합니다.</span></div>
-              <div class="line-module"><strong>판단 근거 분리</strong><span>센서 측정값과 이미지 분석 결과를 분리해 저장하고, 최종 분류에서 함께 사용합니다.</span></div>
-              <div class="line-module"><strong>작업 관리</strong><span>분석 요청과 완료 상태는 별도 작업 단위로 관리합니다.</span></div>
-            </div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="erd-resource-frame">
-              <img src="assets/erd-final.png" alt="DRAIN_DATA, SENSOR_DATA, YOLO_RESULT_DATA, XGBOOST_DATA, ANALYSIS_JOBS ERD">
-            </div>
-          </div>
-        </div>
-      </section>
+<section class="slide" data-page="21 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">15 Data model</div>
+      <h2>DB 설계 / ERD</h2>
+    </div>
+    <div class="section-label">데이터 관계 개요</div>
+  </div>
 
-      <section class="slide" data-page="22 / 34">
-        <div class="topline"><div><div class="kicker">데이터베이스</div><h2>센서 데이터는 시설과 시간 기준으로 구분합니다</h2></div><div class="section-label">조회 기준</div></div>
-        <p class="message-line reveal">같은 빗물받이에도 여러 시점의 센서값이 쌓이므로, 시설 ID와 측정 시각을 함께 봐야 분석 시점의 센서 row를 특정할 수 있습니다.</p>
-        <div class="layout two after-lead">
-          <div class="feature-grid reveal" style="grid-template-columns:1fr;gap:22px">
-            <div class="feature-card primary" style="min-height:138px">
-              <strong>시설 기준</strong>
-              <span>어느 빗물받이에서 측정된 값인지 구분합니다.</span>
-            </div>
-            <div class="feature-card primary" style="min-height:138px">
-              <strong>시간 기준</strong>
-              <span>강우 진행에 따라 수위와 유속이 계속 변하므로 측정 시각이 필요합니다.</span>
-            </div>
-            <div class="feature-card primary" style="min-height:138px">
-              <strong>분석 기준</strong>
-              <span>AI 분석 시점에 가까운 센서 row를 찾아 이미지 분석 결과와 함께 사용합니다.</span>
-            </div>
-          </div>
-          <div class="diagram reveal">
-            <div class="flow"><div class="step">drain_id 선택</div><div class="step">measured_at 정렬</div><div class="step">분석 시점 row 조회</div><div class="step">AnalysisJob 연결</div></div>
-            <div class="table" style="margin-top:30px">
-              <div class="row head"><div class="cell">기준</div><div class="cell">역할</div><div class="cell">발표 포인트</div></div>
-              <div class="row"><div class="cell">drain_id</div><div class="cell">시설 식별</div><div class="cell">어느 빗물받이의 센서값인지 구분</div></div>
-              <div class="row"><div class="cell">measured_at</div><div class="cell">측정 시각</div><div class="cell">시간 순서대로 센서값 정렬</div></div>
-              <div class="row"><div class="cell">drain_id + measured_at</div><div class="cell">복합 조회 기준</div><div class="cell">분석 시점의 센서 row를 특정</div></div>
-              <div class="row"><div class="cell">AnalysisJob</div><div class="cell">분석 작업 연결</div><div class="cell">특정 시점 입력과 결과를 추적</div></div>
-            </div>
-          </div>
+  <div class="hero-split erd-overview">
+    <div class="hero-copy erd-copy reveal">
+      <p class="ref-claim">센서·이미지·위험도를 같은 시설 기준으로 묶습니다.</p>
+
+      <div class="line-modules" style="margin-top:34px">
+        <div class="line-module">
+          <strong>시설 기준</strong>
+          <span>빗물받이 시설을 중심으로 센서값, 이미지 분석 결과, 최종 위험도 결과를 연결합니다.</span>
         </div>
-      </section>
+        <div class="line-module">
+          <strong>판단 근거 분리</strong>
+          <span>센서 측정값과 이미지 분석 결과를 분리해 저장하고, 최종 분류에서 함께 사용합니다.</span>
+        </div>
+        <div class="line-module">
+          <strong>작업 관리</strong>
+          <span>분석 요청과 완료 상태는 별도 작업 단위로 관리합니다.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="erd-resource-frame erd-padded">
+        <img src="assets/erd-final.png" alt="ERD 데이터 관계 개요">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-page="22 / 34">
+  <div class="topline">
+    <div>
+      <div class="kicker">데이터베이스</div>
+      <h2>센서 데이터에 복합키를 적용한 이유</h2>
+    </div>
+    <div class="section-label">PK 설계 판단</div>
+  </div>
+
+  <p class="message-line reveal">
+    센서 데이터는 “어느 시설의 어느 시각 값인가”가 핵심이므로,
+    <strong>drain_id + measured_at</strong> 조합으로 식별하는 것이 자연스럽습니다.
+  </p>
+
+  <div class="pk-clean-panel reveal">
+    <div class="pk-choice">
+      <div>
+        <span class="pk-eyebrow">선택한 기준</span>
+        <div class="pk-key-clean">drain_id + measured_at</div>
+      </div>
+      <p>
+        같은 빗물받이에서도 시간대별 센서값이 계속 쌓이기 때문에,
+        시설 ID와 측정 시각을 함께 사용해 센서 row를 구분합니다.
+      </p>
+    </div>
+
+    <div class="pk-metric-grid">
+      <div class="pk-metric-card">
+        <span>Q1 최근 센서 조회</span>
+        <strong>0.1842ms</strong>
+        <em>복합키 유리</em>
+      </div>
+      <div class="pk-metric-card">
+        <span>Q2 경고 대시보드</span>
+        <strong>0.3342ms</strong>
+        <em>복합키 유리</em>
+      </div>
+      <div class="pk-metric-card muted">
+        <span>Q3 추적 조인</span>
+        <strong>0.3071ms</strong>
+        <em>단일 ID 유리</em>
+      </div>
+    </div>
+
+    <div class="pk-final-line">
+      결론: 센서 시계열 데이터는 복합키를 사용하고, YOLO·XGBoost 결과처럼 추적 조인이 많은 데이터는 단일 ID로 관리합니다.
+    </div>
+  </div>
+</section>
 
       <section class="slide" data-page="23 / 34">
         <div class="topline"><div><div class="kicker">Backend / AI / Frontend</div><h2>분석 요청과 화면 갱신 흐름</h2></div><div class="section-label">overview</div></div>
