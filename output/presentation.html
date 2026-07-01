@@ -3461,7 +3461,8 @@
     class InlineEditor {
       constructor() {
         this.isActive = false;
-        this.key = 'rain-alert-slide-edits-v2';
+        this.key = 'rain-alert-slide-edits-v3';
+        this.baseline = Array.from(this.editableNodes()).map((el) => el.innerHTML);
         this.load();
       }
       editableNodes() {
@@ -3476,15 +3477,24 @@
         if (!this.isActive) this.save();
       }
       save() {
-        const data = Array.from(this.editableNodes()).map((el) => el.innerHTML);
+        const data = {
+          version: 3,
+          items: Array.from(this.editableNodes()).map((el, i) => ({
+            original: this.baseline[i] ?? '',
+            value: el.innerHTML
+          }))
+        };
         localStorage.setItem(this.key, JSON.stringify(data));
       }
       load() {
         try {
-          const data = JSON.parse(localStorage.getItem(this.key) || '[]');
-          if (!data.length) return;
+          const data = JSON.parse(localStorage.getItem(this.key) || '{}');
+          if (!data || !Array.isArray(data.items)) return;
           Array.from(this.editableNodes()).forEach((el, i) => {
-            if (data[i]) el.innerHTML = data[i];
+            const item = data.items[i];
+            if (item && item.original === el.innerHTML && item.value) {
+              el.innerHTML = item.value;
+            }
           });
         } catch (err) {
           console.warn('Edit data could not be loaded', err);
